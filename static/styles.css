@@ -1,0 +1,50 @@
+body {
+    top: 0;
+    left: 0;;
+    width: 99%;
+    height: 97%;
+    position: absolute;
+    display: table;
+    font-style: italic;
+    font-family: "Times New Roman";
+    background-color: #eae0da;
+    /*other choices: dfebeb , f5ebe0 f8ece9*/
+
+}
+
+::selection {
+    background: #F6F7C4;
+  }
+
+p {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#title {
+    font-size: 300px;
+    color: #212529;
+    opacity: 0.6;
+}
+
+.description {
+    font-size: 22px;
+    font-family: Fraunces;
+    opacity: 0.9;
+    display: flex;
+    justify-content: space-between;
+}
+
+a:link, a:visited {
+    font-size:  20px;
+    color: inherit;
+    text-transform: ;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+a:link:hover, a:visited:hover {
+    text-decoration: none;
+    border-bottom: 1px solid rgba(21, 25, 29, 0.9);
+}

@@ -1,4 +1,4 @@
-body {
+body.landing {
     top: 0;
     left: 0;;
     width: 99%;
@@ -10,6 +10,12 @@ body {
     background-color: #eae0da;
     /*other choices: dfebeb , f5ebe0 f8ece9*/
 
+}
+
+.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 ::selection {
@@ -45,6 +51,7 @@ a:link, a:visited {
 }
 
 a:link:hover, a:visited:hover {
+    opacity: 1;
     text-decoration: none;
     border-bottom: 1px solid rgba(21, 25, 29, 0.9);
 }

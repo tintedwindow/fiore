@@ -19,3 +19,9 @@ def after_request(response):
 @app.route("/")
 def index():
     return render_template("landing.html")
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+    # User reached route via a GET -> Simply clicking from home screen
+    return render_template("login.html")

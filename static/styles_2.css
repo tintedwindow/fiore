@@ -23,28 +23,40 @@ body {
 
 
 .login-form input[type="text"],
-.login-form input[type="password"],
-.login-form button[type="submit"] {
+.login-form input[type="password"] {
+  margin-top: 10px;
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid rgba(204, 204, 204, 0.5);
-  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.377);
+  border-radius: 5px;
   box-sizing: border-box;
   font-size: 16px;
-  background-color: rgba(255, 255, 255, 0.678);
+  background-color: inherit;
 }
 
 .login-form button[type="submit"] {
+    margin-top: 15px;
+    margin-bottom: 10px;
     width: 100%; /* Set width to 100% to occupy the container's width */
     max-width: 150px; /* Set a max-width to prevent button from spanning full width */
-    background-color: #007bff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #AFD198;
+    font-size: 15px;
     color: #fff;
     cursor: pointer;
   }
 
 .login-form button[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #9bbb85;
+}
+
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+    outline: 2px solid #AFD198; /* Change the color and width of the outline */
+    /* Add any other styles you want to apply when the field is focused */
 }
 
 ::selection {

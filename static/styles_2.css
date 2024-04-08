@@ -55,12 +55,12 @@ body {
 
 .login-form input[type="text"]:focus,
 .login-form input[type="password"]:focus {
-    outline: 2px solid #AFD198; /* Change the color and width of the outline */
+    outline: 2px solid rgba(167, 146, 119, 0.4); /* Change the color and width of the outline */
     /* Add any other styles you want to apply when the field is focused */
 }
 
 ::selection {
-    background: #F6F7C4;
+    background: #FFE6E6;
   }
 
 p {
@@ -95,3 +95,27 @@ a:link:hover, a:visited:hover {
     text-decoration: none;
     border-bottom: 1px solid rgba(21, 25, 29, 0.9);
 }
+
+/* Change autocomplete styles in WebKit */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/:autofill 
+    When I was registering a test user, I noticed that when I autofilled a user details in my form field, the colors of the field changed.
+    These webkit things are responsible for that.
+    The user agent style sheets of many browsers use !important in their :-webkit-autofill style declarations, 
+    So, when trying to change the things like background color of autofill, it is not possible simply.
+    because:
+        background-color: rgb(232 240 254) !important;
+        color: -internal-light-dark(black, white) !important;
+    but some properties like border, don't have it. So I changed that here :)
+    */
+  border: inherit;
+
+};

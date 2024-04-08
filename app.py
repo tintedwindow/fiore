@@ -35,6 +35,16 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
+@app.route("/home")
+@login_required
+def home():
+
+    user = db.execute(
+        "SELECT id, username FROM users WHERE id = ?", session["user_id"]
+    )
+
+    return render_template("home.html", name = user[0]["username"])
+
 
 @app.route("/")
 def index():
@@ -42,7 +52,37 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """Log user in"""
 
+    # Forget any user_id
+    session.clear()
+
+    # User reached route via POST (as by submitting login form)
+    if request.method == "POST":
+        # Ensure username was submitted
+        if not request.form.get("username"):
+            return render_template("apology.html", message="Must provide username")
+        # Ensure password was submitted
+        elif not request.form.get("password"):
+            return render_template("apology.html", message = "Must provide password")
+        
+        # Query database for username
+        rows = db.execute(
+            "SELECT * FROM users WHERE username = ?", request.form.get("username")
+        )
+
+        # Ensure username exists and password is correct
+        if len(rows) != 1:
+            return render_template("apology.html", message = "Invalid username")
+        elif not check_password_hash(rows[0]["hash"], request.form.get("password")):
+            return render_template("apology.html", message = "Incorrect password")
+        
+        # Remember which user has logged in
+        session["user_id"] = rows[0]["id"]
+
+        # Redirect user to home page
+        return redirect("/home")
+        
     # User reached route via a GET -> Simply clicking from home screen
     return render_template("login.html")
 

@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    background-color: #eae0da;
+    /*other choices: dfebeb , f5ebe0 f8ece9*/
+
+}
+
+.calander-container {
+    width: 300px;
+    padding: 20px;
+    background-color: rgb(179, 71, 71);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  background-color: #e0d7d2;
+}
+
+::selection {
+    background: #FFE6E6;
+  }
+
+#title {
+    font-size: 300px;
+    color: #212529;
+    opacity: 0.6;
+}
+
+.description {
+    font-size: 22px;
+    font-family: Fraunces;
+    opacity: 0.9;
+    display: flex;
+    justify-content: space-between;
+}
+
+a:link, a:visited {
+    color: inherit;
+    text-transform: ;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+a:link:hover, a:visited:hover {
+    opacity: 1;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(21, 25, 29, 0.9);
+}

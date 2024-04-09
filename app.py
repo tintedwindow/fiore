@@ -61,10 +61,10 @@ def login():
     if request.method == "POST":
         # Ensure username was submitted
         if not request.form.get("username"):
-            return render_template("apology.html", message="Must provide username")
+            return render_template("apology.html", message="Must provide username"), 403
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return render_template("apology.html", message = "Must provide password")
+            return render_template("apology.html", message = "Must provide password"), 403
         
         # Query database for username
         rows = db.execute(
@@ -73,9 +73,9 @@ def login():
 
         # Ensure username exists and password is correct
         if len(rows) != 1:
-            return render_template("apology.html", message = "Invalid username")
+            return render_template("apology.html", message = "Invalid username"), 403
         elif not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            return render_template("apology.html", message = "Incorrect password")
+            return render_template("apology.html", message = "Incorrect password"), 403
         
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]

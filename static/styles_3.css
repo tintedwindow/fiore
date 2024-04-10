@@ -13,7 +13,6 @@ body {
 }
 
 .calander-container {
-    width: 300px;
     padding: 20px;
     background-color: rgb(179, 71, 71);
     backdrop-filter: blur(10px);
@@ -22,6 +21,21 @@ body {
     text-align: center;
 }
 
+.calander {
+    border-collapse: collapse;
+}
+
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
 
 .login-form input[type="text"],
 .login-form input[type="password"] {

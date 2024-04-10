@@ -1,5 +1,6 @@
 import os
 
+import calendar
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
@@ -43,7 +44,8 @@ def home():
         "SELECT id, username FROM users WHERE id = ?", session["user_id"]
     )
 
-    return render_template("home.html", name = user[0]["username"])
+    current_cal = calendar.monthcalendar(2024, 4)
+    return render_template("home.html", name = user[0]["username"], calander=current_cal)
 
 
 @app.route("/")

@@ -23,15 +23,18 @@
             <th>FRI</th>
             <th>SAT</th>
         </tr>
-        <tr>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-        </tr>
+
+        {% for week in calander %}
+            <tr>
+                {% for day in week %}
+                    <td>
+                        {% if day != 0 %}
+                            {{day}}
+                        {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
     </table>
 </div>
 

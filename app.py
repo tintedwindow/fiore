@@ -45,7 +45,7 @@ def home():
     )
 
     current_cal = calendar.monthcalendar(2024, 4)
-    return render_template("home.html", name = user[0]["username"], calander=current_cal)
+    return render_template("home_new.html", name = user[0]["username"], calander=current_cal)
 
 
 @app.route("/")

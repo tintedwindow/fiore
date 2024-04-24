@@ -28,9 +28,11 @@
             <tr>
                 {% for day in week %}
                     <td>
-                        {% if day != 0 %}
-                            {{day}}
-                        {% endif %}
+                        <div class="content">
+                            {% if day != 0 %}
+                                {{day}}
+                            {% endif %}
+                        </div>
                     </td>
                 {% endfor %}
             </tr>

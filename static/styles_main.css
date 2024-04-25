@@ -1,7 +1,7 @@
 * {
     margin :0;
     font-family: "Inter", sans-serif;
-    border: border-box;
+    box-sizing: border-box;
     color: #121212;
 }
 
@@ -141,13 +141,24 @@
 
 .calander {
     display: flex;
-    justify-content: space-evenly;
     border: 2px solid black;
-
     width: 100%;
+    height: 100%;
+    flex-direction: column;
 
 }
-th {
+
+.calander-week {
+    display:flex;
+    height: 20%;
+    margin: 1% 0;
+
+    border: 2px solid #ff2727;
+    justify-content: space-evenly;
+
+}
+
+.calander-day {
+    width: 12%;
     border: 1px solid #dddddd;
-    padding: 15px;
 }

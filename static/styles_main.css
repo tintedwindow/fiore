@@ -115,7 +115,7 @@
 }
 
 .content-container {
-    background-color: #050505;
+    background-color: antiquewhite;
     height: calc(100vh - 62px);
     display: flex;
     justify-content: center;
@@ -125,13 +125,29 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    height: 500px;
+    height: 70%;
     width: 60%;
-    background-color: antiquewhite;
+    background-color: ;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgba(0, 0, 0, .4)
 }
 .box1 {
     border: 2px solid black;
     height: 100px;
     width: 12%;
     background-color:
+}
+
+.calander {
+    display: flex;
+    justify-content: space-evenly;
+    border: 2px solid black;
+
+    width: 100%;
+
+}
+th {
+    border: 1px solid #dddddd;
+    padding: 15px;
 }

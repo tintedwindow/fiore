@@ -39,23 +39,53 @@
 
     <div class="content-container">
         <div class="content">
+            
             <div class="calander">
-                <div class="calander-week">
-                    <div class="calander-day">MON</div>
-                    <div class="calander-day">TUE</div>
-                    <div class="calander-day">WED</div>
-                    <div class="calander-day">THU</div>
-                    <div class="calander-day">FRI</div>
-                    <div class="calander-day">SAT</div>
-                    <div class="calander-day">SUN</div>
+                <div class="calander-month">
+                    <form action="/home" method="post">
+                        <input type="hidden" name="month" value="-1">
+                        <button class="arrow" type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                              </svg>
+                        </button>
+                    </form>
+
+                    <div class="calander-day-week">                  
+                        AUGUST
+                    </div>
+
+                    <form action="/home" method="post">
+                        <input type="hidden" name="month" value="1">
+                        <button class="arrow" type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                              </svg>
+                        </button>
+                    </form>
+
+                </div>
+                <div class="calander-head">
+                    <div class="calander-day-week">MON</div>
+                    <div class="calander-day-week">TUE</div>
+                    <div class="calander-day-week">WED</div>
+                    <div class="calander-day-week">THU</div>
+                    <div class="calander-day-week">FRI</div>
+                    <div class="calander-day-week">SAT</div>
+                    <div class="calander-day-week">SUN</div>
                 </div>
 
                 {% for week in calander %}
                     <div class="calander-week">
                         {% for day in week %}
-                            <div class="calander-day">
+                            {% if day == 0 %}
+                                <div class="calander-day-blank">
+                                </div>
+                            {% else %}
+                                <div class="calander-day">
                                     {{day}}
-                            </div>
+                                </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 {% endfor %}

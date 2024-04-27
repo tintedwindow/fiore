@@ -1,6 +1,7 @@
 import os
 
 import calendar
+from datetime import datetime
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
@@ -36,16 +37,59 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-@app.route("/home")
+@app.route("/home", methods=["GET", "POST"])
 @login_required
 def home():
 
-    user = db.execute(
-        "SELECT id, username FROM users WHERE id = ?", session["user_id"]
-    )
+    if request.method == "POST":
+        # do the calculation per value and display the form
+        month_updater = int(request.form.get("month_updater"))
 
-    current_cal = calendar.monthcalendar(2024, 4)
-    return render_template("home_new.html", name = user[0]["username"], calander=current_cal)
+
+        if ((session["month"] + month_updater) > 12):
+            session["year"] = session["year"] + 1
+            session["month"] = 1
+
+        elif(((session["month"] + month_updater) < 1)):
+            session["year"] = session["year"] - 1
+            session["month"] = 12
+
+        else:
+            session["month"] = session["month"] + month_updater
+
+        # get new values for templating
+        month_name = calendar.month_name[session["month"]]
+        month = session["month"]
+        year = session["year"]
+
+        current_cal = calendar.monthcalendar(year, session["month"])
+
+        user = db.execute(
+            "SELECT id, username FROM users WHERE id = ?", session["user_id"]
+        )
+
+        return render_template("home_new.html", name = user[0]["username"], calander=current_cal, month_name=month_name, year=year)
+
+
+
+    else:
+        # seeds with the current month integer
+        session["month"] = datetime.now().month
+        # same with year
+        session["year"] = datetime.now().year
+
+        #get current month name dynamically
+        month_name = calendar.month_name[session["month"]]
+        year = session["year"]
+
+        user = db.execute(
+            "SELECT id, username FROM users WHERE id = ?", session["user_id"]
+        )
+
+        current_cal = calendar.monthcalendar(2024, 4)
+        return render_template("home_new.html", name = user[0]["username"], calander=current_cal, month_name=month_name, year=year)
+
+
 
 
 @app.route("/")

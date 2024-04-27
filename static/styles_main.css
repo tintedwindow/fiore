@@ -158,6 +158,12 @@
     justify-content: space-evenly ;
     text-align: center;
     font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+.calander-month-year {
+    width: 20%;
+    color: rgba(18, 18, 18, 0.6)
 }
 
 .arrow {

@@ -70,24 +70,24 @@
 
                 <!-- class for day names, and the dates-->
                 <div class="calander-body">
-                    <div class="calander-head">
-                        <div class="calander-day-week">MON</div>
-                        <div class="calander-day-week">TUE</div>
-                        <div class="calander-day-week">WED</div>
-                        <div class="calander-day-week">THU</div>
-                        <div class="calander-day-week">FRI</div>
-                        <div class="calander-day-week">SAT</div>
-                        <div class="calander-day-week">SUN</div>
+                    <div class="calander-week-head">
+                        <div class="calander-day-name">MON</div>
+                        <div class="calander-day-name">TUE</div>
+                        <div class="calander-day-name">WED</div>
+                        <div class="calander-day-name">THU</div>
+                        <div class="calander-day-name">FRI</div>
+                        <div class="calander-day-name">SAT</div>
+                        <div class="calander-day-name">SUN</div>
                     </div>
     
                     {% for week in calander %}
                         <div class="calander-week">
                             {% for day in week %}
                                 {% if day == 0 %}
-                                    <div class="calander-day-blank">
+                                    <div class="calander-day-date-blank">
                                     </div>
                                 {% else %}
-                                    <div class="calander-day">
+                                    <div class="calander-day-date">
                                         {{day}}
                                     </div>
                                 {% endif %}

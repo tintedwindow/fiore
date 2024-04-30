@@ -129,7 +129,7 @@
     height: 90%;
     width: 60%;
     background-color: ;
-    border: 2px solid black;
+    border: ;
 }
 
 .calander {
@@ -146,7 +146,7 @@
     align-items: center;
     margin: ;
     height: 7%;
-    border: 2px solid green;
+    border: ;
 }
 
 .calander-month {
@@ -184,43 +184,44 @@
 
 .calander-body {
     height: 80%;
-    border: 2px solid red;
+    border: ;
     margin: ;
     display: flex;
-
     flex-direction: column;
-
 }
 
-.calander-head {
+.calander-week-head {
     display: flex;
     height: 5%;
-    margin:  0 0 1% 0;
-    border: 2px solid rgba(0, 0, 0, 0);
+    margin:  0 0 20px 0;
+    border: ;
     justify-content: space-evenly;
     text-align: center;
     font-size: 1.1rem;
 
 }
+
 .calander-week {
     display: flex;
     height: 13.5%;
-    margin: 1% 0;
-    border: 2px solid rgba(0, 0, 0, 0);
+    /* In CSS, when you set the margin as a percentage, 
+    it's calculated based on the width of the parent container, not the height. 
+    This is true even for top and bottom margins. */
+    margin: 5px 0;
     justify-content: space-evenly;
 
 }
 
-.calander-day-week {
+.calander-day-name {
     width: 12%;
     color: rgba(18, 18, 18, 0.6)
 }
 
-.calander-day {
+.calander-day-date {
     width: 12%;
     border: 1px solid #dddddd;
 }
 
-.calander-day-blank {
+.calander-day-date-blank {
     width: 12%;
 }

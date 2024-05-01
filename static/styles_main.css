@@ -5,6 +5,10 @@
     color: #121212;
 }
 
+::selection {
+    background: #F6F7C4;
+  }
+
 .navbar {
     height: 62px;
     display: flex;
@@ -217,11 +221,32 @@
     color: rgba(18, 18, 18, 0.6)
 }
 
+.calander-day-date-blank {
+    width: 12%;
+}
+
 .calander-day-date {
     width: 12%;
     border: 1px solid #dddddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; 
 }
 
-.calander-day-date-blank {
-    width: 12%;
+.calander-day-date-number {
+    position: absolute;
+    bottom: 6px;
+    right: 8px; 
+    color: rgba(90, 90, 90, 1);
+}
+
+
+.calander-day-date-add {
+    font-size: 30px;
+    fill: rgba(90, 90, 90, 0.3);
+}
+
+.calander-day-date-add:hover {
+    fill: rgba(90, 90, 90, .6) ;
 }

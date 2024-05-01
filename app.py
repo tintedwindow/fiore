@@ -86,7 +86,7 @@ def home():
             "SELECT id, username FROM users WHERE id = ?", session["user_id"]
         )
 
-        current_cal = calendar.monthcalendar(2024, 4)
+        current_cal = calendar.monthcalendar(year, session["month"])
         return render_template("home_new.html", name = user[0]["username"], calander=current_cal, month_name=month_name, year=year)
 
 

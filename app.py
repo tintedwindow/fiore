@@ -69,7 +69,13 @@ def home():
         )
 
         return render_template("home_new.html", name = user[0]["username"], calander=current_cal, month_name=month_name, year=year)
-
+    
+        # this part of post will handle the image that the user uploads
+            # take the image
+                # check for if the image is actually an image jpeg/png ...
+                # associate a random string with that image
+                    # check that random string isn't associated with a previous image (very rare to NO chance, but still check)
+                # store the image in a folder for images
 
 
     else:

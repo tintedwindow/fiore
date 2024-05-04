@@ -250,3 +250,54 @@
 .calander-day-date-add:hover {
     fill: rgba(90, 90, 90, .6) ;
 }
+
+#preview-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0); /* fallback color */
+    background-color: rgba(0, 0, 0, 0.3); /* black wwith alpha opacity */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#modal-content {
+    background-color: #fefefe;
+    width: 40%;
+    height: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Optional: for styling */
+    animation-name: animatetop; /* Optional: for animation */
+    animation-duration: 0.4s; /* Animation duration */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+    /* text properties same as navbar items */
+    font-size: 0.9375rem;
+    color: #050505;
+
+    /* font settings */
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings:
+      "slnt" 0;
+
+
+}
+
+#modal-image-container {
+    height: 30%; 
+    border: 2px solid black;
+    position: relative; 
+}

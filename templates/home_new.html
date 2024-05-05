@@ -106,12 +106,21 @@
 <!-- Modal -->
 <div id="preview-modal" class="modal">
     <div id="modal-content">
-        <div id="modal-image-container">
-            <img id="modal-image" src="#" alt="Image Preview">
+        <div id="modal-image-details">
+            <div id="modal-image-container">
+                <div id="modal-image-date"></div>   
+                <img id="modal-image" src="#" alt="Image Preview">
+            </div>
+            <p id="modal-text">File Selected : </p>
+            <p id="modal-date"></p>
         </div>
-        <p id="modal-text">File Selected : </p>
-        <button id="modal-submit">Submit</button>
-        <button id="modal-cancel" class="close">Discard</button>
+        <div id="modal-input-text-holder">
+            <textarea  id="modal-input-text" placeholder="Optionally add something to remember the day?"></textarea>
+        </div>
+        <div id="modal-buttons">
+            <span class="pseudo-button" id="submitBtn">Submit</span>
+            <span class="pseudo-button" id="discardBtn">Discard</span>
+        </div>
     </div>
 </div>
 

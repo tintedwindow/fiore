@@ -269,13 +269,14 @@
 
 #modal-content {
     background-color: #fefefe;
-    width: 40%;
-    height: 80%;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%; /* Could be more or less, depending on screen size */
+    height: 70%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Optional: for styling */
     animation-name: animatetop; /* Optional: for animation */
     animation-duration: 0.4s; /* Animation duration */
 
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -292,12 +293,112 @@
     font-style: normal;
     font-variation-settings:
       "slnt" 0;
+}
 
-
+#modal-image-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    
+    height: 60%;
 }
 
 #modal-image-container {
-    height: 30%; 
+    height: 75%; 
     border: 2px solid black;
     position: relative; 
+}
+
+#modal-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#modal-image-date {
+    backdrop-filter: blur(2px);
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 18%;
+    padding: 0 4px 0 3px;
+    position: absolute;
+    bottom: 6px;
+    right: 8px; 
+    font-size: 1.1em;
+    color: rgb(0, 0, 0);
+}
+
+#modal-date {
+    display: flex;
+    align-items: center;
+    font-size: 1.3em;
+    height: 10%;
+}
+
+#modal-input-text-holder {
+    border:;
+    height: 28%;
+    display: flex;
+    justify-content: center;
+}
+
+#modal-input-text {
+    resize: none;
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 4px;
+    text-align:center;
+    /* text properties same as navbar items */
+    font-size: 0.9375rem;
+    color: #050505;
+
+    /* font settings */
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings:
+        "slnt" 0;
+}
+#modal-input-text:focus {
+        outline: 2px solid rgba(167, 146, 119, 0.4);
+        outline: none;
+}
+
+#modal-buttons
+{
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+
+#submitBtn {
+    font-size: 1.15em;
+    padding: 5px;
+    border-radius: 4px;
+    text-decoration: underline 2px;
+    text-decoration-color: #fefefe;
+    text-underline-offset: 4px; 
+
+}
+
+#submitBtn:hover {
+    text-decoration-color: #D4E7C5;
+    cursor: pointer;
+}
+#discardBtn {
+    font-size: 1.15em;
+    padding: 5px;
+    border-radius: 4px;
+    text-decoration: underline 2px;
+    text-decoration-color: #fefefe;
+    text-underline-offset: 4px; 
+}
+
+#discardBtn:hover {
+    text-decoration-color: #FFD0D0;
+    cursor: pointer;
 }

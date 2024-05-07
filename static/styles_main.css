@@ -272,7 +272,7 @@
     padding: 20px;
     border: 1px solid #888;
     width: 40%; /* Could be more or less, depending on screen size */
-    height: 70%;
+    height: 80%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Optional: for styling */
     animation-name: animatetop; /* Optional: for animation */
     animation-duration: 0.4s; /* Animation duration */
@@ -305,7 +305,7 @@
 }
 
 #modal-image-container {
-    height: 75%; 
+    height: 65%; 
     border: 2px solid black;
     position: relative; 
 }
@@ -332,7 +332,7 @@
     display: flex;
     align-items: center;
     font-size: 1.3em;
-    height: 10%;
+    height: 20%;
 }
 
 #modal-input-text-holder {

@@ -68,7 +68,7 @@ def home():
             "SELECT id, username FROM users WHERE id = ?", session["user_id"]
         )
 
-        return render_template("home_new.html", name = user[0]["username"], calander=current_cal, month_name=month_name, year=year)
+        return render_template("home_new.html", name = user[0]["username"], calendar=current_cal, month_name=month_name, year=year)
     
         # this part of post will handle the image that the user uploads
             # take the image
@@ -93,7 +93,7 @@ def home():
         )
 
         current_cal = calendar.monthcalendar(year, session["month"])
-        return render_template("home_new.html", name = user[0]["username"], calander=current_cal, month_name=month_name, year=year)
+        return render_template("home_new.html", name = user[0]["username"], calendar=current_cal, month_name=month_name, year=year)
 
 
 

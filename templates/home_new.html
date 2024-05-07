@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <title>Document</title>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles_main.css') }}">
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
     <header>
@@ -40,10 +42,10 @@
     <div class="content-container">
         <div class="content">
             
-            <div class="calander">
+            <div class="calendar">
                 <!-- class for month, year and scroll-->
-                <div class="calander-info">
-                    <div class="calander-month">
+                <div class="calendar-info">
+                    <div class="calendar-month">
                         <form action="/home" method="post">
                             <input type="hidden" name="month_updater" value="-1">
                             <button class="arrow" type="submit">
@@ -53,7 +55,7 @@
                             </button>
                         </form>
     
-                        <div class="calander-month-year">                  
+                        <div class="calendar-month-year">                  
                             {{month_name}} {{year}}
                         </div>
     
@@ -69,29 +71,29 @@
                 </div>
 
                 <!-- class for day names, and the dates-->
-                <div class="calander-body">
-                    <div class="calander-week-head">
-                        <div class="calander-day-name">MON</div>
-                        <div class="calander-day-name">TUE</div>
-                        <div class="calander-day-name">WED</div>
-                        <div class="calander-day-name">THU</div>
-                        <div class="calander-day-name">FRI</div>
-                        <div class="calander-day-name">SAT</div>
-                        <div class="calander-day-name">SUN</div>
+                <div class="calendar-body">
+                    <div class="calendar-week-head">
+                        <div class="calendar-day-name">MON</div>
+                        <div class="calendar-day-name">TUE</div>
+                        <div class="calendar-day-name">WED</div>
+                        <div class="calendar-day-name">THU</div>
+                        <div class="calendar-day-name">FRI</div>
+                        <div class="calendar-day-name">SAT</div>
+                        <div class="calendar-day-name">SUN</div>
                     </div>
     
-                    {% for week in calander %}
-                        <div class="calander-week">
+                    {% for week in calendar %}
+                        <div class="calendar-week">
                             {% for day in week %}
                                 {% if day == 0 %}
-                                    <div class="calander-day-date-blank">
+                                    <div class="calendar-day-date-blank">
                                     </div>
                                 {% else %}
-                                    <div class="calander-day-date">
-                                        <div class="calander-day-date-number">
+                                    <div class="calendar-day-date">
+                                        <div class="calendar-day-date-number">
                                             {{day}}
                                         </div>
-                                        <svg class="calander-day-date-add" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                                        <svg class="calendar-day-date-add" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
                                             <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"/>
                                         </svg>
                                     </div>
@@ -118,13 +120,13 @@
             <textarea  id="modal-input-text" placeholder="Optionally add something to remember the day?"></textarea>
         </div>
         <div id="modal-buttons">
-            <span id="submitBtn">Submit</span>
-            <span id="discardBtn">Discard</span>
+            <span id="modal-submit">Submit</span>
+            <span id="modal-discard">Discard</span>
         </div>
     </div>
 </div>
 
 <!-- File upload hidden attribute-->
-<input id="file-input-common" style="display:none;" type="file" accept="image/png, image/jpeg">
+<input id="file-input" style="display:none;" type="file" accept="image/png, image/jpeg">
 </body>
 </html>

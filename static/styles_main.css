@@ -262,7 +262,6 @@
     overflow: auto;
     background-color: rgb(0, 0, 0); /* fallback color */
     background-color: rgba(0, 0, 0, 0.3); /* black wwith alpha opacity */
-    display: flex;
     align-items: center;
     justify-content: center;
 }

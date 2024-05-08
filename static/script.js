@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    // button clicking parts
     var modalSubmit = document.getElementById('modal-submit');
     var modalDiscard = document.getElementById('modal-discard');
 
@@ -85,7 +86,40 @@ document.addEventListener("DOMContentLoaded", function() {
         fileInput.value = '';
         modal.style.display = "none";
     }
-
-    modalSubmit.addEventListener('click', resetModal);
+    // close modal simply if discard is clicked
     modalDiscard.addEventListener('click', resetModal);
+
+    // submission takes place
+    modalSubmit.addEventListener('click', function() {
+
+        // get current date number again :p
+        var dayDateNumber = document.getElementById('modal-image-date');
+
+        var dataToSend = new FormData();
+        dataToSend.append('file', fileInput.files[0]);       
+        dataToSend.append('date', dayDateNumber);
+
+        fetch('/upload', {
+            method: 'POST',
+            body: dataToSend;
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            alert('File uploaded succesfully!');
+            resetModal();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('Error uploading file.');
+        });
+    } else {
+        alert('Please select a file to upload.');
+    }
+
+});
+
+
+
+
 });

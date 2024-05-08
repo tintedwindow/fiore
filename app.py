@@ -3,7 +3,7 @@ import os
 import calendar
 from datetime import datetime
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session, jsonify
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 import logging
@@ -36,6 +36,25 @@ def after_request(response):
     response.headers["Expires"] = 0
     response.headers["Pragma"] = "no-cache"
     return response
+
+
+
+@app.route('/upload', methods=["POST"])
+@login_required
+def upload():
+    # check for post request requirements
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file added'}), 400
+    if not request.form.get("date"):
+        return jsonify({'error': 'No date added'}), 400
+        
+    file = request.files['file']
+    date = request.form.get('date')
+
+    # Check if the user has actually selected a file
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+
 
 @app.route("/home", methods=["GET", "POST"])
 @login_required

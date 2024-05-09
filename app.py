@@ -7,8 +7,10 @@ from flask import Flask, flash, redirect, render_template, request, session, jso
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 import logging
+from PIL import Image
+from werkzeug.utils import secure_filename
 
-from helpers import login_required
+from helpers import login_required, allowed_file_type
 
 
 # Configuring the application
@@ -42,6 +44,14 @@ def after_request(response):
 @app.route('/upload', methods=["POST"])
 @login_required
 def upload():
+    
+    # this part of post will handle the image that the user uploads
+        # take the image
+            # check for if the image is actually an image jpeg/png ...
+            # associate a random string with that image
+                # check that random string isn't associated with a previous image (very rare to NO chance, but still check)
+            # store the image in a folder for images
+            
     # check for post request requirements
     if 'file' not in request.files:
         return jsonify({'error': 'No file added'}), 400
@@ -54,6 +64,30 @@ def upload():
     # Check if the user has actually selected a file
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
+    
+    if file and allowed_file_type(file.filename):
+        # Read the file stream
+        file_stream = file.stream
+        file_stream.seek(0) # going to beginning of the file stream
+
+        try:
+            # load image from stream
+            img = Image.open(file_stream)
+            img.verify() # verify it's a valid image
+
+            # If image is valid, get a file name and save it permanently
+
+            filename = secure_filename(file.filename)
+            file_stream.seek(0) # go back to beginning of file stream
+            img = Image.open(file_stream)
+            save_path = os.path.join('./uploads', filename)
+            img.save(save_path)
+
+            return jsonify({'message': 'File successfully uploaded', 'filename': filename}), 200
+        except Exception as e:
+            return jsonify({'error': 'Invalid image file: {}'.format(e)}), 400
+    else:
+        return jsonify({'error': 'Allowed file types are .png .jpg .jpeg .gif .webp'}), 400
 
 
 @app.route("/home", methods=["GET", "POST"])
@@ -89,13 +123,6 @@ def home():
 
         return render_template("home_new.html", name = user[0]["username"], calendar=current_cal, month_name=month_name, year=year)
     
-        # this part of post will handle the image that the user uploads
-            # take the image
-                # check for if the image is actually an image jpeg/png ...
-                # associate a random string with that image
-                    # check that random string isn't associated with a previous image (very rare to NO chance, but still check)
-                # store the image in a folder for images
-
 
     else:
         # seeds with the current month integer

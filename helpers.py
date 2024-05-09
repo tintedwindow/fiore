@@ -16,4 +16,8 @@ def login_required(f):
 
     return decorated_function
 
-def is_valid_image(file)
+def allowed_file_type(filename):
+    """Check for allowed file extensions"""
+    # first checks file has an extension via .
+    # and then splits the extension and checks the extension is in the following set
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg', 'gif', 'webp'}

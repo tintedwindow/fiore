@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     URL.revokeObjectURL(this.src);
                 };
             } else {
-                alert('Please select an image file (jpeg or png)!');
+                alert('Please select an image file (png, jpeg, jpg, gif, webp)');
                 fileInput.value = ''; //resets file input
             }
         } else {
@@ -89,37 +89,60 @@ document.addEventListener("DOMContentLoaded", function() {
     // close modal simply if discard is clicked
     modalDiscard.addEventListener('click', resetModal);
 
-    // submission takes place
+    
+    // submission takes place here onwards
+
+    // submission notification after clicking submit
+    function showNotification(message, succesful, duration = 5000) {
+        const notificationBar = document.getElementById('notification-bar');
+        notificationBar.textContent = message; // Set text in it to be the status message
+    
+        // background color based on success
+        if (succesful) {
+            notificationBar.style.backgroundColor = '#B5C18E'; // Green for success
+        } else {
+            notificationBar.style.backgroundColor = '#FF8080'; // Red for error
+        }
+    
+        notificationBar.style.display = 'flex'; 
+    
+        setTimeout(function() {
+            notificationBar.style.display = 'none'; 
+        }, duration);
+    }
+
+    // when I click the submit button
     modalSubmit.addEventListener('click', function() {
 
         // get current date number again :p
-        var dayDateNumber = document.getElementById('modal-image-date');
+        var dayDateNumber = document.getElementById('modal-image-date').textContent;
 
-        var dataToSend = new FormData();
-        dataToSend.append('file', fileInput.files[0]);       
-        dataToSend.append('date', dayDateNumber);
+        if (fileInput.files.length > 0) {
+            var dataToSend = new FormData();
+            dataToSend.append('file', fileInput.files[0]);       
+            dataToSend.append('date', dayDateNumber);
 
-        fetch('/upload', {
-            method: 'POST',
-            body: dataToSend;
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-            alert('File uploaded succesfully!');
-            resetModal();
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-            alert('Error uploading file.');
-        });
-    } else {
-        alert('Please select a file to upload.');
-    }
-
-});
-
-
-
-
+            fetch('/upload', {
+                method: 'POST',
+                body: dataToSend,
+            })
+            .then(response => {
+                if (!response.ok) {  // Check if response is not OK (status not in the range 200-299)
+                    throw new Error('Server responded with an error!');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                resetModal();
+                showNotification('File uploaded successfully!', true, 5000); // Show success message
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                showNotification('Error uploading file.', false, 5000);  // http error stuff handling
+            });        
+        } else {
+            showNotification('Please select a file to upload', false, 5000);
+        }
+    });
 });

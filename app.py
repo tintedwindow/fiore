@@ -59,7 +59,9 @@ def upload():
         return jsonify({'error': 'No date added'}), 400
         
     file = request.files['file']
-    date = request.form.get('date')
+    description = request.form.get('description', '').strip() # defult to an empty string if no description provided
+    if description == '':
+        description = None
 
     # Check if the user has actually selected a file
     if file.filename == '':
@@ -82,6 +84,14 @@ def upload():
             img = Image.open(file_stream)
             save_path = os.path.join('./uploads', filename)
             img.save(save_path)
+
+            day = int(request.form.get('date'))
+            month = session['month']
+            year = session['year']
+            image_date = datetime(year, month, day)
+
+            db.execute("INSERT INTO images (user_id, path, image_date, description) VALUES (?, ?, ?, ?)", 
+                       (session['user_id'], save_path, image_date, description))
 
             return jsonify({'message': 'File successfully uploaded', 'filename': filename}), 200
         except Exception as e:

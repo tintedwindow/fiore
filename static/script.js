@@ -116,11 +116,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // get current date number again :p
         var dayDateNumber = document.getElementById('modal-image-date').textContent;
+        var description = document.getElementById('modal-input-text').textContent;
 
         if (fileInput.files.length > 0) {
             var dataToSend = new FormData();
             dataToSend.append('file', fileInput.files[0]);       
-            dataToSend.append('date', dayDateNumber);
+            dataToSend.append('day', dayDateNumber);
+            dataToSend.append('description', description)
 
             fetch('/upload', {
                 method: 'POST',

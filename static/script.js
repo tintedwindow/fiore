@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     URL.revokeObjectURL(this.src);
                 };
             } else {
-                alert('Please select an image file (png, jpeg, jpg, gif, webp)');
+                alert('Please select an image file (png, jpeg, jpg, jfif, gif, webp)');
                 fileInput.value = ''; //resets file input
             }
         } else {
@@ -116,13 +116,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // get current date number again :p
         var dayDateNumber = document.getElementById('modal-image-date').textContent;
-        var description = document.getElementById('modal-input-text').textContent;
+        var image_description = document.getElementById('modal-input-text').value;
 
         if (fileInput.files.length > 0) {
             var dataToSend = new FormData();
             dataToSend.append('file', fileInput.files[0]);       
-            dataToSend.append('day', dayDateNumber);
-            dataToSend.append('description', description)
+            dataToSend.append('date', dayDateNumber);
+            dataToSend.append('description', image_description);
 
             fetch('/upload', {
                 method: 'POST',

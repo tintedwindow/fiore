@@ -20,4 +20,4 @@ def allowed_file_type(filename):
     """Check for allowed file extensions"""
     # first checks file has an extension via .
     # and then splits the extension and checks the extension is in the following set
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg', 'gif', 'webp'}
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg', 'jfif', 'gif', 'webp'}

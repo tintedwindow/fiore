@@ -241,6 +241,12 @@
     color: rgba(90, 90, 90, 1);
 }
 
+.calendar-day-date-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
 
 .calendar-day-date-add {
     font-size: 30px;

@@ -93,9 +93,13 @@
                                         <div class="calendar-day-date-number">
                                             {{day}}
                                         </div>
-                                        <svg class="calendar-day-date-add" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"/>
-                                        </svg>
+                                        {% if day in images_by_day %}
+                                            <img class="calendar-day-date-image" src="{{ images_by_day[day]['image_path'] }}" alt="{{ images_by_day[day]['description'] }}">
+                                        {% else %}
+                                            <svg class="calendar-day-date-add" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"/>
+                                            </svg>
+                                        {% endif %}
                                     </div>
                                 {% endif %}
                             {% endfor %}
@@ -119,7 +123,12 @@
         <div id="modal-image-details">
             <div id="modal-image-container">
                 <div id="modal-image-date"></div>   
-                <img id="modal-image" src="#" alt="Image Preview">
+                <!-- DON'T EVER PUT # AS IMAGE SRC VALUE PLSSSSSSSSSSS THANK UUU THIS TOOK ME A WHOLE DAY
+                IT MESSED WITH MY CALENDAR SCROLL
+                src="#" in the <img> tag essentially meant that the browser would attempt to load the current page as an image
+                so sending a get request to that page. That's why I was seeing two SELECT statements in flask log.-->
+                
+                <img id="modal-image" src="" alt="Image Preview">
             </div>
             <p id="modal-text">File Selected : </p>
             <p id="modal-date"></p>

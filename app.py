@@ -69,6 +69,7 @@ def upload():
     
     if file and allowed_file_type(file.filename):
         # Read the file stream
+        
         file_stream = file.stream
         file_stream.seek(0) # going to beginning of the file stream
 
@@ -86,12 +87,12 @@ def upload():
             img.save(save_path)
 
             day = int(request.form.get('date'))
-            month = session['month']
-            year = session['year']
+            month = session["month"]
+            year = session["year"]
             image_date = datetime(year, month, day)
+            print(image_date)
 
-            db.execute("INSERT INTO images (user_id, path, image_date, description) VALUES (?, ?, ?, ?)", 
-                       (session['user_id'], save_path, image_date, description))
+            db.execute("INSERT INTO images (user_id, path, image_date, description) VALUES (?, ?, ?, ?)", session['user_id'], save_path, image_date, description)
 
             return jsonify({'message': 'File successfully uploaded', 'filename': filename}), 200
         except Exception as e:
@@ -105,8 +106,10 @@ def upload():
 def home():
 
     if request.method == "POST":
+        print(session["month"] , session["year"])
         # do the calculation per value and display the form
         month_updater = int(request.form.get("month_updater"))
+        print(month_updater)
 
 
         if ((session["month"] + month_updater) > 12):
@@ -124,6 +127,7 @@ def home():
         month_name = calendar.month_name[session["month"]]
         month = session["month"]
         year = session["year"]
+        print(month, year)
 
         current_cal = calendar.monthcalendar(year, session["month"])
 
@@ -131,7 +135,11 @@ def home():
             "SELECT id, username FROM users WHERE id = ?", session["user_id"]
         )
 
-        return render_template("home_new.html", name = user[0]["username"], calendar=current_cal, month_name=month_name, year=year)
+        images = db.execute("SELECT path, image_date, description FROM images WHERE user_id = ? AND strftime('%Y-%m', image_date) = ?",
+                            session["user_id"], f"{year}-{month:02}")
+
+        images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': img['description']} for img in images}
+        return render_template("home_new.html", name = user[0]["username"], calendar=current_cal, month_name=month_name, year=year, images_by_day=images_by_day)
     
 
     else:
@@ -142,14 +150,20 @@ def home():
 
         #get current month name dynamically
         month_name = calendar.month_name[session["month"]]
+        month = session["month"]
         year = session["year"]
 
         user = db.execute(
             "SELECT id, username FROM users WHERE id = ?", session["user_id"]
         )
 
+        images = db.execute("SELECT path, image_date, description FROM images WHERE user_id = ? AND strftime('%Y-%m', image_date) = ?",
+                            session["user_id"], f"{year}-{month:02}")
+
+        images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': img['description']} for img in images}
+
         current_cal = calendar.monthcalendar(year, session["month"])
-        return render_template("home_new.html", name = user[0]["username"], calendar=current_cal, month_name=month_name, year=year)
+        return render_template("home_new.html", name = user[0]["username"], calendar=current_cal, month_name=month_name, year=year, images_by_day=images_by_day)
 
 
 

@@ -3,7 +3,7 @@ import os
 import calendar
 from datetime import datetime
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session, jsonify
+from flask import Flask, flash, redirect, render_template, request, session, jsonify, send_from_directory
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 import logging
@@ -39,7 +39,13 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
+@app.route('/<path:filename>')
+def uploaded_file(filename):
+    return send_from_directory(os.getcwd(), filename)
 
+@app.route('/test')
+def test():
+    return render_template('test.html')
 
 @app.route('/upload', methods=["POST"])
 @login_required

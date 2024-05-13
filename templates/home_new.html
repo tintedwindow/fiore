@@ -94,7 +94,7 @@
                                             {{day}}
                                         </div>
                                         {% if day in images_by_day %}
-                                            <img class="calendar-day-date-image" id="{{ 'day-' ~ day }}" src="{{ url_for('uploaded_file', filename=images_by_day[day]['image_path']) }}" alt="{{ images_by_day[day]['description'] }}">
+                                            <img  alt="{{ 'day-' ~ day }}" class="calendar-day-date-image" id="{{ 'day-' ~ day }}" src="{{ url_for('uploaded_file', filename=images_by_day[day]['image_path']) }}" title="{{ images_by_day[day]['description'] if images_by_day[day]['description'] else '' }}">
                                         {% else %}
                                             <svg class="calendar-day-date-add" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
                                                 <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"/>
@@ -147,6 +147,12 @@
 <!-- File upload hidden attribute-->
 <input id="file-input" style="display:none;" type="file" accept="image/png, image/jpeg">
 
+<!-- Image page hidden form attribute-->
+<form id="image-page-info" style="display:none;" method="post" action="/day-info"> 
+    <input name="image_page_day" type="hidden">
+    <input name="image_page_month" type="hidden" value="{{month}}">
+    <input name="image_page_year" type="hidden" value="{{year}}">
+</form>
 
 </body>
 </html>

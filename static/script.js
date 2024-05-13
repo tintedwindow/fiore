@@ -147,4 +147,22 @@ document.addEventListener("DOMContentLoaded", function() {
             showNotification('Please select a file to upload', false, 5000);
         }
     });
+
+
+    // Handles navigation to the day page via image click
+
+    var clickedImage = document.querySelectorAll('.calendar-day-date-image');
+
+    clickedImage.forEach(function(button) {
+        button.addEventListener('click', function() {
+
+            var imageId = this.getAttribute('id');
+            var dayDateNumber = imageId.split('-')[1];
+            document.querySelector('#image-page-info [name="image_page_day"]').value = dayDateNumber;
+            console.log(dayDateNumber);
+
+            // Submit the form
+            document.getElementById('image-page-info').submit();
+        });
+    });
 });

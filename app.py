@@ -47,6 +47,37 @@ def uploaded_file(filename):
 def test():
     return render_template('test.html')
 
+@app.route('/day-info', methods=["POST", "GET"])
+@login_required
+def day_info():
+    if request.method == "POST":
+        print(request.form.get("image_page_day"))
+        print(request.form.get("image_page_month"))
+        print(request.form.get("image_page_year"))
+
+        if not (request.form.get("image_page_day") and request.form.get("image_page_month") and request.form.get("image_page_year")):
+            # I was reading harry potter lately, i just wanted to add a reference. Will change_later
+            return render_template("apology.html", message="Are you sure you have all the books, Potter?"), 403
+        
+        day = int(request.form.get("image_page_day"))
+        month = int(request.form.get("image_page_month"))
+        year = int(request.form.get("image_page_year"))
+        month_name = calendar.month_name[month]
+
+    
+        day_details = db.execute("SELECT path, description FROM images WHERE user_id = ? AND strftime('%Y-%m-%d', image_date) = ?",
+                        session["user_id"], f"{year}-{month:02}-{day:02}")
+        
+        if day_details:
+            # If there is an image for the selected date, render the image page
+            return render_template('day_info.html', day_details=day_details, day = day, month_name=month_name, year=year)
+        else:
+            # If there is no image for the selected date, return an error message
+            return render_template("apology.html", message="Are you roaming around unknown POST request corridors, Potter?"), 403
+
+    else :
+        return render_template("apology.html", message="Are you roaming around unknown GET request corridors, Potter?"), 403
+
 @app.route('/upload', methods=["POST"])
 @login_required
 def upload():
@@ -144,8 +175,8 @@ def home():
         images = db.execute("SELECT path, image_date, description FROM images WHERE user_id = ? AND strftime('%Y-%m', image_date) = ?",
                             session["user_id"], f"{year}-{month:02}")
 
-        images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': img['description']} for img in images}
-        return render_template("home_new.html", name = user[0]["username"], calendar=current_cal, month_name=month_name, year=year, images_by_day=images_by_day)
+        images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': img['description'].replace('\n', '<br>') if img['description'] else None} for img in images}
+        return render_template("home_new.html", name = user[0]["username"], calendar=current_cal, month_name=month_name, month=month, year=year, images_by_day=images_by_day)
     
 
     else:
@@ -169,7 +200,7 @@ def home():
         images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': img['description']} for img in images}
 
         current_cal = calendar.monthcalendar(year, session["month"])
-        return render_template("home_new.html", name = user[0]["username"], calendar=current_cal, month_name=month_name, year=year, images_by_day=images_by_day)
+        return render_template("home_new.html", name = user[0]["username"], calendar=current_cal, month_name=month_name, month=month, year=year, images_by_day=images_by_day)
 
 
 

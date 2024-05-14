@@ -90,7 +90,7 @@
                                     </div>
                                 {% else %}
                                     <div class="calendar-day-date">
-                                        <div class="calendar-day-date-number">
+                                        <div class="calendar-day-date-number" style="{{ 'color: white; mix-blend-mode: ; text-shadow: 1px 1px 4px rgba(0, 0, 0, 1);' if day in images_by_day }}">
                                             {{day}}
                                         </div>
                                         {% if day in images_by_day %}

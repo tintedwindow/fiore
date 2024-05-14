@@ -239,6 +239,7 @@
     bottom: 6px;
     right: 8px; 
     color: rgba(90, 90, 90, 1);
+    background-color: ;
 }
 
 .calendar-day-date-image {
@@ -246,7 +247,10 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
 
+.calendar-day-date-image:hover {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Optional: for styling */
 }
 
 .calendar-day-date-add {
@@ -312,7 +316,7 @@
 
 #modal-image-container {
     height: 65%; 
-    border: 2px solid black;
+    border: 1px solid #dddddd;
     position: relative; 
 }
 
@@ -323,15 +327,13 @@
 }
 
 #modal-image-date {
-    backdrop-filter: blur(2px);
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 18%;
-    padding: 0 4px 0 3px;
+    color: white; 
+    mix-blend-mode: ; 
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 1);
     position: absolute;
     bottom: 6px;
     right: 8px; 
     font-size: 1.1em;
-    color: rgb(0, 0, 0);
 }
 
 #modal-date {

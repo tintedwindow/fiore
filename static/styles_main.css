@@ -14,6 +14,12 @@
     display: flex;
     align-items: center;
     position: relative; /* Add this line */
+
+    background-color: rgba(255, 255, 255, .9);
+    backdrop-filter: blur(50px);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
 
 .navbar::after {
@@ -120,10 +126,11 @@
 
 .content-container {
     background-color: antiquewhite;
-    height: calc(100vh - 62px);
+    height: calc(100vh);
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 62px;
 
 }
 .content {

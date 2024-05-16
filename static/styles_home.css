@@ -1,0 +1,319 @@
+.content-container {
+    background-color: white;
+    height: calc(100vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 62px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 90%;
+    width: 60%;
+    background-color: ;
+    border: ;
+}
+
+.calendar {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+}
+
+.calendar-info {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: ;
+    height: 7%;
+    border: ;
+}
+
+.calendar-month {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    margin: ;
+    justify-content: space-evenly ;
+    align-items: center;
+    text-align: center;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+.calendar-month-year {
+    width: 20%;
+    word-spacing: 0.5em;
+    color: rgba(18, 18, 18, 0.6);
+    padding: 0.5%;
+}
+
+.arrow {
+    background: none;
+    border: none;
+    padding: 50%;
+    border-radius: 50%;
+    opacity: 0.35;
+
+}
+
+.arrow:hover {
+    opacity: 0.6;
+    background-color: rgba(0, 0, 0, .05);
+}
+
+.calendar-body {
+    height: 80%;
+    border: ;
+    margin: ;
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-week-head {
+    display: flex;
+    height: 5%;
+    margin:  0 0 20px 0;
+    border: ;
+    justify-content: space-evenly;
+    text-align: center;
+    font-size: 1.1rem;
+
+}
+
+.calendar-week {
+    display: flex;
+    height: 13.5%;
+    /* In CSS, when you set the margin as a percentage, 
+    it's calculated based on the width of the parent container, not the height. 
+    This is true even for top and bottom margins. */
+    margin: 5px 0;
+    justify-content: space-evenly;
+
+}
+
+.calendar-day-name {
+    width: 12%;
+    color: rgba(18, 18, 18, 0.6)
+}
+
+.calendar-day-date-blank {
+    width: 12%;
+}
+
+.calendar-day-date {
+    width: 12%;
+    border: 1px solid #dddddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; 
+}
+
+.calendar-day-date-number {
+    position: absolute;
+    bottom: 6px;
+    right: 8px; 
+    color: rgba(90, 90, 90, 1);
+    background-color: ;
+}
+
+.calendar-day-date-image {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.calendar-day-date-image:hover {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Optional: for styling */
+}
+
+.calendar-day-date-add {
+    font-size: 30px;
+    fill: rgba(90, 90, 90, 0.3);
+}
+
+.calendar-day-date-add:hover {
+    fill: rgba(90, 90, 90, .6) ;
+}
+
+#preview-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0); /* fallback color */
+    background-color: rgba(0, 0, 0, 0.3); /* black wwith alpha opacity */
+    align-items: center;
+    justify-content: center;
+}
+
+#modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%; /* Could be more or less, depending on screen size */
+    height: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Optional: for styling */
+    animation-name: animatetop; /* Optional: for animation */
+    animation-duration: 0.4s; /* Animation duration */
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+    /* text properties same as navbar items */
+    font-size: 0.9375rem;
+    color: #050505;
+
+    /* font settings */
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings:
+      "slnt" 0;
+}
+
+#modal-image-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    
+    height: 60%;
+}
+
+#modal-image-container {
+    height: 65%; 
+    border: 1px solid #dddddd;
+    position: relative; 
+}
+
+#modal-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#modal-image-date {
+    color: white; 
+    mix-blend-mode: ; 
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 1);
+    position: absolute;
+    bottom: 6px;
+    right: 8px; 
+    font-size: 1.1em;
+}
+
+#modal-date {
+    display: flex;
+    align-items: center;
+    font-size: 1.3em;
+    height: 20%;
+}
+
+#modal-input-text-holder {
+    border:;
+    height: 28%;
+    display: flex;
+    justify-content: center;
+}
+
+#modal-input-text {
+    resize: none;
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 4px;
+    text-align:center;
+    /* text properties same as navbar items */
+    font-size: 0.9375rem;
+    color: #050505;
+
+    /* font settings */
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings:
+        "slnt" 0;
+}
+#modal-input-text:focus {
+        outline: 2px solid rgba(167, 146, 119, 0.4);
+        outline: none;
+}
+
+#modal-buttons
+{
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+
+#modal-submit {
+    font-size: 1.15em;
+    padding: 5px;
+    border-radius: 4px;
+    text-decoration: underline 2px;
+    text-decoration-color: #fefefe;
+    text-underline-offset: 4px; 
+
+}
+
+#modal-submit:hover {
+    text-decoration-color: #D4E7C5;
+    cursor: pointer;
+}
+#modal-discard {
+    font-size: 1.15em;
+    padding: 5px;
+    border-radius: 4px;
+    text-decoration: underline 2px;
+    text-decoration-color: #fefefe;
+    text-underline-offset: 4px; 
+}
+
+#modal-discard:hover {
+    text-decoration-color: #FFD0D0;
+    cursor: pointer;
+}
+
+#notification-bar {
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: space-evenly;
+    position: fixed;
+    top: 62px;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background-color: #ffffff;
+    opacity: 0.8;
+    color: #050505; 
+    text-align: center;
+    padding: 10px 0;
+    z-index: 1; /* Make sure it appears above other content */
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.3);
+
+    /* font settings */
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings:
+        "slnt" 0;
+}

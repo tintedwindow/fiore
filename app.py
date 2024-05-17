@@ -70,7 +70,7 @@ def day_info():
         
         if day_details:
             # If there is an image for the selected date, render the image page
-            return render_template('day_info.html', day_details=day_details, day = day, month_name=month_name, year=year)
+            return render_template('day_info.html', name=session["user_name"], day_details=day_details, day = day, month_name=month_name, year=year)
         else:
             # If there is no image for the selected date, return an error message
             return render_template("apology.html", message="Are you roaming around unknown POST request corridors, Potter?"), 403
@@ -168,15 +168,11 @@ def home():
 
         current_cal = calendar.monthcalendar(year, session["month"])
 
-        user = db.execute(
-            "SELECT id, username FROM users WHERE id = ?", session["user_id"]
-        )
-
         images = db.execute("SELECT path, image_date, description FROM images WHERE user_id = ? AND strftime('%Y-%m', image_date) = ?",
                             session["user_id"], f"{year}-{month:02}")
 
         images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': img['description'].replace('\n', '<br>') if img['description'] else None} for img in images}
-        return render_template("home_new.html", name = user[0]["username"], calendar=current_cal, month_name=month_name, month=month, year=year, images_by_day=images_by_day)
+        return render_template("home_new.html", name = session["user_name"], calendar=current_cal, month_name=month_name, month=month, year=year, images_by_day=images_by_day)
     
 
     else:
@@ -190,17 +186,13 @@ def home():
         month = session["month"]
         year = session["year"]
 
-        user = db.execute(
-            "SELECT id, username FROM users WHERE id = ?", session["user_id"]
-        )
-
         images = db.execute("SELECT path, image_date, description FROM images WHERE user_id = ? AND strftime('%Y-%m', image_date) = ?",
                             session["user_id"], f"{year}-{month:02}")
 
         images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': img['description']} for img in images}
 
         current_cal = calendar.monthcalendar(year, session["month"])
-        return render_template("home_new.html", name = user[0]["username"], calendar=current_cal, month_name=month_name, month=month, year=year, images_by_day=images_by_day)
+        return render_template("home_new.html", name = session["user_name"], calendar=current_cal, month_name=month_name, month=month, year=year, images_by_day=images_by_day)
 
 
 
@@ -238,6 +230,7 @@ def login():
         
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
+        session["user_name"] = request.form.get("username") 
 
         # Redirect user to home page
         return redirect("/home")

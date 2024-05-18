@@ -3,7 +3,7 @@ import os
 import calendar
 from datetime import datetime
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session, jsonify, send_from_directory
+from flask import Flask, flash, redirect, render_template, request, session, jsonify, send_from_directory, url_for
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 import logging
@@ -43,25 +43,48 @@ def after_request(response):
 def uploaded_file(filename):
     return send_from_directory(os.getcwd(), filename)
 
-@app.route('/test')
-def test():
-    return render_template('test.html')
+@app.route('/entry-scroll', methods=["GET"])
+def entry_scroll():
+    # retrieve the last or the next entry of the user
+    try:
+        updater = int(request.args.get("updater"))
+        day = int(request.args.get("day"))
+        month = int(request.args.get("month"))
+        year = int(request.args.get("year"))
+    except ValueError:
+        return render_template("apology.html", message="Are you sure you are using the correct spells, Potter?"), 403
+    
+    print(updater)
+    print("This was updater ^^")
+    if updater == -1:
+        date_info = db.execute("SELECT image_date FROM images WHERE user_id = ? AND DATE(image_date) < ? ORDER BY image_date DESC LIMIT 1;",
+                            session["user_id"], f"{year}-{month:02}-{day:02}")
+    else:
+        date_info = db.execute("SELECT image_date FROM images WHERE user_id = ? AND DATE(image_date) > ? ORDER BY image_date ASC LIMIT 1;",
+                        session["user_id"], f"{year}-{month:02}-{day:02}")
+    
+    if date_info:
+        date = datetime.strptime(date_info[0]["image_date"], '%Y-%m-%d %H:%M:%S')
+        return redirect(url_for('day_info', day=date.day, month=date.month, year=date.year))
+    else:
+        return redirect("/home")
+    
 
 @app.route('/day-info', methods=["POST", "GET"])
 @login_required
 def day_info():
-    if request.method == "POST":
-        print(request.form.get("image_page_day"))
-        print(request.form.get("image_page_month"))
-        print(request.form.get("image_page_year"))
+    if request.method == "GET":
+        print(request.args.get("day"))
+        print(request.args.get("month"))
+        print(request.args.get("year"))
 
-        if not (request.form.get("image_page_day") and request.form.get("image_page_month") and request.form.get("image_page_year")):
+        if not (request.args.get("day") and request.args.get("month") and request.args.get("year")):
             # I was reading harry potter lately, i just wanted to add a reference. Will change_later
             return render_template("apology.html", message="Are you sure you have all the books, Potter?"), 403
         
-        day = int(request.form.get("image_page_day"))
-        month = int(request.form.get("image_page_month"))
-        year = int(request.form.get("image_page_year"))
+        day = int(request.args.get("day"))
+        month = int(request.args.get("month"))
+        year = int(request.args.get("year"))
         month_name = calendar.month_name[month]
 
     
@@ -70,13 +93,13 @@ def day_info():
         
         if day_details:
             # If there is an image for the selected date, render the image page
-            return render_template('day_info.html', name=session["user_name"], day_details=day_details, day = day, month_name=month_name, year=year)
+            return render_template('day_info.html', name=session["user_name"], day_details=day_details, day = day, month=month, month_name=month_name, year=year)
         else:
             # If there is no image for the selected date, return an error message
-            return render_template("apology.html", message="Are you roaming around unknown POST request corridors, Potter?"), 403
+            return render_template("apology.html", message="Are you sure you are on the right date, Potter?"), 403
 
     else :
-        return render_template("apology.html", message="Are you roaming around unknown GET request corridors, Potter?"), 403
+        return render_template("apology.html", message="Are you roaming around unknown request corridors, Potter?"), 403
 
 @app.route('/upload', methods=["POST"])
 @login_required

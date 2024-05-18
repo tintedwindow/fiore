@@ -26,7 +26,13 @@
                         <li class="nav-list-item">About Us</li>
                         <li class="nav-list-item">Resources</li>
                         <li class="nav-list-item">Acknowledgements</li>
-                        <li class="nav-list-item">Italy?</li>
+                        <li class="nav-list-item">Italy?
+                            <ul class="nav-list-item-dropdown">
+                                <li class="nav-list-item-dropdown-item ">place uno</li>
+                                <li class="nav-list-item-dropdown-item ">place due</li>
+                                <li class="nav-list-item-dropdown-item ">place tre?</li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 <div class="nav-inner-right">
@@ -149,10 +155,10 @@
 <input id="file-input" style="display:none;" type="file" accept="image/png, image/jpeg">
 
 <!-- Image page hidden form attribute-->
-<form id="image-page-info" style="display:none;" method="post" action="/day-info"> 
-    <input name="image_page_day" type="hidden">
-    <input name="image_page_month" type="hidden" value="{{month}}">
-    <input name="image_page_year" type="hidden" value="{{year}}">
+<form id="image-page-info" style="display:none;" method="get" action="/day-info"> 
+    <input name="day" type="hidden">
+    <input name="month" type="hidden" value="{{month}}">
+    <input name="year" type="hidden" value="{{year}}">
 </form>
 
 </body>

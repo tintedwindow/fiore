@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             var imageId = this.getAttribute('id');
             var dayDateNumber = imageId.split('-')[1];
-            document.querySelector('#image-page-info [name="image_page_day"]').value = dayDateNumber;
+            document.querySelector('#image-page-info [name="day"]').value = dayDateNumber;
             console.log(dayDateNumber);
 
             // Submit the form

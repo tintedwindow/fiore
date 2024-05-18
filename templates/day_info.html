@@ -33,7 +33,7 @@
                     <ul class="nav-list">
                         <li class="nav-list-item">{{ name }}</li>
                         <div class="nav-menu-divider"></div>
-                        <li class="nav-list-item pseudo-button">Log out</li>
+                        <a href="/logout"> <li class="nav-list-item pseudo-button">Log out</li> </a>
                     </ul>
                 </div>
             </div>
@@ -50,8 +50,11 @@
                     </div>
                     <div class="day-page-info">
                         <div class="calendar-month">
-                            <form action="/home" method="post">
-                                <input type="hidden" name="month_updater" value="-1">
+                            <form action="/entry-scroll" method="get" title="Previous Entry">
+                                <input name="updater" type="hidden" value="-1">
+                                <input name="day" type="hidden" value="{{day}}">
+                                <input name="month" type="hidden" value="{{month}}">
+                                <input name="year" type="hidden" value="{{year}}">
                                 <button class="arrow" type="submit">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
@@ -60,11 +63,16 @@
                             </form>
         
                             <div class="calendar-month-year">
-                                {{day}} {{month_name}} {{year}}
+                                    <a class="calander-back-home" href="/home" title="Back to Calander">
+                                        {{day}} {{month_name}} {{year}}
+                                    </a>
                             </div>
         
-                            <form action="/home" method="post">
-                                <input type="hidden" name="month_updater" value="1">
+                            <form action="/entry-scroll" method="get" title="Next Entry">
+                                <input name="updater" type="hidden" value="1">
+                                <input name="day" type="hidden" value="{{day}}">
+                                <input name="month" type="hidden" value="{{month}}">
+                                <input name="year" type="hidden" value="{{year}}">
                                 <button class="arrow" type="submit">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>

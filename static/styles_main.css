@@ -87,7 +87,8 @@
     border-radius: 4px;
     font-size: 0.9375rem;
     color: #050505;
-
+    position: relative;
+    
     /* font settings */
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -95,6 +96,7 @@
     font-style: normal;
     font-variation-settings:
       "slnt" 0;
+
 }
 
 .nav-list-item:hover {
@@ -124,4 +126,37 @@
     cursor: link;
 }
 
+.nav-list-item-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    padding: 4px;
+    margin: 0;
+    border-radius: 4px;
+    z-index: 100;
+}
 
+
+.nav-list-item-dropdown-item {
+    display: block;
+    padding: 0 10px;
+    height: 30px;
+    line-height: 31px;
+    border-radius: 4px;
+    font-size: 0.9375rem;
+    color: #050505;
+    white-space: nowrap;
+}
+
+
+.nav-list-item-dropdown-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.nav-list-item:hover .nav-list-item-dropdown {
+    display: block;
+}

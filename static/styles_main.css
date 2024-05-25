@@ -160,3 +160,11 @@
 .nav-list-item:hover .nav-list-item-dropdown {
     display: block;
 }
+
+@media only screen and (max-width: 768px) {
+    /* mobile nav styles */
+}
+
+@media screen and (min-width: 769px) {
+    /* desktop nav styles */
+}

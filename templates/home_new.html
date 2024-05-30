@@ -1,76 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "page_with_nav.html" %}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{% block static %}
+    <!-- font specific stuff-->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
     <title>Fiore</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='styles_main.css') }}">
+    <!-- style sheet and javascript-->
     <link rel="stylesheet" href="{{ url_for('static',filename='styles_home.css') }}">
-
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-</head>
-<body>
-    <header>
-        <div class="navbar">
-            <div class="nav-logo">
-                <div class="logo"></div>
-                <div class="logo-text">Fiore</div>
-            </div>
-            <div class="nav-inner">
-                <div class="nav-inner-left">
-                    <ul class="nav-list" id="nav-list-left">
-                        <li class="nav-list-item">About Us</li>
-                        <li class="nav-list-item">Resources</li>
-                        <li class="nav-list-item">Acknowledgements</li>
-                        <li class="nav-list-item">Italy?
-                            <ul class="nav-list-item-dropdown">
-                                <li class="nav-list-item-dropdown-item ">place uno</li>
-                                <li class="nav-list-item-dropdown-item ">place due</li>
-                                <li class="nav-list-item-dropdown-item ">place tre?</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div class="nav-inner-right">
-                    <ul class="nav-list" id="nav-list-right">
-                        <li class="nav-list-item">{{ name }}</li>
-                        <div class="nav-menu-divider"></div>
-                        <li class="nav-list-item pseudo-button" id="desktop-logout">Log out</li>
-                        <div>
-                            <div class="bar1"></div>
-                            <div class="bar2"></div>
-                            <div class="bar3"></div>
-                            <ul>
-                                <li><a href="/about">About Us</a></li>
-                                <li><a href="/about">Resources</a></li>
-                                <li><a href="/about">Acknowledgements</a></li>
-                                <li id="dropdown-simple"> <a>Italy?</a> 
-                                    <svg clas="mobile-nav-arrow" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
-                                      </svg>
-                                </li>
-                                <ul>
-                                    <li><a href="/about">Rome</a></li>
-                                    <li><a href="/about">Milan</a></li>
-                                    <li ><a href="/about">Florence</a></li>
-                                </ul>
-                                <li><a href="/about" style="color: inherit;" id="mobile-logout">Log out :(</a></li>
-                            </ul>
-                
-                        </div>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </header>
+{% endblock %}
 
+{% block content %}
     <div class="content-container">
         <div class="content">
-            
             <div class="calendar">
                 <!-- class for month, year and scroll-->
                 <div class="calendar-info">
@@ -80,20 +22,20 @@
                             <button class="arrow" type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
-                                  </svg>
+                                </svg>
                             </button>
                         </form>
-    
+
                         <div class="calendar-month-year">                  
                             {{month_name}} {{year}}
                         </div>
-    
+
                         <form action="/home" method="post">
                             <input type="hidden" name="month_updater" value="1">
                             <button class="arrow" type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-                                  </svg>
+                                </svg>
                             </button>
                         </form>
                     </div>
@@ -110,7 +52,7 @@
                         <div class="calendar-day-name">SAT</div>
                         <div class="calendar-day-name">SUN</div>
                     </div>
-    
+
                     {% for week in calendar %}
                         <div class="calendar-week">
                             {% for day in week %}
@@ -126,7 +68,8 @@
                                             <img  alt="{{ 'day-' ~ day }}" class="calendar-day-date-image" id="{{ 'day-' ~ day }}" src="{{ url_for('uploaded_file', filename=images_by_day[day]['image_path']) }}" title="{{ images_by_day[day]['description'] if images_by_day[day]['description'] else '' }}">
                                         {% else %}
                                             <svg class="calendar-day-date-add" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"/>
+                                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
                                             </svg>
                                         {% endif %}
                                     </div>
@@ -139,15 +82,14 @@
         </div>
     </div>
 
+    <!-- Status nav bar-->
+    <div id="notification-bar">
 
-<!-- Status nav bar-->
-<div id="notification-bar">
-    
-</div>
+    </div>
 
 
-<!-- Modal -->
-<div id="preview-modal" class="modal">
+    <!-- Modal -->
+    <div id="preview-modal" class="modal">
     <div id="modal-content">
         <div id="modal-image-details">
             <div id="modal-image-container">
@@ -170,18 +112,17 @@
             <span id="modal-discard">Discard</span>
         </div>
     </div>
-</div>
+    </div>
 
 
-<!-- File upload hidden attribute-->
-<input id="file-input" style="display:none;" type="file" accept="image/png, image/jpeg">
+    <!-- File upload hidden attribute-->
+    <input id="file-input" style="display:none;" type="file" accept="image/png, image/jpeg">
 
-<!-- Image page hidden form attribute-->
-<form id="image-page-info" style="display:none;" method="get" action="/day-info"> 
+    <!-- Image page hidden form attribute-->
+    <form id="image-page-info" style="display:none;" method="get" action="/day-info"> 
     <input name="day" type="hidden">
     <input name="month" type="hidden" value="{{month}}">
     <input name="year" type="hidden" value="{{year}}">
-</form>
+    </form>
 
-</body>
-</html>
+{% endblock %}

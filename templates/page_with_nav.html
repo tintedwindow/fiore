@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- fonts api?-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- nav bar styles-->
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles_main.css') }}">
+    {% block static %} {% endblock %}
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="nav-logo">
+                <div class="logo"></div>
+                <div class="logo-text">Fiore</div>
+            </div>
+            <div class="nav-inner">
+                <div class="nav-inner-left">
+                    <ul class="nav-list" id="nav-list-left">
+                        <li class="nav-list-item"><a href="/about">About Us</a></li>
+                        <li class="nav-list-item"><a href="/about">Resources</a></li>
+                        <li class="nav-list-item"><a href="/about">Acknowledgements</a></li>
+                        <li class="nav-list-item dropdown-activator"> 
+                            <span>
+                                <a>Italy?</a>
+                                <svg id="italy-dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                                </svg>
+                            </span>
+                            <ul class="nav-list-item-dropdown">
+                                <li class="nav-list-item"><a href="/about">place uno</a></li>
+                                <li class="nav-list-item"><a href="/about">place due</a></li>
+                                <li class="nav-list-item"><a href="/about">place tre?</a></li>
+                            </ul>
+                        </li>
+                        <li class="pseudo-button" id="mobile-logout"><a href="/about" style="color: inherit;">Log out :(</a></li>
+                    </ul>
+                </div>
+                <div class="nav-inner-right">
+                    <ul class="nav-list" id="nav-list-right" >
+                        {% if session["user_id"] %}
+                            <li class="nav-list-item"><a href="/profile">{{ name }}</a></li>
+                            <div class="nav-menu-divider"></div>
+                            <li class="nav-list-item pseudo-button" id="desktop-logout"><a href="/about">Log out</a></li>
+                        {% else %}
+                            <li class="nav-list-item"><a href="/profile">Log in</a></li>
+                            <div class="nav-menu-divider"></div>
+                            <li class="nav-list-item pseudo-button" id="desktop-logout"><a href="/about">Enter Fiore</a></li>
+                        {% endif %}
+                        <li> 
+                            <div class="nav-toggle" aria-label="toggle navigation">
+                                <div class="bar1"></div>
+                                <div class="bar2"></div>
+                                <div class="bar3"></div>
+                            </div>
+                        </li>                
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    {% block content %} {% endblock %}
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Navigation toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-inner-left');
+
+        navToggle.addEventListener('click', function() {
+            navToggle.classList.toggle('open');
+            navMenu.classList.toggle('nav-inner-left-open');
+        });
+
+        const dropdownActivator = document.querySelector(".dropdown-activator");
+        const dropdown = document.querySelector(".nav-list-item-dropdown");
+        const dropdownArrow = document.getElementById("italy-dropdown-arrow"); 
+
+        dropdownActivator.addEventListener('click', function (event) {
+            event.preventDefault();
+            dropdown.classList.toggle('nav-list-item-dropdown-visible');
+            dropdownArrow.classList.toggle('italy-dropdown-arrow-open');
+        });
+    });
+</script>
+</html>

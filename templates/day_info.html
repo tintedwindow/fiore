@@ -1,48 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "page_with_nav.html" %}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{% block static %}
+    <!-- font specific stuff -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <title> {{day}} {{month_name}} {{year % 100}} </title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='styles_main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static',filename='styles_day.css') }}">
 
-</head>
+    <title> {{day}} {{month_name}} {{year % 100}} </title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles_day.css') }}">
+{% endblock %}
+
 <body>
 
-    <header>
-        <div class="navbar">
-            <div class="nav-logo">
-                <div class="logo"></div>
-                <div class="logo-text">Fiore</div>
-            </div>
-            <div class="nav-inner">
-                <div class="nav-inner-left">
-                    <ul class="nav-list">
-                        <a href="/about"> <li class="nav-list-item">About Us</li> </a>
-                        <a href="/resources"> <li class="nav-list-item">Resources</li> </a>
-                        <li class="nav-list-item">Acknowledgements</li>
-                        <li class="nav-list-item">Italy?</li>
-                    </ul>
-                </div>
-                <div class="nav-inner-right">
-                    <ul class="nav-list">
-                        <li class="nav-list-item">{{ name }}</li>
-                        <div class="nav-menu-divider"></div>
-                        <a href="/logout"> <li class="nav-list-item pseudo-button">Log out</li> </a>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </header>
-
+{% block content %}
     <div class="content-container">
         <div class="content">
-            
             <div class="day-page-container">
                 <div class="day-page-body">
                     <div class="day-page-image-container">
@@ -91,6 +61,4 @@
                 </div>
         </div>
     </div>
-    
-</body>
-</html>
+{% endblock %}

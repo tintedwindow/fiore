@@ -150,7 +150,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     // Handles navigation to the day page via image click
-
     var clickedImage = document.querySelectorAll('.calendar-day-date-image');
 
     clickedImage.forEach(function(button) {
@@ -166,23 +165,4 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-
-    // Navigation toggle
-    const navToggle = document.querySelector('.nav-toggle');
-    const navMenu = document.querySelector('.nav-inner-left');
-
-    navToggle.addEventListener('click', function() {
-        navToggle.classList.toggle('open');
-        navMenu.classList.toggle('nav-inner-left-open');
-    });
-
-    const dropdownActivator = document.querySelector(".dropdown-activator");
-    const dropdown = document.querySelector(".nav-list-item-dropdown");
-    const dropdownArrow = document.getElementById("italy-dropdown-arrow"); 
-
-    dropdownActivator.addEventListener('click', function (event) {
-        event.preventDefault();
-        dropdown.classList.toggle('nav-list-item-dropdown-visible');
-        dropdownArrow.classList.toggle('italy-dropdown-arrow-open');
-    });
 });

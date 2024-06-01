@@ -73,9 +73,9 @@ def entry_scroll():
 def about():
     return render_template("apology.html", message="Did you use a memory charm and forgot about yourself, Potter?")
 
-@app.route('resources')
+@app.route('/resources')
 def resources():
-    return render_template("apology.html", message="These are the books you have to consult, Potter!" )
+    return render_template("apology.html", message="These are the books you have to consult, Potter!")
 
 
 

@@ -68,7 +68,17 @@ def entry_scroll():
         return redirect(url_for('day_info', day=date.day, month=date.month, year=date.year))
     else:
         return redirect("/home")
-    
+
+@app.route('/about')
+def about():
+    return render_template("apology.html", message="Did you use a memory charm and forgot about yourself, Potter?")
+
+@app.route('resources')
+def resources():
+    return render_template("apology.html", message="These are the books you have to consult, Potter!" )
+
+
+
 
 @app.route('/day-info', methods=["POST", "GET"])
 @login_required

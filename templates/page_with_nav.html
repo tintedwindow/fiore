@@ -37,7 +37,11 @@
                                 <li class="nav-list-item"><a href="/about">place tre?</a></li>
                             </ul>
                         </li>
-                        <li class="pseudo-button" id="mobile-logout"><a href="/logout" style="color: inherit;">Log out :(</a></li>
+                        {% if session["user_id"] %}
+                            <li class="pseudo-button" id="mobile-logout"><a href="/logout" style="color: inherit;">Log out :(</a></li>
+                        {% else %}
+                            <li class="pseudo-button" id="mobile-logout"><a href="/register" style="color: inherit;">Register</a></li>
+                        {% endif %}
                     </ul>
                 </div>
                 <div class="nav-inner-right">
@@ -47,7 +51,7 @@
                             <div class="nav-menu-divider"></div>
                             <li class="nav-list-item pseudo-button" id="desktop-logout"><a href="/logout">Log out</a></li>
                         {% else %}
-                            <li class="nav-list-item"><a href="/profile">Log in</a></li>
+                            <li class="nav-list-item"><a href="/login">Log in</a></li>
                             <div class="nav-menu-divider"></div>
                             <li class="nav-list-item pseudo-button" id="desktop-logout"><a href="/register">Enter Fiore</a></li>
                         {% endif %}

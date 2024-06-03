@@ -77,6 +77,10 @@ def about():
 def resources():
     return render_template("apology.html", message="These are the books you have to consult, Potter!")
 
+@app.route('/acknowledgements')
+def acknowledgements():
+    return render_template("apology.html", message="You can thank me for hepling you in Hogwards, Potter!")
+
 
 
 

@@ -10,7 +10,7 @@ import logging
 from PIL import Image
 from werkzeug.utils import secure_filename
 
-from helpers import login_required, allowed_file_type
+from helpers import login_required, allowed_file_type, street_link
 
 
 # Configuring the application

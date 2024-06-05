@@ -5,15 +5,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
     <title>Apology!</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='styles_day.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles_apology.css') }}">
 {% endblock %}
 
 {% block content %}
     <div class="content-container">
         <div class="content">
-            <p style="font-size: 26px;">
-                {{message}}
-            </p>
+            <div class="apology-container">
+                <div class="street-view-container">
+                    <iframe id="street-view" src="{{ place_info[1] }}" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="apology-head">  
+                    Oh dear. Are you lost? Explore
+                        <a class="street-place" href="https://www.google.com/maps/search/{{place_info[0]}}" target="_blank" title="place_info[0]">
+                            {{ place_info[0] }}
+                        </a>
+                </div>
+                <div class="apology-description">
+                    {{ message }}
+                </div>
+                <div class="back-to-home"> 
+                    <a href="/home">Back to Fiore</a>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

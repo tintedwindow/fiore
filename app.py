@@ -248,10 +248,10 @@ def login():
     if request.method == "POST":
         # Ensure username was submitted
         if not request.form.get("username"):
-            return render_template("login.html", message = "Must provide a username"), 403
+            return render_template("login.html", message = "Must provide a username"), 400
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return render_template("login.html", message = "Must provide a password"), 403
+            return render_template("login.html", message = "Must provide a password"), 400
         
         # Query database for username
         rows = db.execute(
@@ -294,9 +294,10 @@ def register():
         # Ensure username was submitted and isn't taken
         print(username)
         if not username:
-            return render_template("register.html", message = "Username not submitted")
+            return render_template("register.html", message = "Username not submitted"), 400
         if len(db.execute("SELECT * FROM users WHERE username = ?", username)) != 0:
-            return render_template("register.html", message= "Username already taken")
+            # 409 Conflict
+            return render_template("register.html", message= "Username already taken"), 409
         
         print(username + "1")
         password = request.form.get("password")
@@ -305,9 +306,9 @@ def register():
         print(password, password_c)
         # Ensure passwords were submitted and both fields match
         if not password or not password_c:
-            return render_template("register.html", message = "Password not submitted")
+            return render_template("register.html", message = "Password not submitted"), 400
         if password != password_c:
-            return render_template("register.html", message = "Passwords do not match")
+            return render_template("register.html", message = "Passwords do not match"), 400
 
         db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, generate_password_hash(password))
         print(username)

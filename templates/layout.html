@@ -1,21 +1,15 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-    <!-- Google Fonts Data-->
-        <!-- Common Fonts data needed for all fonts-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- fonts api?-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <!-- Font specific lines-->
-     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,200&display=swap" rel="stylesheet">
-     <link href="https://fonts.googleapis.com/css2?family=Trirong&display=swap" rel="stylesheet">
-     <link href="https://fonts.googleapis.com/css2?family=Epilogue&display=swap" rel="stylesheet">
-     <link href="https://fonts.googleapis.com/css2?family=Splash&display=swap" rel="stylesheet">
-
-     <link rel= "stylesheet" href= "{{ url_for('static',filename='styles_2.css') }}">
-    <!-- Local stuff like favicon, my stylesheet etc-->
-    <title>{% block title %}{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <!-- login styles-->
+    <link rel= "stylesheet" href= "{{ url_for('static',filename='styles_login.css') }}">
+    <title>Fiore - {% block title %} {% endblock %}</title>
 </head>
 
 <body>

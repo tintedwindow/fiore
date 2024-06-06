@@ -5,12 +5,21 @@
 {% endblock %}
 
 {% block main %}
-<div class="login-container">
-    <form class="login-form" action="/register" method="post">
-        <input autocomplete="off" autofocus name="username" placeholder="Username" type="text">
-        <input autocomplete="off" name="password" placeholder="Password" type="password">
-        <input autocomplete="off" name="confirmation" placeholder="Confirm Password" type="password">
-        <button type="submit">Register</button>
-    </form>
-</div>
+    <div class="content-container">
+        <div class="content">
+            <div class="login-container">
+                <form class="login-form" action="/login" method="post">
+                    <div class="description-hero">
+                        Create your  
+                            <a class="hero-home" href="/">Fiore</a> 
+                        account
+                    </div>
+                    <input autocomplete="off" autofocus name="username" placeholder="Pick a username..." type="text">
+                    <input autocomplete="off" name="password" placeholder="Make a password" type="password">
+                    <input autocomplete="off" name="confirmation" placeholder="Confirm your password" type="password">
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

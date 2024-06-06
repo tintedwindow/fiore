@@ -10,7 +10,7 @@ import logging
 from PIL import Image
 from werkzeug.utils import secure_filename
 
-from helpers import login_required, allowed_file_type, street_link
+from helpers import login_required, allowed_file_type, street_link, apology
 
 
 # Configuring the application
@@ -110,8 +110,7 @@ def day_info():
             return render_template('day_info.html', name=session["user_name"], day_details=day_details, day = day, month=month, month_name=month_name, year=year)
         else:
             # If there is no image for the selected date, return an error message
-            return render_template("apology.html", message="Are you sure you are on the right date, Potter?", place_info=street_link()), 403
-
+            return apology("Are you sure you are on the right date, Potter?", 403)
     else :
         return render_template("apology.html", message="Are you roaming around unknown request corridors, Potter?", place_info=street_link()), 403
 

@@ -31,3 +31,7 @@ def street_link():
     ]
 
     return random.choice(embed_views)
+
+def apology(message, code=400):
+    """ Renders an apology page with a street view"""
+    return render_template("apology.html", message=message, place_info=street_link()), code

@@ -1,0 +1,132 @@
+* {
+    margin :0;
+    font-family: "Inter", sans-serif;
+    box-sizing: border-box;
+    color: #121212;
+}
+
+::selection {
+    background: #F6F7C4;
+  }
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.login-container {
+    width: 100%;
+    max-width: 320px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    text-align: center;
+}
+
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+
+    margin-top: 4px;
+    margin-bottom: 8px;
+    width: 100%;
+    padding: 4px 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 26px;
+    box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px inset;
+}
+
+.login-form button[type="submit"] {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    width: 100%; /* Set width to 100% to occupy the container's width */
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 5px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #0081f2;
+    color: #fff;
+    font-size: 15px;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 570;
+    font-style: normal;
+    font-variation-settings:
+      "slnt" 0;
+  }
+
+.login-form button[type="submit"]:hover {
+    background-color: #045ac4;
+}
+
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+    outline: none; /* Change the color and width of the outline */
+    box-shadow: inset 0 0 0 1px rgba(35, 131, 226, .57), 0 0 0 2px rgba(35, 131, 226, .35) !important;
+    /* Add any other styles you want to apply when the field is focused */
+}
+
+::selection {
+    background: #FFE6E6;
+  }
+
+.description-hero {
+    padding: 0px 5px;
+    color: #86868b;
+    text-align: center;
+    overflow: auto;
+    font-size: 20px;
+    margin-bottom: 25px;
+    text-align: left;
+    font-weight: 570;
+}
+
+.hero-home {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: #86868b;
+}
+
+.hero-home:hover {
+    text-decoration-color: #3b3b3b;
+}
+
+.description {
+    color: #86868b;
+    text-align: center;
+    overflow: auto;
+    font-size: 15px;
+    color: #D37676;
+}
+
+/* Change autocomplete styles in WebKit */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/:autofill 
+    When I was registering a test user, I noticed that when I autofilled a user details in my form field, the colors of the field changed.
+    These webkit things are responsible for that.
+    The user agent style sheets of many browsers use !important in their :-webkit-autofill style declarations, 
+    So, when trying to change the things like background color of autofill, it is not possible simply.
+    because:
+        background-color: rgb(232 240 254) !important;
+        color: -internal-light-dark(black, white) !important;
+    but some properties like border, don't have it. So I changed that here :)
+    */
+  border: inherit;
+};

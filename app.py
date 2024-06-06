@@ -248,10 +248,10 @@ def login():
     if request.method == "POST":
         # Ensure username was submitted
         if not request.form.get("username"):
-            return render_template("apology.html", message="Must provide username"), 403
+            return render_template("login.html", message = "Must provide a username"), 403
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return render_template("apology.html", message = "Must provide password"), 403
+            return render_template("login.html", message = "Must provide a password"), 403
         
         # Query database for username
         rows = db.execute(
@@ -260,9 +260,9 @@ def login():
 
         # Ensure username exists and password is correct
         if len(rows) != 1:
-            return render_template("apology.html", message = "Invalid username"), 403
+            return render_template("login.html", message = "Invalid username"), 403
         elif not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            return render_template("apology.html", message = "Incorrect password"), 403
+            return render_template("login.html", message = "Incorrect password"), 403
         
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
@@ -294,9 +294,10 @@ def register():
         # Ensure username was submitted and isn't taken
         print(username)
         if not username:
-            return render_template("apology.html", message = "Username not submitted")
+            return render_template("register.html", message = "Username not submitted")
         if len(db.execute("SELECT * FROM users WHERE username = ?", username)) != 0:
-            return render_template("apology.html", message= "Username already taken")
+            return render_template("register.html", message= "Username already taken")
+        
         print(username + "1")
         password = request.form.get("password")
         password_c = request.form.get("confirmation")
@@ -304,9 +305,9 @@ def register():
         print(password, password_c)
         # Ensure passwords were submitted and both fields match
         if not password or not password_c:
-            return render_template("apology.html", message = "Password not submitted")
+            return render_template("register.html", message = "Password not submitted")
         if password != password_c:
-            return render_template("apology.html", message = "Passwords do not match")
+            return render_template("register.html", message = "Passwords do not match")
 
         db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, generate_password_hash(password))
         print(username)

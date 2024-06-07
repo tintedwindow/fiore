@@ -35,9 +35,9 @@
                                 </svg>
                             </span>
                             <ul class="nav-list-item-dropdown">
-                                <li class="nav-list-item"><a href="/about">place uno</a></li>
-                                <li class="nav-list-item"><a href="/about">place due</a></li>
-                                <li class="nav-list-item"><a href="/about">place tre?</a></li>
+                                <li class="nav-list-item"><a href="/italy" target="_blank">place uno</a></li>
+                                <li class="nav-list-item"><a href="/italy" target="_blank">place due</a></li>
+                                <li class="nav-list-item"><a href="/italy" target="_blank">place tre?</a></li>
                             </ul>
                         </li>
                         {% if session["user_id"] %}
@@ -88,7 +88,6 @@
         const dropdownArrow = document.getElementById("italy-dropdown-arrow"); 
 
         dropdownActivator.addEventListener('click', function (event) {
-            event.preventDefault();
             dropdown.classList.toggle('nav-list-item-dropdown-visible');
             dropdownArrow.classList.toggle('italy-dropdown-arrow-open');
         });

@@ -15,15 +15,20 @@
                 <div class="street-view-container">
                     <iframe id="street-view" src="{{ place_info[1] }}" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-                <div class="apology-head">  
-                    Oh dear. Are you lost? Explore
+                <div class="apology-head">
+                    {% if not italy %}
+                        Oh dear. Are you lost?
+                    {% endif %}
+                    Explore
                         <a class="street-place" href="https://www.google.com/maps/search/{{place_info[0]}}" target="_blank" title="place_info[0]">
                             {{ place_info[0] }}
                         </a>
                 </div>
-                <div class="apology-description">
-                    {{ message }}
-                </div>
+                {% if message %}
+                    <div class="apology-description">
+                        {{ message }}
+                    </div>
+                {% endif %}
                 <div class="back-to-home"> 
                     <a href="/home">Back to Fiore</a>
                 </div>

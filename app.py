@@ -69,6 +69,11 @@ def entry_scroll():
     else:
         return redirect("/home")
 
+@app.route("/italy")
+def italy():
+    return render_template("apology.html", italy=True, place_info=street_link())
+
+
 @app.route('/about')
 def about():
     return render_template("apology.html", message="Did you use a memory charm and forgot about yourself, Potter?")

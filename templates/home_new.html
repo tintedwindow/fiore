@@ -16,8 +16,10 @@
                 <!-- class for month, year and scroll-->
                 <div class="calendar-info">
                     <div class="calendar-month">
-                        <form action="/home" method="post">
-                            <input type="hidden" name="month_updater" value="-1">
+                        <form action="/calendar-scroll" method="get">
+                            <input type="hidden" name="updater" value="-1">
+                            <input name="month" type="hidden" value="{{month}}">
+                            <input name="year" type="hidden" value="{{year}}">
                             <button class="arrow" type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
@@ -29,8 +31,10 @@
                             {{month_name}} {{year}}
                         </div>
 
-                        <form action="/home" method="post">
-                            <input type="hidden" name="month_updater" value="1">
+                        <form action="/calendar-scroll" method="get">
+                            <input type="hidden" name="updater" value="1">
+                            <input name="month" type="hidden" value="{{month}}">
+                            <input name="year" type="hidden" value="{{year}}">
                             <button class="arrow" type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
@@ -116,6 +120,8 @@
 
     <!-- File upload hidden attribute-->
     <input id="file-input" style="display:none;" type="file" accept="image/png, image/jpeg">
+    <input id="file-month" name="month" type="hidden" value="{{month}}">
+    <input id="file-year" type="hidden" value="{{year}}">
 
     <!-- Image page hidden form attribute-->
     <form id="image-page-info" style="display:none;" method="get" action="/day-info"> 

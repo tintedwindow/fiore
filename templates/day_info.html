@@ -54,9 +54,12 @@
             
 
                 <div class="day-page-description">
-                    {% if day_details[0]['description'] %}    
-                        {{ day_details[0]['description'] }}
+                    {% if day_details[0]['description'] %} 
+                    <pre style="color: inherit; white-space: pre-wrap;">{{ day_details[0]['description'] }}</pre>
                     {% endif %}
+                </div>
+                <div class="back-to-home"> 
+                    <a href="/home">Back to Fiore</a>
                 </div>
             </div>
         </div>

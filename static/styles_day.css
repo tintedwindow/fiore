@@ -123,29 +123,42 @@
     height: 25%;
     padding-top: 10px;
     color: #86868b;
+    /* little darker: 717175*/
     text-align: center;
     overflow: auto;
 
 }
 
 .back-to-home {
-    height: 10%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 1em;
-    color: #3d3939 ;
-    position: ;
-
-    /* font settings */
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 18px;
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 600;
+    font-weight: 400;
     font-style: normal;
     font-variation-settings:
-        "slnt" 0;
+      "slnt" 0;
+}
+
+.back-to-home a {
+    text-decoration: none;
+    padding: 5px 20px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.05);
+
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 570;
+    font-style: normal;
+    font-variation-settings:
+      "slnt" 0;
+
+}
+
+.back-to-home a:hover {
+    background-color: rgba(0, 0, 0, 0.08);
 }
 
 

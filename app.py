@@ -69,6 +69,28 @@ def entry_scroll():
     else:
         return redirect("/home")
 
+@app.route('/calendar-scroll', methods=["GET"])
+def calendar_scroll():
+    try:
+        updater = int(request.args.get("updater"))
+        month = int(request.args.get("month"))
+        year = int(request.args.get("year"))
+    except ValueError:
+        return render_template("apology.html", message="Are you sure you are using the correct spells, Potter?"), 403
+    
+    if ((month + updater) > 12):
+        year = year + 1
+        month = 1
+    elif(((month + updater) < 1)):
+        year = year - 1
+        month = 12
+    else:
+        month = month + updater
+
+    return redirect(url_for('home', month=month, year=year))
+
+
+
 @app.route("/italy")
 def italy():
     return render_template("apology.html", italy=True, place_info=street_link())
@@ -135,6 +157,10 @@ def upload():
         return jsonify({'error': 'No file added'}), 400
     if not request.form.get("date"):
         return jsonify({'error': 'No date added'}), 400
+    if not request.form.get("month"):
+        return jsonify({'error': 'No month added'}), 400
+    if not request.form.get("year"):
+        return jsonify({'error': 'No year added'}), 400
         
     file = request.files['file']
     description = request.form.get('description', '').strip() # defult to an empty string if no description provided
@@ -165,8 +191,8 @@ def upload():
             img.save(save_path)
 
             day = int(request.form.get('date'))
-            month = session["month"]
-            year = session["year"]
+            month = int(request.form.get('month'))
+            year = int(request.form.get('year'))
             image_date = datetime(year, month, day)
             print(image_date)
 
@@ -179,63 +205,50 @@ def upload():
         return jsonify({'error': 'Allowed file types are .png .jpg .jpeg .gif .webp'}), 400
 
 
-@app.route("/home", methods=["GET", "POST"])
+@app.route("/home", methods=["GET"])
 @login_required
 def home():
+    if request.method == "GET":
+        print(request.args.get("month"))
+        print(request.args.get("year"))
 
-    if request.method == "POST":
-        print(session["month"] , session["year"])
-        # do the calculation per value and display the form
-        month_updater = int(request.form.get("month_updater"))
-        print(month_updater)
+        if(request.args.get("month") and request.args.get("year")):
+                               
+            # do the calculation per value and display the form
+            try:
+                month = int(request.args.get("month"))
+                year = int(request.args.get("year"))
+            except ValueError:
+                return render_template("apology.html", message="Are you sure you are using the correct spells, Potter?"), 403
 
+            # get new values for templating
+            month_name = calendar.month_name[month]
 
-        if ((session["month"] + month_updater) > 12):
-            session["year"] = session["year"] + 1
-            session["month"] = 1
+            current_cal = calendar.monthcalendar(year, month)
 
-        elif(((session["month"] + month_updater) < 1)):
-            session["year"] = session["year"] - 1
-            session["month"] = 12
+            images = db.execute("SELECT path, image_date, description FROM images WHERE user_id = ? AND strftime('%Y-%m', image_date) = ?",
+                                session["user_id"], f"{year}-{month:02}")
 
+            images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': img['description'] if img['description'] else None} for img in images}
+            return render_template("home_new.html", name = session["user_name"], calendar=current_cal, month_name=month_name, month=month, year=year, images_by_day=images_by_day)
+
+        #if visited with an empty url i.e. simply coming to home
         else:
-            session["month"] = session["month"] + month_updater
+            # seeds with the current month integer
+            month = datetime.now().month
+            # same with year
+            year = datetime.now().year
 
-        # get new values for templating
-        month_name = calendar.month_name[session["month"]]
-        month = session["month"]
-        year = session["year"]
-        print(month, year)
+            #get current month name dynamically
+            month_name = calendar.month_name[month]
 
-        current_cal = calendar.monthcalendar(year, session["month"])
+            images = db.execute("SELECT path, image_date, description FROM images WHERE user_id = ? AND strftime('%Y-%m', image_date) = ?",
+                                session["user_id"], f"{year}-{month:02}")
 
-        images = db.execute("SELECT path, image_date, description FROM images WHERE user_id = ? AND strftime('%Y-%m', image_date) = ?",
-                            session["user_id"], f"{year}-{month:02}")
+            images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': img['description']} for img in images}
 
-        images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': img['description'].replace('\n', '<br>') if img['description'] else None} for img in images}
-        return render_template("home_new.html", name = session["user_name"], calendar=current_cal, month_name=month_name, month=month, year=year, images_by_day=images_by_day)
-    
-
-    else:
-        # seeds with the current month integer
-        session["month"] = datetime.now().month
-        # same with year
-        session["year"] = datetime.now().year
-
-        #get current month name dynamically
-        month_name = calendar.month_name[session["month"]]
-        month = session["month"]
-        year = session["year"]
-
-        images = db.execute("SELECT path, image_date, description FROM images WHERE user_id = ? AND strftime('%Y-%m', image_date) = ?",
-                            session["user_id"], f"{year}-{month:02}")
-
-        images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': img['description']} for img in images}
-
-        current_cal = calendar.monthcalendar(year, session["month"])
-        return render_template("home_new.html", name = session["user_name"], calendar=current_cal, month_name=month_name, month=month, year=year, images_by_day=images_by_day)
-
-
+            current_cal = calendar.monthcalendar(year, month)
+            return render_template("home_new.html", name = session["user_name"], calendar=current_cal, month_name=month_name, month=month, year=year, images_by_day=images_by_day)
 
 
 @app.route("/")

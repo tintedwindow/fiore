@@ -117,11 +117,15 @@ document.addEventListener("DOMContentLoaded", function() {
         // get current date number again :p
         var dayDateNumber = document.getElementById('modal-image-date').textContent;
         var image_description = document.getElementById('modal-input-text').value;
+        var image_month = document.getElementById("file-month").value;
+        var image_year = document.getElementById("file-year").value;
 
         if (fileInput.files.length > 0) {
             var dataToSend = new FormData();
             dataToSend.append('file', fileInput.files[0]);       
             dataToSend.append('date', dayDateNumber);
+            dataToSend.append('month', image_month);
+            dataToSend.append('year', image_year);
             dataToSend.append('description', image_description);
 
             fetch('/upload', {

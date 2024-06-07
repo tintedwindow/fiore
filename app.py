@@ -52,7 +52,7 @@ def entry_scroll():
         month = int(request.args.get("month"))
         year = int(request.args.get("year"))
     except ValueError:
-        return render_template("apology.html", message="Are you sure you are using the correct spells, Potter?"), 403
+        return apology("Are you sure you are using the correct spells, Potter?", 403)
     
     print(updater)
     print("This was updater ^^")
@@ -76,7 +76,7 @@ def calendar_scroll():
         month = int(request.args.get("month"))
         year = int(request.args.get("year"))
     except ValueError:
-        return render_template("apology.html", message="Are you sure you are using the correct spells, Potter?"), 403
+        return apology("Are you sure you are using the correct spells, Potter?", 403)
     
     if ((month + updater) > 12):
         year = year + 1
@@ -98,17 +98,15 @@ def italy():
 
 @app.route('/about')
 def about():
-    return render_template("apology.html", message="Did you use a memory charm and forgot about yourself, Potter?")
+    return apology(message="Did you use a memory charm and forgot about yourself, Potter?")
 
 @app.route('/resources')
 def resources():
-    return render_template("apology.html", message="These are the books you have to consult, Potter!")
+    return apology("These are the books you have to consult, Potter!")
 
 @app.route('/acknowledgements')
 def acknowledgements():
-    return render_template("apology.html", message="You can thank me for hepling you in Hogwards, Potter!")
-
-
+    return apology("You can thank me for hepling you in Hogwards, Potter!")
 
 
 @app.route('/day-info', methods=["POST", "GET"])
@@ -120,8 +118,7 @@ def day_info():
         print(request.args.get("year"))
 
         if not (request.args.get("day") and request.args.get("month") and request.args.get("year")):
-            # I was reading harry potter lately, i just wanted to add a reference. Will change_later
-            return render_template("apology.html", message="Are you sure you have all the books, Potter?"), 403
+            return apology("Are you sure you have all the books, Potter?", 403)
         
         day = int(request.args.get("day"))
         month = int(request.args.get("month"))
@@ -139,7 +136,7 @@ def day_info():
             # If there is no image for the selected date, return an error message
             return apology("Are you sure you are on the right date, Potter?", 403)
     else :
-        return render_template("apology.html", message="Are you roaming around unknown request corridors, Potter?", place_info=street_link()), 403
+        return apology("Are you roaming around unknown request corridors, Potter?", 403)
 
 @app.route('/upload', methods=["POST"])
 @login_required
@@ -219,8 +216,11 @@ def home():
                 month = int(request.args.get("month"))
                 year = int(request.args.get("year"))
             except ValueError:
-                return render_template("apology.html", message="Are you sure you are using the correct spells, Potter?"), 403
-
+                return apology("Are you sure you are using the correct spells, Potter?", 403)
+            
+            if (month < 1 or month > 12 or year > 2100):
+                return apology("Are you trying to break a school rule and go out of bounds, Potter?", 403)
+            
             # get new values for templating
             month_name = calendar.month_name[month]
 

@@ -89,6 +89,29 @@ def calendar_scroll():
 
     return redirect(url_for('home', month=month, year=year))
 
+@app.route("/delete", methods=["POST"])
+def delete():
+
+    if not (request.form.get("day") and request.form.get("month") and request.form.get("year")):
+        return apology("Are you sure you are casting the vanishing spell correctly, Potter?", 403)
+    
+    try:
+        day = int(request.form.get("day"))
+        month = int(request.form.get("month"))
+        year = int(request.form.get("year"))
+    except ValueError:
+        return apology("Are you sure you are using the correct spells, Potter?", 403)
+
+    image_info = db.execute("SELECT image_id FROM images WHERE user_id = ? AND strftime('%Y-%m-%d', image_date) = ?",
+                        session["user_id"], f"{year}-{month:02}-{day:02}")
+    
+    if(image_info):
+        db.execute("DELETE FROM images WHERE user_id = ? AND strftime('%Y-%m-%d', image_date) = ?",
+                            session["user_id"], f"{year}-{month:02}-{day:02}")
+        return redirect(url_for('home', month=month, year=year))
+
+    else:
+        return apology("First you need something to practice vanishing on, Potter.", 403)      
 
 
 @app.route("/italy")
@@ -229,7 +252,7 @@ def home():
             images = db.execute("SELECT path, image_date, description FROM images WHERE user_id = ? AND strftime('%Y-%m', image_date) = ?",
                                 session["user_id"], f"{year}-{month:02}")
 
-            images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': img['description'] if img['description'] else None} for img in images}
+            images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': img['description'].split(".")[0] + "..." if img['description'] else None} for img in images}
             return render_template("home_new.html", name = session["user_name"], calendar=current_cal, month_name=month_name, month=month, year=year, images_by_day=images_by_day)
 
         #if visited with an empty url i.e. simply coming to home
@@ -245,7 +268,7 @@ def home():
             images = db.execute("SELECT path, image_date, description FROM images WHERE user_id = ? AND strftime('%Y-%m', image_date) = ?",
                                 session["user_id"], f"{year}-{month:02}")
 
-            images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': img['description']} for img in images}
+            images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': img['description'].split(".")[0] + "..."  if img['description'] else None} for img in images}
 
             current_cal = calendar.monthcalendar(year, month)
             return render_template("home_new.html", name = session["user_name"], calendar=current_cal, month_name=month_name, month=month, year=year, images_by_day=images_by_day)

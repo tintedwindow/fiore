@@ -35,11 +35,12 @@
 }
 
 .day-page-image-container {
-    height: 90%;
+    height: 83%;
     border: ;
     margin: ;
     display: flex;
     flex-direction: column;
+
 }
 
 .day-page-image {
@@ -48,6 +49,29 @@
     object-fit: contain;
 }
 
+.day-page-delete {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: ;
+    height: 7%;
+    overflow: ;
+}
+
+
+.bin {
+    background: none;
+    border: none;
+    padding: 5px;
+    border-radius: 25px;
+    opacity: 0.35;
+}
+
+.bin:hover {
+    opacity: 0.6;
+    fill: red;
+    background-color: rgba(0, 0, 0, .05);
+}
 
 .day-page-info {
     display: flex;
@@ -163,5 +187,63 @@
     color: rgba(18, 18, 18, 0.9);
 }
 
+#notification-bar {
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 62px;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background-color: #ffffff;
+    opacity: 0.8;
+    color: #050505; 
+    text-align: center;
+    padding: 10px 0;
+    z-index: 1; /* Make sure it appears above other content */
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.3);
 
+    /* font settings */
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings:
+        "slnt" 0;
+}
 
+#notification-buttons {
+    margin-left: 10px;
+    display: none;
+}
+
+#notification-buttons div {
+    display: flex;
+    align-items: center;
+    margin: 0px 5px;
+    cursor: pointer;
+    border-radius: 2px;
+    fill: rgba(0, 0, 0, 0.8);
+
+}
+
+#notification-yes {
+    font-size: 20px;
+    padding: 2px 10px;
+}
+
+#notification-no {
+    padding: 2px 12px;
+}
+
+#notification-yes:hover {
+    background-color: rgba(207, 81, 100, 0.5);
+    fill: rgba(0, 0, 0, 1);
+}
+
+#notification-no:hover {
+    background-color: rgba(165, 221, 155, 0.4) ;
+    background-color: rgba(0, 0, 0, 0.08);
+    fill: rgba(0, 0, 0, 1);
+}

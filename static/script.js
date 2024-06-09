@@ -48,6 +48,26 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
+
+    // submission notification after clicking submit
+    function showNotification(message, succesful, duration = 5000) {
+        const notificationBar = document.getElementById('notification-bar');
+        notificationBar.textContent = message; // Set text in it to be the status message
+    
+        // background color based on success
+        if (succesful) {
+            notificationBar.style.backgroundColor = '#B5C18E'; // Green for success
+        } else {
+            notificationBar.style.backgroundColor = '#FF8080'; // Red for error
+        }
+    
+        notificationBar.style.display = 'flex'; 
+    
+        setTimeout(function() {
+            notificationBar.style.display = 'none'; 
+        }, duration);
+    }
+
     var modal = document.getElementById('preview-modal');
     var modalImage = document.getElementById('modal-image');
     var modalText = document.getElementById('modal-text');
@@ -68,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     URL.revokeObjectURL(this.src);
                 };
             } else {
-                alert('Please select an image file (png, jpeg, jpg, jfif, gif, webp)');
+                showNotification('Please select an image file (png, jpeg, jpg, jfif, gif, webp)', false, 5000);
                 fileInput.value = ''; //resets file input
             }
         } else {
@@ -77,39 +97,23 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // button clicking parts
-    var modalSubmit = document.getElementById('modal-submit');
-    var modalDiscard = document.getElementById('modal-discard');
-
+    // functioon to close the modal, reset some values
     function resetModal() {
         modalImage.src = '';
         fileInput.value = '';
         modal.style.display = "none";
     }
+
+
+    // button clicking parts
+    var modalSubmit = document.getElementById('modal-submit');
+    var modalDiscard = document.getElementById('modal-discard');
+
     // close modal simply if discard is clicked
     modalDiscard.addEventListener('click', resetModal);
 
     
     // submission takes place here onwards
-
-    // submission notification after clicking submit
-    function showNotification(message, succesful, duration = 5000) {
-        const notificationBar = document.getElementById('notification-bar');
-        notificationBar.textContent = message; // Set text in it to be the status message
-    
-        // background color based on success
-        if (succesful) {
-            notificationBar.style.backgroundColor = '#B5C18E'; // Green for success
-        } else {
-            notificationBar.style.backgroundColor = '#FF8080'; // Red for error
-        }
-    
-        notificationBar.style.display = 'flex'; 
-    
-        setTimeout(function() {
-            notificationBar.style.display = 'none'; 
-        }, duration);
-    }
 
     // when I click the submit button
     modalSubmit.addEventListener('click', function() {

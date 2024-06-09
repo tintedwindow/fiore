@@ -44,7 +44,9 @@
 
 
 .logo {
-    background-image: url("notion.png");
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-size: 32px 32px;
     background-repeat: no-repeat;
     height: 32px;
@@ -54,7 +56,7 @@
 .logo-text {
     font-size: 17px;
     font-weight: bold;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .nav-menu-divider {

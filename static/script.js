@@ -138,31 +138,55 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(response => {
                 if (!response.ok) {  // Check if response is not OK (status not in the range 200-299)
-                    throw new Error('Server responded with an error!');
+                    return response.json().then(err => { throw new Error(err.error); })
                 }
                 return response.json();
             })
             .then(data => {
                 console.log('Success:', data);
+
+                let dayBox = document.getElementById('day-box-' + data.day);
+                let img = document.createElement('img');
+                img.src = data.image_path;
+                img.alt = "day-" + data.day;
+                img.title = data.description ? data.description : '';
+                img.className = "calendar-day-date-image";
+                img.id = 'day-' + data.day;
+
+                let dayBoxDate = document.querySelector('#day-box-' + data.day + ' div');
+                dayBoxDate.classList.add("calendar-day-date-number-yes");
+
+                let svgElement = document.querySelector('#day-box-' + data.day + ' svg');
+                svgElement.parentNode.removeChild(svgElement);
+
+                dayBox.appendChild(img);
+                addClickListenerToImage(img);
+
                 resetModal();
                 showNotification('File uploaded successfully!', true, 5000); // Show success message
             })
             .catch((error) => {
                 console.error('Error:', error);
-                showNotification('Error uploading file.', false, 5000);  // http error stuff handling
+                resetModal();
+                showNotification(error.message, false, 5000);  // http error stuff handling
             });        
         } else {
+            resetModal();
             showNotification('Please select a file to upload', false, 5000);
         }
     });
 
 
-    // Handles navigation to the day page via image click
-    var clickedImage = document.querySelectorAll('.calendar-day-date-image');
+        // Handles navigation to the day page via image click
+        var clickedImage = document.querySelectorAll('.calendar-day-date-image');
+        clickedImage.forEach(addClickListenerToImage);
 
-    clickedImage.forEach(function(button) {
-        button.addEventListener('click', function() {
+});
 
+
+
+    function addClickListenerToImage(image) {
+        image.addEventListener('click', function() {
             var imageId = this.getAttribute('id');
             var dayDateNumber = imageId.split('-')[1];
             document.querySelector('#image-page-info [name="day"]').value = dayDateNumber;
@@ -171,6 +195,4 @@ document.addEventListener("DOMContentLoaded", function() {
             // Submit the form
             document.getElementById('image-page-info').submit();
         });
-    });
-
-});
+    };

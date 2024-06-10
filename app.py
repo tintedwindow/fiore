@@ -217,8 +217,8 @@ def upload():
             print(image_date)
 
             db.execute("INSERT INTO images (user_id, path, image_date, description) VALUES (?, ?, ?, ?)", session['user_id'], save_path, image_date, description)
-
-            return jsonify({'message': 'File successfully uploaded', 'filename': filename}), 200
+        
+            return jsonify({'message': 'File successfully uploaded', 'filename': filename, 'day' : day, 'description': description.split(".")[0] + "..." if description else None, 'image_path': save_path }), 200
         except Exception as e:
             return jsonify({'error': 'Invalid image file: {}'.format(e)}), 400
     else:

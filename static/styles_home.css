@@ -123,6 +123,13 @@
     background-color: ;
 }
 
+.calendar-day-date-number-yes {
+    color: white; 
+    mix-blend-mode: ; 
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 1);
+
+}
+
 .calendar-day-date-image {
     cursor: pointer;
     width: 100%;

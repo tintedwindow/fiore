@@ -11,6 +11,7 @@
 
 {% block content %}
     <div class="content-container">
+        <img id="dynamic-image">
         <div class="content">
             <div class="calendar">
                 <!-- class for month, year and scroll-->
@@ -63,8 +64,8 @@
                                     <div class="calendar-day-date-blank">
                                     </div>
                                 {% else %}
-                                    <div class="calendar-day-date">
-                                        <div class="calendar-day-date-number" style="{{ 'color: white; mix-blend-mode: ; text-shadow: 1px 1px 4px rgba(0, 0, 0, 1);' if day in images_by_day }}">
+                                    <div id="{{ 'day-box-'~ day }}" class="calendar-day-date">
+                                        <div class="calendar-day-date-number {{ 'calendar-day-date-number-yes' if day in images_by_day }}">
                                             {{day}}
                                         </div>
                                         {% if day in images_by_day %}

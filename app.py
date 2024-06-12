@@ -138,12 +138,14 @@ def profile():
     creation_date = db.execute("SELECT creation_date FROM users WHERE id = ?", session["user_id"])
     creation_date = creation_date[0]["creation_date"]
 
-    user_data = db.execute("SELECT image_date, description, COUNT(description), upload_date FROM images WHERE user_id = ?", session["user_id"])
+    deescription_count = db.execute("SELECT COUNT(description) as descriptions FROM images WHERE user_id = ?", session["user_id"])
+    deescription_count = deescription_count[0]["descriptions"]
 
+    entries = db.execute("SELECT image_date, description, upload_date FROM images WHERE user_id = ?", session["user_id"])
 
-    user_data= {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'upload_date': datetime.strptime(img['upload_date'], '%Y-%m-%d %H:%M:%S').day, 'description': img['description'].split(".")[0] + "..." if img['description'] else None} for img in images}
+    entries_by_day= {datetime.strptime(entry['image_date'], '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d'): {'upload_date': datetime.strptime(entry['upload_date'], '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d'), 'description': entry['description'].split(".")[0] + "..." if entry['description'] else None} for entry in entries}
 
-    return render_template("profile.html")
+    return render_template("profile.html", entries_by_day=entries_by_day)
 
 @app.route('/day-info', methods=["POST", "GET"])
 @login_required

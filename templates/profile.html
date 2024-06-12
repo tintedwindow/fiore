@@ -58,12 +58,12 @@
                     </div>
                 </div>
                 <div class="entry-list-body">
-                    {% for entry in day_list %}
+                    {% for key, value in entries_by_day.items() %}
                         <div class="entry-list-entry">
                             <div class=""> {{ loop.index }}</div>
-                            <div class="">{{ entry["date"] }}</div>
-                            <div class="">{{ entry["date_added"] }}</div>
-                            <div class="">{{ entry["description"] }}</div>
+                            <div class="">{{ key }}</div>
+                            <div class="">{{ value["upload_date"] }}</div>
+                            <div class="">{{ value["description"] }}</div>
                         </div>
                     {% endfor %}
                 </div>

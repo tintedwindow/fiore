@@ -110,8 +110,26 @@
     padding: 5px 8px;
     display: flex;
     width: 25%;
-
 }
+
+.entry-list-head-item:nth-child(1) {
+    width: 10%;
+}
+
+
+.entry-list-head-item{
+    padding: 5px 8px;
+    width: 30%;
+    color: rgba(55, 53, 47, 1);
+}
+
+.entry-list-head-item:nth-child(1) {
+    padding: 5px 8px;
+    width: 10%;
+    color: rgba(55, 53, 47, 1);
+}
+
+
 
 .entry-list-head-icon {
     font-size: 16px;
@@ -167,10 +185,6 @@
     padding: 5px 8px;
     width: 10%;
     color: rgba(55, 53, 47, 1);
-}
-
-.entry-list-head:nth-child(1) {
-    border: 2px solid red;
 }
 
 .entry-list-entry div:nth-child(1),

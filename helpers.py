@@ -1,6 +1,7 @@
 from flask import redirect, render_template, session
 from functools import wraps
 import random
+import re
 
 def login_required(f):
     """
@@ -35,3 +36,27 @@ def street_link():
 def apology(message, code=400):
     """ Renders an apology page with a street view"""
     return render_template("apology.html", message=message, place_info=street_link()), code
+
+
+def valid_username(username):
+    if not 4 <= len(username) <= 20:
+        return "Username must be between 4 and 20 characters"
+    elif not re.match(r"^[a-zA-Z0-9_]*$", username):
+        return "Username can only contain letters, numbers, and underscores"
+    else:
+        return 200 # a bit of an easter egg to http ok :)
+    
+
+def valid_password(password):
+    if len(password) < 8:
+        return "Password must be at least 8 characters"
+    elif not re.search(r"[a-z]", password):
+        return "Password must contain at least one lowercase letter"
+    elif not re.search(r"[A-Z]", password):
+        return "Password must contain at least one uppercase letter"
+    elif not re.search(r"[0-9]", password):
+        return "Password must contain at least one digit"
+    elif not re.search(r"[!@#$%^&*]", password):
+        return "Password must contain at least one special character"
+    else:
+        return 200

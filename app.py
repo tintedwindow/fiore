@@ -10,7 +10,7 @@ import logging
 from PIL import Image
 from werkzeug.utils import secure_filename
 
-from helpers import login_required, allowed_file_type, street_link, apology
+from helpers import login_required, allowed_file_type, street_link, apology, valid_username, valid_password
 
 
 # Configuring the application
@@ -132,6 +132,19 @@ def acknowledgements():
     return apology("You can thank me for hepling you in Hogwards, Potter!")
 
 
+@app.route('/profile')
+@login_required
+def profile():
+    creation_date = db.execute("SELECT creation_date FROM users WHERE id = ?", session["user_id"])
+    creation_date = creation_date[0]["creation_date"]
+
+    user_data = db.execute("SELECT image_date, description, COUNT(description), upload_date FROM images WHERE user_id = ?", session["user_id"])
+
+
+    user_data= {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'upload_date': datetime.strptime(img['upload_date'], '%Y-%m-%d %H:%M:%S').day, 'description': img['description'].split(".")[0] + "..." if img['description'] else None} for img in images}
+
+    return render_template("profile.html")
+
 @app.route('/day-info', methods=["POST", "GET"])
 @login_required
 def day_info():
@@ -214,9 +227,11 @@ def upload():
             month = int(request.form.get('month'))
             year = int(request.form.get('year'))
             image_date = datetime(year, month, day)
+            current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             print(image_date)
+            print(current_date)
 
-            db.execute("INSERT INTO images (user_id, path, image_date, description) VALUES (?, ?, ?, ?)", session['user_id'], save_path, image_date, description)
+            db.execute("INSERT INTO images (user_id, path, image_date, description, upload_date) VALUES (?, ?, ?, ?, ?)", session['user_id'], save_path, image_date, description, current_date)
         
             return jsonify({'message': 'File successfully uploaded', 'filename': filename, 'day' : day, 'description': description.split(".")[0] + "..." if description else None, 'image_path': save_path }), 200
         except Exception as e:
@@ -344,14 +359,21 @@ def register():
         password = request.form.get("password")
         password_c = request.form.get("confirmation")
 
-        print(password, password_c)
         # Ensure passwords were submitted and both fields match
         if not password or not password_c:
             return render_template("register.html", message = "Password not submitted"), 400
         if password != password_c:
             return render_template("register.html", message = "Passwords do not match"), 400
+        
+        #validate the username and password 
+        if valid_username(username) != 200: 
+            return render_template("register.html", message = valid_username(username)), 400
+        if valid_password(password) != 200: 
+            return render_template("register.html", message = valid_password(password)), 400
+        
+        current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, generate_password_hash(password))
+        db.execute("INSERT INTO users (username, hash, creation_date) VALUES (?, ?, ?)", username, generate_password_hash(password), current_date)
         print(username)
         return redirect("/login")
     else:

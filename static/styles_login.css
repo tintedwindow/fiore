@@ -23,30 +23,58 @@ body {
     padding: 20px;
     backdrop-filter: blur(10px);
     border-radius: 8px;
-    text-align: center;
 }
 
-
-.login-form input[type="text"],
-.login-form input[type="password"] {
-
+.input-container {
     margin-top: 4px;
     margin-bottom: 8px;
     width: 100%;
     padding: 4px 10px;
     margin-bottom: 15px;
-    border: none;
     border-radius: 5px;
     box-sizing: border-box;
+    box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px inset;
+    display: flex;
+    height: 34px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input-container-focus {
+    outline: none;
+    box-shadow: inset 0 0 0 1px rgba(35, 131, 226, .57), 0 0 0 2px rgba(35, 131, 226, .35) !important;
+}
+
+.login-form-input-text {
+    padding: 0px;
     font-size: 15px;
     line-height: 26px;
-    box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px inset;
+    border: none;
+    height: 100%;
+    width: 100%;
+}
+
+.login-form-input-password {
+    padding: 0px;
+    font-size: 15px;
+    line-height: 26px;
+    border: none;
+    height: 100%;
+    width: 90%;
+}
+
+.password-eye {
+    font-size: 18px;
+    fill: rgba(15, 15, 15, 0.5);  
+}
+.password-eye:hover {
+    fill: rgba(15, 15, 15, 0.7); 
 }
 
 .login-form button[type="submit"] {
     margin-top: 15px;
     margin-bottom: 10px;
-    width: 100%; /* Set width to 100% to occupy the container's width */
+    width: 100%;
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
@@ -68,11 +96,10 @@ body {
     background-color: #045ac4;
 }
 
-.login-form input[type="text"]:focus,
-.login-form input[type="password"]:focus {
-    outline: none; /* Change the color and width of the outline */
-    box-shadow: inset 0 0 0 1px rgba(35, 131, 226, .57), 0 0 0 2px rgba(35, 131, 226, .35) !important;
-    /* Add any other styles you want to apply when the field is focused */
+.login-form-input-text:focus,
+.login-form-input-password:focus {
+    outline: none;
+    box-shadow: none !important;
 }
 
 ::selection {

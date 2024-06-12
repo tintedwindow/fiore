@@ -1,0 +1,180 @@
+.content-container {
+    background-color: ;
+    height: calc(100vh);
+    padding-top: 62px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 90%;
+    width: 60%;
+    background-color: ;
+
+}
+
+.user-info {
+    margin-top: 10px;
+    width: 100%;
+    margin-bottom: 50px;
+
+}
+
+.user-name {
+    margin-bottom: 5px;
+    text-align: center;
+    color: rgba(18, 18, 18, 0.9);
+    padding: 0.5%;
+
+    font-size: 1.8em;
+    /* font settings */
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-variation-settings:
+        "slnt" 0;
+}
+
+.user-stats {
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 20px;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 570;
+    font-style: normal;
+    font-variation-settings:
+      "slnt" 0;
+}
+
+.user-stats span {
+    color: rgba(18, 18, 18, 0.7);
+}
+
+.entry-list-table {
+    width: 100%;
+    height: 80%;
+    overflow-y: auto; /* Added to allow scrolling */
+
+}
+
+.entry-list-table::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+.entry-list-table::-webkit-scrollbar-track {
+    background: #ffffff; /* Background of the scrollbar track */
+    border-radius: 10px;
+}
+
+.entry-list-table::-webkit-scrollbar-thumb {
+    background-color:rgba(55, 53, 47, 0.45); /* Color of the scrollbar thumb */
+    border-radius: 15px; /* Rounded corners */
+    border: 2px solid #ffffff; /* Space around the thumb */
+}
+
+.entry-list-head {
+    font-size: 18px;
+    padding-bottom: 10px;
+    overflow: hidden;
+    width: 100;
+    display: flex;
+    color: rgba(255, 191, 0, 0.65);
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    background-color: #fff; /* Background color to overlay the entries */
+    z-index: 10; /* Ensure the header stays on top */
+}
+
+.entry-list-head::after {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    left: 0px;
+    right: 0px;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.1);
+    opacity: 1;
+}
+
+.entry-list-head-item {
+    padding: 5px 8px;
+    display: flex;
+    width: 25%;
+
+}
+
+.entry-list-head-icon {
+    font-size: 16px;
+    padding: 1px 4px 0px 0px;
+    display: flex;
+    align-items: center;
+    fill: rgba(55, 53, 47, 0.65);
+}
+
+.entry-list-head-icon-svg {
+    fill: rgba(55, 53, 47, 0.45);
+}
+
+.entry-list-head-title{
+    color: rgba(55, 53, 47, 0.75);
+    display: flex;
+    display: flex;
+    align-items: center;    
+}
+
+.entry-list-entry {
+    overflow: hidden;
+    width: 100;
+    display: flex;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.entry-list-entry::after {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    left: 0px;
+    right: 0px;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.1);
+    opacity: 1;
+}
+
+
+.entry-list-entry:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+    cursor: pointer;
+}
+
+.entry-list-entry div {
+    padding: 5px 8px;
+    width: 30%;
+    color: rgba(55, 53, 47, 1);
+}
+
+.entry-list-entry div:nth-child(1) {
+    padding: 5px 8px;
+    width: 10%;
+    color: rgba(55, 53, 47, 1);
+}
+
+.entry-list-head:nth-child(1) {
+    border: 2px solid red;
+}
+
+.entry-list-entry div:nth-child(1),
+.entry-list-entry div:nth-child(2),
+.entry-list-entry div:nth-child(3) {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}

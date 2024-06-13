@@ -3,14 +3,14 @@ import os
 import calendar
 from datetime import datetime
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session, jsonify, send_from_directory, url_for
+from flask import Flask, flash, redirect, render_template, request, session, jsonify, send_from_directory, url_for, get_flashed_messages
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 import logging
 from PIL import Image
 from werkzeug.utils import secure_filename
 
-from helpers import login_required, allowed_file_type, street_link, apology, valid_username, valid_password
+from helpers import login_required, allowed_file_type, street_link, apology, valid_username, format_description
 
 
 # Configuring the application
@@ -108,6 +108,8 @@ def delete():
     if(image_info):
         db.execute("DELETE FROM images WHERE user_id = ? AND strftime('%Y-%m-%d', image_date) = ?",
                             session["user_id"], f"{year}-{month:02}-{day:02}")
+        
+        flash('Deleted entry for ' + str(day) + " " + calendar.month_name[month] + " " + str(year))
         return redirect(url_for('home', month=month, year=year))
 
     else:
@@ -136,16 +138,19 @@ def acknowledgements():
 @login_required
 def profile():
     creation_date = db.execute("SELECT creation_date FROM users WHERE id = ?", session["user_id"])
-    creation_date = creation_date[0]["creation_date"]
+    creation_date = datetime.strptime(creation_date[0]["creation_date"], '%Y-%m-%d %H:%M:%S').strftime('%d-%m-%Y')
 
-    deescription_count = db.execute("SELECT COUNT(description) as descriptions FROM images WHERE user_id = ?", session["user_id"])
-    deescription_count = deescription_count[0]["descriptions"]
+
+    description_count = db.execute("SELECT COUNT(description) as descriptions FROM images WHERE user_id = ?", session["user_id"])
+    description_count = description_count[0]["descriptions"]
+    entry_count = db.execute("SELECT COUNT(image_date) as total_dates FROM images WHERE user_id = ?", session["user_id"])
+    entry_count = entry_count[0]["total_dates"]
 
     entries = db.execute("SELECT image_date, description, upload_date FROM images WHERE user_id = ?", session["user_id"])
 
-    entries_by_day= {datetime.strptime(entry['image_date'], '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d'): {'upload_date': datetime.strptime(entry['upload_date'], '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d'), 'description': entry['description'].split(".")[0] + "..." if entry['description'] else None} for entry in entries}
+    entries_by_day= {datetime.strptime(entry['image_date'], '%Y-%m-%d %H:%M:%S').strftime('%d-%m-%Y'): {'upload_date': datetime.strptime(entry['upload_date'], '%Y-%m-%d %H:%M:%S').strftime('%d-%m-%Y'), 'description': format_description(entry['description'])} for entry in entries}
 
-    return render_template("profile.html", entries_by_day=entries_by_day)
+    return render_template("profile.html", entries_by_day=entries_by_day, creation_date=creation_date, description_count=description_count, entry_count=entry_count)
 
 @app.route('/day-info', methods=["POST", "GET"])
 @login_required
@@ -269,8 +274,14 @@ def home():
             images = db.execute("SELECT path, image_date, description FROM images WHERE user_id = ? AND strftime('%Y-%m', image_date) = ?",
                                 session["user_id"], f"{year}-{month:02}")
 
-            images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': img['description'].split(".")[0] + "..." if img['description'] else None} for img in images}
-            return render_template("home_new.html", name = session["user_name"], calendar=current_cal, month_name=month_name, month=month, year=year, images_by_day=images_by_day)
+            images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': format_description(img['description'])} for img in images}
+
+            # checks if redirected by delete
+            message = get_flashed_messages()
+            if message:
+                message = message[0]
+
+            return render_template("home_new.html", name = session["user_name"], calendar=current_cal, month_name=month_name, month=month, year=year, images_by_day=images_by_day, message=message)
 
         #if visited with an empty url i.e. simply coming to home
         else:

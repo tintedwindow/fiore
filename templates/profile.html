@@ -3,7 +3,7 @@
 {% block static %}
     <!-- font specific stuff -->
 
-    <title> {{username}} | Profile </title>
+    <title> {{ session["user_name"] }} | Profile </title>
     <link rel="stylesheet" href="{{ url_for('static',filename='styles_profile.css') }}">
 {% endblock %}
 
@@ -16,9 +16,9 @@
                 <div class="user-name">
                     <span id="greeting-text">Hi</span>, tinted!</div>
                 <div class="user-stats">
-                    <span>Account created: 2 May 2024</span> 
-                    <span>Total Entries: 230</span>
-                    <span>Entries with description: 45</span>
+                    <span>Account created: {{ creation_date}}</span> 
+                    <span>Total Entries: {{ entry_count}}</span>
+                    <span>Entries with description: {{ description_count}}</span>
                 </div>
             </div>
             <div class="entry-list-table">
@@ -61,15 +61,22 @@
                     {% for key, value in entries_by_day.items() %}
                         <div class="entry-list-entry">
                             <div class=""> {{ loop.index }}</div>
-                            <div class="">{{ key }}</div>
+                            <div class="entry-date">{{ key }}</div>
                             <div class="">{{ value["upload_date"] }}</div>
-                            <div class="">{{ value["description"] }}</div>
+                            <div class="">{{ value["description"] if value["description"] }}</div>
                         </div>
                     {% endfor %}
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Image page hidden form attribute-->
+    <form id="image-page-info" style="display:none;" method="get" action="/day-info"> 
+        <input name="day" type="hidden">
+        <input name="month" type="hidden">
+        <input name="year" type="hidden">
+    </form>
 
 <script>
     let currentHour = new Date().getHours();
@@ -84,5 +91,23 @@
     else {
         greetingText.innerHTML = "Good evening";
     }
+
+    document.querySelectorAll(".entry-list-entry").forEach(function(entry) {
+        entry.addEventListener('click', function(){
+            let entryDate = entry.querySelector('.entry-date').innerHTML;
+            console.log(entryDate);
+
+            let dateParts = entryDate.split("-");
+
+            document.querySelector('#image-page-info [name="day"]').value = dateParts[0];
+            document.querySelector('#image-page-info [name="month"]').value = dateParts[1];
+            document.querySelector('#image-page-info [name="year"]').value = dateParts[2];
+
+            document.getElementById('image-page-info').submit();
+
+        });
+
+    });
+
 </script>
 {% endblock %}

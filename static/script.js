@@ -81,7 +81,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 var fileURL = URL.createObjectURL(file);
                 modalImage.src = fileURL;
                 modalText.textContent = 'File selected: ' + shortenFilename(file.name);
+
                 modal.style.display = "flex";
+                document.getElementById('modal-input-text').focus();
 
                 // revoking for saving ram or stuff. dbb said was good practice
                 modalImage.onload = function() {
@@ -101,6 +103,8 @@ document.addEventListener("DOMContentLoaded", function() {
     function resetModal() {
         modalImage.src = '';
         fileInput.value = '';
+        document.getElementById('modal-input-text').value = '';
+
         modal.style.display = "none";
     }
 
@@ -181,18 +185,29 @@ document.addEventListener("DOMContentLoaded", function() {
         var clickedImage = document.querySelectorAll('.calendar-day-date-image');
         clickedImage.forEach(addClickListenerToImage);
 
+
+        //handles if there is a redirect from delete i.e. a message
+
+        var messageStatus= document.getElementById("message-status");
+
+        if (messageStatus.textContent.trim() !== "") {
+            showNotification(messageStatus.textContent.trim(), true, 5000);  
+            messageStatus.textContent = "";
+        }
 });
 
 
 
-    function addClickListenerToImage(image) {
-        image.addEventListener('click', function() {
-            var imageId = this.getAttribute('id');
-            var dayDateNumber = imageId.split('-')[1];
-            document.querySelector('#image-page-info [name="day"]').value = dayDateNumber;
-            console.log(dayDateNumber);
+function addClickListenerToImage(image) {
+    image.addEventListener('click', function() {
+        var imageId = this.getAttribute('id');
+        var dayDateNumber = imageId.split('-')[1];
+        document.querySelector('#image-page-info [name="day"]').value = dayDateNumber;
+        console.log(dayDateNumber);
 
-            // Submit the form
-            document.getElementById('image-page-info').submit();
-        });
-    };
+        // Submit the form
+        document.getElementById('image-page-info').submit();
+    });
+};
+
+

@@ -54,10 +54,12 @@
     font-style: normal;
     font-variation-settings:
       "slnt" 0;
+
 }
 
 .user-stats span {
     color: rgba(18, 18, 18, 0.7);
+    padding: 3px 0px;
 }
 
 .entry-list-table {

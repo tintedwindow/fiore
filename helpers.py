@@ -60,3 +60,22 @@ def valid_password(password):
         return "Password must contain at least one special character"
     else:
         return 200
+    
+def format_description(description):
+    """Formats the description of the user if they have one else returns none"""
+    if not description:
+        return None
+    
+    description_list = description.split(".")
+    
+    if len(description_list[0]) > 40:
+        return description_list[0][:40] + "..."
+
+    if len(description_list) > 1:
+        if description_list[1] != '':
+            return description_list[0] + "..."
+        else:
+            return description_list[0] + "."
+    else:
+        return description_list[0]
+    

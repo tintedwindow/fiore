@@ -1,0 +1,42 @@
+{% extends "page_with_nav.html" %}
+
+{% block static %}
+    <!-- font specific stuff-->
+
+    <title>Welcome to Fiore</title>
+    <!-- style sheet and javascript-->
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles_landing.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}
+
+{{ url_for('uploaded_file', filename=images_by_day[day]['image_path']) }}
+
+{% block content %}
+
+<div class="content-container">
+    <div class="content">
+        <div class="home-hero">
+            <div class="hero-title">
+                Why Fiore?
+            </div>
+            <div class="description-container">
+                <div class="hero-description">Ever thought how journaling could be made easier?
+                    <br>Now, it's just one click away with Fiore!</div>
+                <div class="hero-description-footer">
+                    Fiore combines the ideas of <a href="https://youtu.be/rfeADdY1rHw?si=2PwVqeuwLE-Z9zYk" target="_blank" class="grey-highlight">journaling</a> with <a href="https://youtu.be/a9y1Zs9suZY?si=RiYawwbQmDBYSH3j" target="_blank" class="grey-highlight">minimalism</a>, giving you an experience that 
+                    <br>
+                    <a href="https://www.youtube.com/watch?v=2mafGDk2Rl4" target="_blank" class="grey-highlight"> reflects on your life</a> via a visual calendar.
+                    <br>
+                    You can <a class="text-bold">reflect each day with a picture</a>, which becomes a permanent memory in that rectangular frame, and <a class="text-bold">all these frames come together to make your very own Fiore!</a>
+                    <br>
+                    Fiore is inspired by a touch of <a href="https://maps.app.goo.gl/sFZakMTtuCAuGXB56" target="_blank" class="yellow-highlight">Italy</a>. The <a class="yellow-highlight">islands</a>, the <a class="yellow-highlight">landscapes</a>, and the <a class="yellow-highlight">beaches</a>, they reflect the calmness that comes with <a href="https://youtu.be/2mafGDk2Rl4?si=hPVpkTk7dfikVcGK" target="_blank" class="yellow-highlight">intentional living</a> and <a class="pink-highlight">the calmness that Fiore brings with it's journaling</a>.
+                    <br>
+                    <br>
+                    <br>
+                    <span class="text-bold">We hope you enjoy your stay at Fiore!</span>
+                </div>        
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

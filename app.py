@@ -123,7 +123,7 @@ def italy():
 
 @app.route('/about')
 def about():
-    return apology(message="Did you use a memory charm and forgot about yourself, Potter?")
+    return render_template("about.html")
 
 @app.route('/resources')
 def resources():

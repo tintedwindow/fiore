@@ -3,10 +3,9 @@
 {% block static %}
     <!-- font specific stuff-->
 
-    <title>Welcome to Fiore</title>
+    <title>About Fiore</title>
     <!-- style sheet and javascript-->
     <link rel="stylesheet" href="{{ url_for('static',filename='styles_landing.css') }}">
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
 {% endblock %}
 
 {{ url_for('uploaded_file', filename=images_by_day[day]['image_path']) }}

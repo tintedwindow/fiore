@@ -6,29 +6,201 @@
     <title>Welcome to Fiore</title>
     <!-- style sheet and javascript-->
     <link rel="stylesheet" href="{{ url_for('static',filename='styles_landing.css') }}">
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
 {% endblock %}
 
 {{ url_for('uploaded_file', filename=images_by_day[day]['image_path']) }}
 
 {% block content %}
-    <div class="content-container">
-        <div class="content">
-            <div class="home-hero">
-                <div class="hero-title">
-                    Fiore
-                </div>
-                <div class="hero-title-footer">
-                    Framing Instances On Rectangles Everyday
-                </div>
-                <div class="hero-title-buttons">
-                    <a id="hero-login" href="/login">Log in here</a>
-                    <a id="hero-register" href="/register">Register for free -></a>
-                </div>
-                <div class="hero-image-container">
-                    <img class="hero-image" src="{{ url_for('uploaded_file', filename='static/home_image_tight.jpg') }}">
-                </div>
+<div class="content-container">
+    <div class="content">
+        <div class="home-hero">
+            <div class="hero-title">
+                A calendar as unique as you!
+            </div>
+            <div class="description-container">
+                <div class="hero-description-footer" style="margin: 30px 0px;">
+                    Fiore combines the ideas of <a href="https://youtu.be/rfeADdY1rHw?si=2PwVqeuwLE-Z9zYk" target="_blank" class="grey-highlight">journaling</a> with <a href="https://youtu.be/a9y1Zs9suZY?si=RiYawwbQmDBYSH3j" target="_blank" class="grey-highlight">minimalism</a>, giving you an experience that 
+                    <br>
+                    <a href="https://www.youtube.com/watch?v=2mafGDk2Rl4" target="_blank" class="grey-highlight"> reflects on your life</a> via a visual calendar.
+                    <br>
+                    <div class="hero-carousel-container">
+                        <div style="font-size: 65px; display:flex;  flex-direction: row;">
+                            <div id="carousel-date"  class="carousel-hero-icon" style="opacity: 1;">
+                                <svg id="svg-date" class="carousel-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#FF6F61" class="bi bi-calendar-date" viewBox="0 0 16 16">
+                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
+                                    <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5z"/>
+                                </svg>
+                                <div class="icon-text-head">
+                                    Date
+                                </div>
+                            </div>
+                            <div id="carousel-image"  class="carousel-hero-icon">
+                                <svg id="svg-image" class="carousel-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
+                                    <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+                                    <path d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1z"/>
+                                </svg>
+                                <div class="icon-text-head">
+                                    Image
+                                </div>
+                            </div>
+                            <div id="carousel-describe" class="carousel-hero-icon">
+                                <svg id="svg-describe" class="carousel-svg" xmlns="http://www.w3.org/2000/svg"width="24" height="24"  fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
+                                    <path d="M2.5 3a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1zm10.113-5.373a7 7 0 0 0-.445-.275l.21-.352q.183.111.452.287.27.176.51.428.234.246.398.562.164.31.164.692 0 .54-.216.873-.217.328-.721.328-.322 0-.504-.211a.7.7 0 0 1-.188-.463q0-.345.211-.521.205-.182.569-.182h.281a1.7 1.7 0 0 0-.123-.498 1.4 1.4 0 0 0-.252-.37 2 2 0 0 0-.346-.298m-2.168 0A7 7 0 0 0 10 6.352L10.21 6q.183.111.452.287.27.176.51.428.234.246.398.562.164.31.164.692 0 .54-.216.873-.217.328-.721.328-.322 0-.504-.211a.7.7 0 0 1-.188-.463q0-.345.211-.521.206-.182.569-.182h.281a1.8 1.8 0 0 0-.117-.492 1.4 1.4 0 0 0-.258-.375 2 2 0 0 0-.346-.3z"/>
+                                </svg>
+                                <div class="icon-text-head">
+                                    Describe
+                                </div>
+                            </div>
+                            <div id="carousel-done"  class="carousel-hero-icon" style="cursor: pointer; opacity: 0.4;display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 35px ;  margin: 0px 20px;">
+                                <svg id="svg-done" class="carousel-svg" style="border: none; border-radius: 0px; padding: 0px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"  fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
+                                    <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0"/>
+                                    <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708"/>
+                                </svg>
+                                <div class="icon-text-head">
+                                    Done
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-description">
+                            <span id="carousel-front-text" style="color:#E65A50">Pick a date.</span>
+                            <span id="carousel-end-text"> Chose any date you want from the calendar!</span>
+                        </div>
+                        <div class="carousel-image-with-arrows">
+                            <img id="carousel-image-element" src="{{ url_for('uploaded_file', filename='static/date.jpg') }}">
+                            <div class="left-arrow-div">
+                                <span class="arrow-span" style="margin-left: 15px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                        <path stroke="black" stroke-width="1" fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                                      </svg>
+                                </span>
+                            </div>
+                            <div class="right-arrow-div">
+                                <span class="arrow-span" style=" margin-right: 15px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                        <path stroke="black" stroke-width="1" fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                                      </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="carousel-dots-container">
+                            <span class="carousel-dots">•</span>
+                            <span class="carousel-dots" style="color: rgba(18, 18, 18, 0.4);">•</span>
+                            <span class="carousel-dots" style="color: rgba(18, 18, 18, 0.4);">•</span>
+                            <span class="carousel-dots" style="color: rgba(18, 18, 18, 0.4);">•</span>
+                        </div>
+                    </div>
+                </div>        
             </div>
         </div>
     </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    
+        let carouselIcons = document.querySelectorAll(".carousel-hero-icon");
+        let carouselDots = document.querySelectorAll(".carousel-dots");
+        let carouselFrontText = document.getElementById("carousel-front-text");
+        let carouselEndText = document.getElementById("carousel-end-text");
+    
+        let carouselImages = ["one.png", "two.png", "three.png", "four.png" ];
+        let carouselIndex = 0;
+    
+        let idToIndex = {
+            "carousel-date" : 0,
+            "carousel-image" : 1,
+            "carousel-describe" : 2,
+            "carousel-done" : 3
+            };
+        
+        let carouselDict = {
+            0 : ["#FF6F61", "#E65A50", "Pick a date.", "Chose any date you want from the calendar."],
+            1 : ["#4DB6AC", "#439C94",  "Upload an Image.", "Chose from a variety of image file formats (even gifs)."],
+            2 : ["#42A5F5", "#3791E0", "Maybe add a description?", "Feel free to add a description, like a journal text."],
+            3 : ["#FFCA28", "#E6B323", "Fiore!", "Watch the memory get framed in your calendar!"]
+        };
+    
+        let imageSrc = [ "date.jpg", "image.jpg", "description.jpg", "done.jpg"];
+    
+        var current = 0;
+    
+        function changeCarousel(index) {
+    
+            // grey out all elements and change to default black
+            carouselIcons.forEach (items => {
+                items.style.opacity = "0.4";
+            });
+    
+            document.querySelectorAll(".carousel-hero-icon div"). forEach( div =>{
+                div.style.color = "inherit";
+            });
+            
+            document.querySelectorAll(".carousel-hero-icon svg"). forEach( svg =>{
+                svg.setAttribute("fill", "currentColor");
+            });
+    
+            // this highlights the index icon to color, adds index src, index dot 
+            
+            let item = carouselIcons[index];
+            item.style.opacity = "1";
+            var svg = item.querySelector('svg');
+            var div = item.querySelector('div div.icon-text-head');
+    
+            svg.setAttribute("fill", carouselDict[index][0]);
+            carouselFrontText.style.color = carouselDict[index][1];
+            carouselFrontText.innerHTML = carouselDict[index][2];
+            carouselEndText.innerHTML = carouselDict[index][3];
+    
+    
+            // handles changing image src
+    
+            document.getElementById("carousel-image-element").setAttribute("src", imageSrc[index]);
+            // handles the carousel dots
+            carouselDots.forEach (dot => {
+                dot.style.color = "rgba(18, 18, 18, 0.4)";
+            });
+    
+            carouselDots[index].style.color = "inherit";
+    
+            current = index;
+        };
+        changeCarousel(0); // makes the page load with first selected always
+        
+    
+        
+        // carousel change based on arrow click
+        let arrows = document.querySelectorAll(".arrow-span");
+    
+        arrows[0].addEventListener("click", function() {
+            if (current === 0){
+                current = 3
+            }
+            else {
+                current = current - 1;
+            }
+    
+            changeCarousel(current);
+        });
+        
+        arrows[1].addEventListener("click", function(){
+            if (current === 3){
+                current = 0;
+            }
+            else {
+                current = current + 1;
+            }
+            changeCarousel(current);
+        });
+    
+        // carousel change based on category icon
+        carouselIcons.forEach(item => {
+            item.addEventListener('click', function(){
+                changeCarousel(idToIndex[this.id])
+            });
+        });
+    
+    });
+    
+</script>
 {% endblock %}

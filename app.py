@@ -10,7 +10,7 @@ import logging
 from PIL import Image
 from werkzeug.utils import secure_filename
 
-from helpers import login_required, allowed_file_type, street_link, apology, valid_username, format_description
+from helpers import login_required, allowed_file_type, street_link, apology, valid_username, format_description, generate_filename
 
 
 # Configuring the application
@@ -201,7 +201,7 @@ def upload():
         return jsonify({'error': 'No month added'}), 400
     if not request.form.get("year"):
         return jsonify({'error': 'No year added'}), 400
-        
+            
     file = request.files['file']
     description = request.form.get('description', '').strip() # defult to an empty string if no description provided
     if description == '':
@@ -210,6 +210,13 @@ def upload():
     # Check if the user has actually selected a file
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
+    
+    try:
+        day = int(request.form.get('date'))
+        month = int(request.form.get('month'))
+        year = int(request.form.get('year'))
+    except ValueError:
+        return apology("Are you sure you are using the correct spells, Potter?", 403)
     
     if file and allowed_file_type(file.filename):
         # Read the file stream
@@ -223,20 +230,14 @@ def upload():
             img.verify() # verify it's a valid image
 
             # If image is valid, get a file name and save it permanently
-
-            filename = secure_filename(file.filename)
+            filename = secure_filename(generate_filename(file.filename, year, month, day))
             file_stream.seek(0) # go back to beginning of file stream
             img = Image.open(file_stream)
             save_path = os.path.join('./uploads', filename)
             img.save(save_path)
 
-            day = int(request.form.get('date'))
-            month = int(request.form.get('month'))
-            year = int(request.form.get('year'))
             image_date = datetime(year, month, day)
             current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            print(image_date)
-            print(current_date)
 
             db.execute("INSERT INTO images (user_id, path, image_date, description, upload_date) VALUES (?, ?, ?, ?, ?)", session['user_id'], save_path, image_date, description, current_date)
         

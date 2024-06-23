@@ -2,6 +2,8 @@ from flask import redirect, render_template, session
 from functools import wraps
 import random
 import re
+from uuid import uuid4
+import os
 
 def login_required(f):
     """
@@ -78,4 +80,14 @@ def format_description(description):
             return description_list[0] + "."
     else:
         return description_list[0]
+    
+def generate_filename(filename, year, month, day):
+    """ formats the file name to a unique identifier with date at end """
+
+    _, ext = os.path.splitext(filename)
+    year = str(year).zfill(4)
+    month = str(month).zfill(2)
+    day = str(day).zfill(2)
+    return (str(uuid4()).replace('-', '') + '_'  + year + month + day + ext)
+
     

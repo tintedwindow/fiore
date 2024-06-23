@@ -88,6 +88,6 @@ def generate_filename(filename, year, month, day):
     year = str(year).zfill(4)
     month = str(month).zfill(2)
     day = str(day).zfill(2)
-    return (str(uuid4()).replace('-', '') + '_'  + year + month + day + ext)
+    return (year + month + day + "-" + str(uuid4()) + ext)
 
     

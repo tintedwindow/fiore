@@ -39,9 +39,15 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-@app.route('/<path:filename>')
-def uploaded_file(filename):
-    return send_from_directory(os.getcwd(), filename)
+@app.route('/<path:filename>/')
+@app.route('/<path:filename>/<int:thumbnail>')
+def uploaded_file(filename, thumbnail=None):
+    if thumbnail: 
+        image_path = os.path.join('./uploads/thumbnails', 'thumb-' + filename)
+    else:
+        image_path = os.path.join('./uploads', filename)
+
+    return send_from_directory(os.getcwd(), image_path)
 
 @app.route('/entry-scroll', methods=["GET"])
 def entry_scroll():
@@ -102,10 +108,17 @@ def delete():
     except ValueError:
         return apology("Are you sure you are using the correct spells, Potter?", 403)
 
-    image_info = db.execute("SELECT image_id FROM images WHERE user_id = ? AND strftime('%Y-%m-%d', image_date) = ?",
+    image_info = db.execute("SELECT image_id, filename FROM images WHERE user_id = ? AND strftime('%Y-%m-%d', image_date) = ?",
                         session["user_id"], f"{year}-{month:02}-{day:02}")
     
     if(image_info):
+
+        # delete from upload and thumbnail directories
+        filename = image_info[0]["filename"]
+        os.remove(os.path.join('./uploads/thumbnails', 'thumb-' + filename))
+        os.remove(os.path.join('./uploads', filename))
+
+        #delete entry from database
         db.execute("DELETE FROM images WHERE user_id = ? AND strftime('%Y-%m-%d', image_date) = ?",
                             session["user_id"], f"{year}-{month:02}-{day:02}")
         
@@ -169,7 +182,7 @@ def day_info():
         month_name = calendar.month_name[month]
 
     
-        day_details = db.execute("SELECT path, description FROM images WHERE user_id = ? AND strftime('%Y-%m-%d', image_date) = ?",
+        day_details = db.execute("SELECT filename, description FROM images WHERE user_id = ? AND strftime('%Y-%m-%d', image_date) = ?",
                         session["user_id"], f"{year}-{month:02}-{day:02}")
         
         if day_details:
@@ -235,13 +248,18 @@ def upload():
             img = Image.open(file_stream)
             save_path = os.path.join('./uploads', filename)
             img.save(save_path)
+            #saves a low rez thumbnail
+            img.thumbnail((800, 800)) #resizes the image to max 800 x 800 pixels
+            thumb_path = os.path.join('./uploads/thumbnails', 'thumb-' + filename)
+            img.save(thumb_path)
+
 
             image_date = datetime(year, month, day)
             current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-            db.execute("INSERT INTO images (user_id, path, image_date, description, upload_date) VALUES (?, ?, ?, ?, ?)", session['user_id'], save_path, image_date, description, current_date)
+            db.execute("INSERT INTO images (user_id, filename, image_date, description, upload_date) VALUES (?, ?, ?, ?, ?)", session['user_id'], filename, image_date, description, current_date)
         
-            return jsonify({'message': 'File successfully uploaded', 'filename': filename, 'day' : day, 'description': description.split(".")[0] + "..." if description else None, 'image_path': save_path }), 200
+            return jsonify({'message': 'File successfully uploaded', 'filename': filename, 'day' : day, 'description': description.split(".")[0] + "..." if description else None, 'filename': filename }), 200
         except Exception as e:
             return jsonify({'error': 'Invalid image file: {}'.format(e)}), 400
     else:
@@ -272,10 +290,10 @@ def home():
 
             current_cal = calendar.monthcalendar(year, month)
 
-            images = db.execute("SELECT path, image_date, description FROM images WHERE user_id = ? AND strftime('%Y-%m', image_date) = ?",
+            images = db.execute("SELECT filename, image_date, description FROM images WHERE user_id = ? AND strftime('%Y-%m', image_date) = ?",
                                 session["user_id"], f"{year}-{month:02}")
 
-            images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': format_description(img['description'])} for img in images}
+            images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'filename': img['filename'], 'description': format_description(img['description'])} for img in images}
 
             # checks if redirected by delete
             message = get_flashed_messages()
@@ -294,10 +312,10 @@ def home():
             #get current month name dynamically
             month_name = calendar.month_name[month]
 
-            images = db.execute("SELECT path, image_date, description FROM images WHERE user_id = ? AND strftime('%Y-%m', image_date) = ?",
+            images = db.execute("SELECT filename, image_date, description FROM images WHERE user_id = ? AND strftime('%Y-%m', image_date) = ?",
                                 session["user_id"], f"{year}-{month:02}")
 
-            images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'image_path': img['path'], 'description': img['description'].split(".")[0] + "..."  if img['description'] else None} for img in images}
+            images_by_day = {datetime.strptime(img['image_date'], '%Y-%m-%d %H:%M:%S').day: {'filename': img['filename'], 'description': img['description'].split(".")[0] + "..."  if img['description'] else None} for img in images}
 
             current_cal = calendar.monthcalendar(year, month)
             return render_template("home_new.html", name = session["user_name"], calendar=current_cal, month_name=month_name, month=month, year=year, images_by_day=images_by_day)

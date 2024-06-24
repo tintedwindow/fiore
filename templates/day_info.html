@@ -15,7 +15,7 @@
             <div class="day-page-container">
                 <div class="day-page-body">
                     <div class="day-page-image-container">
-                        <img  alt="{{ 'day-' ~ day }}" class="day-page-image" src="{{ url_for('uploaded_file', filename=day_details[0]['path']) }}" title="{{day}}"> 
+                        <img  alt="{{ 'day-' ~ day }}" class="day-page-image" src="{{ url_for('uploaded_file', filename=day_details[0]['filename']) }}" title="{{day}}"> 
                     </div>
                     <div class="day-page-delete">
                         <button class="bin" style="margin-right: 20px;" title="Delete Entry">

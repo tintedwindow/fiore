@@ -106,10 +106,10 @@
 
 .yellow-highlight {
     background-color: rgb(254, 255, 210);
-
     text-decoration: none;
     padding: 4px 5px;
     border-radius: 5px;
+    white-space: nowrap;
 
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -129,6 +129,7 @@
     text-decoration: none;
     padding: 4px 5px;
     border-radius: 5px;
+    white-space: nowrap;
 
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -146,6 +147,8 @@
     text-decoration-thickness: 1px;
     text-underline-offset: 8px;
     text-decoration-color: rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 600;

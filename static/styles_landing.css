@@ -106,6 +106,7 @@
 
 .yellow-highlight {
     background-color: rgb(254, 255, 210);
+    background-color:  #fdfbe4;
     text-decoration: none;
     padding: 4px 5px;
     border-radius: 5px;
@@ -143,12 +144,9 @@
 .text-bold {
     padding: 4px 5px;
     border-radius: 5px;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 8px;
-    text-decoration-color: rgba(0, 0, 0, 0.5);
+    text-decoration: none;
     white-space: nowrap;
-
+    
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 600;
@@ -156,6 +154,21 @@
     font-variation-settings:
       "slnt" 0;
 }
+
+.text-underline {
+    white-space: nowrap;
+    
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 7px;
+    text-decoration-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.text-underline:hover {
+    text-decoration-color: rgba(0, 0, 0, 0.8);
+}
+
 
 .hero-carousel-container {
     width: 100%;

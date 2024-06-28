@@ -73,22 +73,13 @@
         let arrows = document.querySelectorAll(".arrow-span");
 
         arrows[0].addEventListener("click", function() {
-            if (current === 1){
-                current = 0;
-            }
-            else {
-                current = 1;
-            }
+            // thank you dbb for this scalable tip :)
+            current = (current - 1 + imageSrc.length) % imageSrc.length;
             document.getElementById("carousel-image-element").setAttribute("src","static/" + imageSrc[current]);
         });
 
         arrows[1].addEventListener("click", function() {
-            if (current === 0){
-                current = 1;
-            }
-            else {
-                current = 0;
-            }
+            current = (current + 1) % imageSrc.length;
             document.getElementById("carousel-image-element").setAttribute("src","static/" + imageSrc[current]);
         });
     });

@@ -11,8 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Playball&display=swap" rel="stylesheet">
 {% endblock %}
 
-{{ url_for('uploaded_file', filename=images_by_day[day]['image_path']) }}
-
 {% block content %}
 
 <div class="content-container">
@@ -27,16 +25,38 @@
                         Fiore combines the ideas of <a href="https://youtu.be/rfeADdY1rHw?si=2PwVqeuwLE-Z9zYk" target="_blank" class="grey-highlight">journaling</a> with <a href="https://youtu.be/a9y1Zs9suZY?si=RiYawwbQmDBYSH3j" target="_blank" class="grey-highlight">minimalism</a>, giving you an experience that 
                         <br>
                         <a href="https://www.youtube.com/watch?v=2mafGDk2Rl4" target="_blank" class="grey-highlight"> reflects on your life</a> via a visual calendar.
-                        <br>
+                        <div class="hero-carousel-container" style="margin: 10px auto 0px auto;">
+                            <div class="carousel-image-with-arrows">
+                                <img id="carousel-image-element" src="{{ url_for('uploaded_file', filename='static/fiore_full_zoomed_out.jpg') }}">
+                                <div class="left-arrow-div">
+                                    <span class="arrow-span" style="margin-left: 15px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                            <path stroke="black" stroke-width="1" fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                                          </svg>
+                                    </span>
+                                </div>
+                                <div class="right-arrow-div">
+                                    <span class="arrow-span" style=" margin-right: 15px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                            <path stroke="black" stroke-width="1" fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                                          </svg>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                    <div style="margin-top: 30px;">
+                    <div style="margin-top: 10px;">
                         Fiore works by <a title="fiore">framing instances on rectangles everyday</a> and creating a calendar that is uniquely yours.
-                        It's like flipping a page on your calendar, but on each day, you see a glimpse of what your day was like. Fiore supports the most common image formats and has a very minimal UI, 
+                        It's like flipping a page on your calendar, but on each day you see a glimpse of what your day was like. Fiore supports the most common image formats and has a very minimal UI, 
                        <a class="text-underline">reducing the friction between you and your next journal entry.</a>           
                     </div>
                     <div style="margin-top: 40px;">
                         Fiore is inspired by <a href="https://maps.app.goo.gl/sFZakMTtuCAuGXB56" target="_blank" class="yellow-highlight">a touch of Italy</a>. <a class="yellow-highlight">The islands</a>, <a class="yellow-highlight">the landscapes</a> and <a class="yellow-highlight">the beaches</a>,
                         they reflect the calmness that comes with <a href="https://youtu.be/2mafGDk2Rl4?si=hPVpkTk7dfikVcGK" target="_blank" class="text-bold">intentional living</a> and the calmness that Fiore brings to your journaling experience.
+                    </div>
+                    <div style="margin: 40px 0px 20px 0px;">
+                       We hope you enjoy your stay at Fiore!
                     </div>
                 </div>        
             </div>
@@ -44,5 +64,35 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let imageSrc = [ "fiore_full_zoomed_out.jpg", "journal_entry.jpg"];
+        var current = 0;
+
+        // carousel change based on arrow click
+        let arrows = document.querySelectorAll(".arrow-span");
+
+        arrows[0].addEventListener("click", function() {
+            if (current === 1){
+                current = 0;
+            }
+            else {
+                current = 1;
+            }
+            document.getElementById("carousel-image-element").setAttribute("src","static/" + imageSrc[current]);
+        });
+
+        arrows[1].addEventListener("click", function() {
+            if (current === 0){
+                current = 1;
+            }
+            else {
+                current = 0;
+            }
+            document.getElementById("carousel-image-element").setAttribute("src","static/" + imageSrc[current]);
+        });
+    });
+    
+</script>
 
 {% endblock %}

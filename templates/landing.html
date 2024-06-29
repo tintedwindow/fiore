@@ -6,7 +6,6 @@
     <title>Welcome to Fiore</title>
     <!-- style sheet and javascript-->
     <link rel="stylesheet" href="{{ url_for('static',filename='styles_landing.css') }}">
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -102,8 +101,7 @@
         let carouselFrontText = document.getElementById("carousel-front-text");
         let carouselEndText = document.getElementById("carousel-end-text");
         let carouselGetStarted = document.getElementById("carousel-get-started");
-    
-        let carouselImages = ["one.png", "two.png", "three.png", "four.png" ];
+
         let carouselIndex = 0;
     
         let idToIndex = {
@@ -138,9 +136,9 @@
             document.querySelectorAll(".carousel-hero-icon svg"). forEach( svg =>{
                 svg.setAttribute("fill", "currentColor");
             });
+
     
             // this highlights the index icon to color, adds index src, index dot 
-            
             let item = carouselIcons[index];
             item.style.opacity = "1";
             var svg = item.querySelector('svg');
@@ -171,13 +169,13 @@
     
             current = index;
         };
+
         changeCarousel(0); // makes the page load with first selected always
         
     
         
         // carousel change based on arrow click
         let arrows = document.querySelectorAll(".arrow-span");
-    
         arrows[0].addEventListener("click", function() {
             // thank you dbb for this scalable tip :)
             current = (current - 1 + imageSrc.length) % imageSrc.length;    

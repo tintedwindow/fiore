@@ -262,6 +262,22 @@
         outline: none;
 }
 
+#modal-input-text::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+#modal-input-text::-webkit-scrollbar-track {
+    background: #ffffff; /* Background of the scrollbar track */
+    border-radius: 10px;
+}
+
+#modal-input-text::-webkit-scrollbar-thumb {
+    background-color:rgba(55, 53, 47, 0.45); /* Color of the scrollbar thumb */
+    border-radius: 15px; /* Rounded corners */
+    border: 2px solid #ffffff; /* Space around the thumb */
+    cursor: auto; /* without this, my cursor was a text icon even on scroll bar*/
+}
+
 #modal-buttons
 {
     height: 15%;

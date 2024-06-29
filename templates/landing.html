@@ -185,7 +185,7 @@
         });
         
         arrows[1].addEventListener("click", function(){
-            current = (current - 1 + imageSrc.length) % imageSrc.length;
+            current = (current + 1) % imageSrc.length;
             changeCarousel(current);
         });
     

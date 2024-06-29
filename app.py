@@ -150,10 +150,9 @@ def acknowledgements():
 @app.route('/profile')
 @login_required
 def profile():
+    
     creation_date = db.execute("SELECT creation_date FROM users WHERE id = ?", session["user_id"])
     creation_date = datetime.strptime(creation_date[0]["creation_date"], '%Y-%m-%d %H:%M:%S').strftime('%d-%m-%Y')
-
-
     description_count = db.execute("SELECT COUNT(description) as descriptions FROM images WHERE user_id = ?", session["user_id"])
     description_count = description_count[0]["descriptions"]
     entry_count = db.execute("SELECT COUNT(image_date) as total_dates FROM images WHERE user_id = ?", session["user_id"])
@@ -282,7 +281,7 @@ def home():
             except ValueError:
                 return apology("Are you sure you are using the correct spells, Potter?", 403)
             
-            if (month < 1 or month > 12 or year > 2100):
+            if (month < 1 or month > 12 or year >= 2100):
                 return apology("Are you trying to break a school rule and go out of bounds, Potter?", 403)
             
             # get new values for templating

@@ -144,7 +144,8 @@ def resources():
 
 @app.route('/acknowledgements')
 def acknowledgements():
-    return apology("You can thank me for hepling you in Hogwards, Potter!")
+    return render_template("acknowledgements.html")
+    # return apology("You can thank me for hepling you in Hogwards, Potter!")
 
 
 @app.route('/profile')

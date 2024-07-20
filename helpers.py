@@ -26,7 +26,7 @@ def allowed_file_type(filename):
     # and then splits the extension and checks the extension is in the following set
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg', 'jfif', 'gif', 'webp'}
 
-def street_link():
+def street_link(return_all=False):
     """Returns a random google street view embed along with place name"""
 
     # a variable that tracks whether it was triggered via the resources tab!
@@ -37,6 +37,9 @@ def street_link():
         ["Tropea", "https://www.google.com/maps/embed?pb=!4v1721499716380!6m8!1m7!1sA6K8MBBKvhcOr-4G0O-NjQ!2m2!1d38.67740125296768!2d15.8913837582285!3f200.09535612161147!4f-4.784162648697659!5f0.4000000000000002"]
     ]
 
+    if return_all:
+        return embed_views
+    
     return random.choice(embed_views)
 
 def apology(message, code=400):

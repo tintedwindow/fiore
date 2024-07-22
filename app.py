@@ -140,6 +140,8 @@ def about():
 
 @app.route('/resources')
 def resources():
+    return render_template("resources.html", places=street_link(return_all=True))
+
     return apology("These are the books you have to consult, Potter!")
 
 @app.route('/acknowledgements')

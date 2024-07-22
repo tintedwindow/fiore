@@ -1,0 +1,56 @@
+{% extends "page_with_nav.html" %}
+
+{% block static %}
+    <!-- font specific stuff-->
+
+    <title>Acknowledgements</title>
+    <!-- style sheet and javascript-->
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles_landing.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playball&display=swap" rel="stylesheet">
+    <style>
+        .story-display-none {
+            display: none;
+        }
+        .story-toggle-blue {
+            color: #0081f2;
+        }
+
+        .story-toggle-blue-lighter {
+            color: rgb(158, 210, 245) ;
+        }
+
+        #story-text{
+            /*
+            padding: 0px 10px; 
+            background-color: rgba(0, 204, 255, 0.01);
+            border: 1px solid rgba(0, 0, 0, .075);
+            border-radius: 7px;
+            */
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<div class="content-container">
+    <div class="content">
+        <div class="home-hero">
+            <div class="hero-title">
+                This is the story of Fiore! I hope the things that inspired me, inspire you too!
+            </div>
+            <div class="description-container">
+                <div class="hero-description-footer" style="text-align: justify;">
+                    Try
+                    {% for place in places %}
+                        <a href="{{place[1]}}">{{place[0]}}</a>{% if not loop.last %}, {% else %}. {% endif %} 
+                        <!-- thank you dbb -->
+                    {% endfor %}
+                </div>               
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

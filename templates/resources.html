@@ -3,7 +3,7 @@
 {% block static %}
     <!-- font specific stuff-->
 
-    <title>Acknowledgements</title>
+    <title>Resources</title>
     <!-- style sheet and javascript-->
     <link rel="stylesheet" href="{{ url_for('static',filename='styles_landing.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
@@ -38,13 +38,13 @@
     <div class="content">
         <div class="home-hero">
             <div class="hero-title">
-                This is the story of Fiore! I hope the things that inspired me, inspire you too!
+                This is the story of Fiore! I hope the things that inspired me can inspire you too!
             </div>
             <div class="description-container">
                 <div class="hero-description-footer" style="text-align: justify;">
                     Try
                     {% for place in places %}
-                        <a href="{{place[1]}}">{{place[0]}}</a>{% if not loop.last %}, {% else %}. {% endif %} 
+                        <a href="https://www.google.com/maps/search/{{place[0]}}" target="_blank">{{place[0]}}</a>{% if not loop.last %}, {% else %}. {% endif %} 
                         <!-- thank you dbb -->
                     {% endfor %}
                 </div>               

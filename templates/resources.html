@@ -44,7 +44,7 @@
                 <div class="hero-description-footer" style="text-align: justify;">
                     Try
                     {% for place in places %}
-                        <a href="https://www.google.com/maps/search/{{place[0]}}" target="_blank">{{place[0]}}</a>{% if not loop.last %}, {% else %}. {% endif %} 
+                        <a href="{{place[2]}}" target="_blank">{{place[0]}}</a>{% if not loop.last %}, {% else %}. {% endif %} 
                         <!-- thank you dbb -->
                     {% endfor %}
                 </div>               

@@ -1,4 +1,4 @@
-k{% extends "page_with_nav.html" %}
+{% extends "page_with_nav.html" %}
 
 {% block static %}
     <!-- font specific stuff-->
@@ -20,6 +20,18 @@ k{% extends "page_with_nav.html" %}
         .story-toggle-blue-lighter {
             color: rgb(158, 210, 245) ;
         }
+
+        .acknowledgement-link-temp {
+            text-decoration: underline;
+            text-decoration-color: rgb(158, 210, 245);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 7px;
+        }
+
+        .acknowledgement-link {
+            color: #2b70ad;
+            text-decoration :none;
+        }        
 
         #story-text{
             /*
@@ -46,7 +58,7 @@ k{% extends "page_with_nav.html" %}
                         <a target="_blank" class="grey-highlight">This is <span style="text-decoration:line-through; text-decoration-thickness: 1px; opacity: 0.6;">a</span> CS50 <span style="text-decoration:line-through; text-decoration-thickness: 1px; opacity: 0.6;">project</span>.</a>
                         <br>
                         <div style="text-align: right;">
-                            <a target="_blank" class="text-dsunderline">Perhaps, the course that shaped me as a programmer, and more so a problem solver</a> <span title="Read more" id="story-toggle" class="story-toggle-blue"  style="cursor: pointer;">...</span>
+                            <a target="_blank" class="text-dsunderline">Perhaps, the course that shaped me as a programmer and more so, a problem solver</a> <span title="Read more" id="story-toggle" class="story-toggle-blue"  style="cursor: pointer;">...</span>
                         </div>
                     </div>
                     <div id="story-text" class="story-display-none" style="justify-content: left; margin: 15px 0px;">
@@ -56,83 +68,43 @@ k{% extends "page_with_nav.html" %}
                         <br>
                         It was also around the time Apple was having one of their WWDC events, and me having watched that, YouTube was recommending me older WWDC videos. And that's when I saw WWDC 2013.
                         <div style="text-align: center; margin: 5px 0px;">
-                            The first thing we ask is</a> <a target="_blank" class="grey-highlight"> what do we want people to feel?</a>
+                            'The first thing we ask is</a> <a target="_blank" class="grey-highlight"> what do we want people to feel?</a>'
                         </div>
-                        That line hit me. As someone who always saw exploring street view as a means of escape, a calming feeling waiting for me in a random street of the world, 
+                        That line deeply resonated with me. As someone who always saw exploring street view as a means of escape, a calming feeling waiting for me in a random street of the world especially Italy, 
                         I knew what I wanted my project to make people feel.
                         <br>
-                        I also had started journaling, thanks to <a class="text-underline" href="https://youtube.com/@unjadedjade?si=5wTQWJ2Yxvby-Smi">Jade</a>, <a class="text-underline" href="https://youtu.be/rfeADdY1rHw?si=E9oqRKs0nkAiU1B9">Nathaniel</a>, <a class="text-underline" href="https://youtube.com/@malamalife?si=JbBsnp9NorT1PCfL">Sophie</a>, <a class="text-underline" href="https://youtu.be/JHKiDe8E4hY?si=wx-zuqzTXF0_5pUl">Ali</a> and <a class="text-underline" href="https://youtu.be/ZK5VUuxGYr0?si=pASTZSfYItzVb7nH">Sadia</a>. It was a mixed experience at first because I had just started, but quickly things started connecting.
-                        What made it easier to journal was on <a class="text-underline" href="https://youtu.be/JHKiDe8E4hY?si=wx-zuqzTXF0_5pUl">Ali's suggestion</a> to try an app called <a class="text-underline" href="https://dayoneapp.com/web/">Day One</a>, a digital journal where on a free account, you were limited to one entry a day.
+                        I also had started journaling, thanks to <a class="text-underline" href="https://youtube.com/@unjadedjade?si=5wTQWJ2Yxvby-Smi">Jade</a>, <a class="text-underline" href="https://youtu.be/rfeADdY1rHw?si=E9oqRKs0nkAiU1B9">Nathaniel</a>, <a class="text-underline" href="https://youtube.com/@malamalife?si=JbBsnp9NorT1PCfL">Sophie</a>, <a class="text-underline" href="https://youtu.be/JHKiDe8E4hY?si=wx-zuqzTXF0_5pUl">Ali</a> and <a class="text-underline" href="https://youtu.be/ZK5VUuxGYr0?si=pASTZSfYItzVb7nH">Sadia</a>.
+                        At first, the experience was mixed since I had just started, but soon everything began to fall into place.
+                        What made it easier to journal was on <a class="text-underline" href="https://youtu.be/JHKiDe8E4hY?si=wx-zuqzTXF0_5pUl">Ali's suggestion</a> to try an app called <a class="text-underline" href="https://dayoneapp.com/web/">Day One</a>, a digital journal, where on a free account, you were limited to one entry a day.
                         And this free plan limitation surprisingly ended up helping me in simplifying my journaling habits!
                         <br>
-                        This limitation and the new found simplicity ultimately landed me on a vague idea I sketched on my <a class="text-underline" href="https://keep.google.com/">Keeps</a> one night. And I thought, if I could combine the feeling of looking at a place or a memory and associating it with a day, it could work.
-                        Then came the idea for Fiore! Framing instances on rectangles everyday!
+                        This limitation and the new found simplicity ultimately led me to a vague idea I sketched on my <a class="text-underline" href="https://keep.google.com/">Keeps</a> one night that if I could combine the feeling of looking at a place or a memory and associating it with a day, it could work.
+                        Then thus, the idea for Fiore was born: Framing Instances On Rectangles Everyday!
                         This project made me realize that there's so much to learn for me and it also made me realize that I infact did when I finally solved each challange whether it was flying the nett and setting up local development and making Flask work, or going from a table tag to divisions that represent days in Fiore now :)
                     </div>
                     <div>
-                        I have always been a Notion user, and one thing that was really inspiring to me was how they kept everything so simple yet organized. I specially loved their website, and used to think that one day I would make one like this. And that's how the design of the website got finalized. It really reciprocated with the calmness of Fiore as well.
-                        Coming to the libraries, and acknowledgements realted to code, Google Fonts provided the font Inter, and it's font variations are used across the website. I made this project on Visual Studio Code. 
-                        The backend language was Python and the web framework used was Flask.
+                        I have always been a <a class="acknowledgement-link">Notion</a> user and I've always admired it for it's simplicity and organization. I remember, the first time visiting <a class="acknowledgement-link">their website</a> and being so inspired by it that I used to think that one day I would make one like this. This played a key role in building the design for this website, reflecting the calmness of a simple and organized journal app with added hints of Italy, Fiore.
+                        <br>
+                        For the project’s development, I used Google Fonts to incorporate the <a class="acknowledgement-link">Inter font</a> and it's variations throughout the website. The project was built using <a class="acknowledgement-link">Visual Studio Code</a> as my primary and only IDE. 
+                        The backend language was <a class="acknowledgement-link">Python</a> and the web framework used was <a href="https://flask.palletsprojects.com/en/3.0.x/" class="acknowledgement-link">Flask</a>.
                     </div>
-                    Here's all the Python libraries that hepled me make it possible.
+                    Here are the Python libraries that hepled me make this project possible.
                     <ul style="text-align: left; font-size: 19px; line-height: 40px; margin-left: 15px;">
-                        <li>cs50 (also provided SQL features)</li>
-                        <li>flask</li>
-                        <li>flask_sessions</li>
-                        <li>werkzeug.security</li>
-                        <li>werkzeug.utils</li>
-                        <li>Built-in Python libraries: calendar, datetime, functools, logging, os, re, uuid</li>
+                        <li><a href="https://cs50.readthedocs.io/libraries/cs50/python/" class="acknowledgement-link">cs50</a> (which also provided SQL features)</li>
+                        <li><a href="https://flask.palletsprojects.com/en/3.0.x/installation/#python-version" class="acknowledgement-link">flask</a></li>
+                        <li><a href="https://flask-session.readthedocs.io/en/latest/" class="acknowledgement-link">flask_sessions</a></li>
+                        <li><a href="https://werkzeug.palletsprojects.com/en/3.0.x/" class="acknowledgement-link">werkzeug</a> (security and utils)</li>
+                        <li><a href="#" class="acknowledgement-link">The Python Standard Library</a> (calendar, datetime, functools, logging, os, re, uuid)</li>
                     </ul>
-                    I ran Ubuntu in WSL. Additionally, I want to also thank Stack Overflow, the visits to which got more and more frequent as the project expanded. This project also introduced me to Git and Github, and Fiore's repository can be found <a class="text-underline" href="https://github.com/tintedwindow/fiore">here</a>. 
-                    <br>
-                    Once again, in this project I was standing on the shoulder of giants. 
-                    <br>
-                    So, from the bottom of my heart, thank you!
-                </div>
-                <div style="display: flex; display: none; flex-direction: row; width: 100%; justify-content: space-between;">
-
-                    <div class="resource-box" style="width: 356px; height: 416px; background-color: #f7f9fd; 
-                    border-radius: 16px; box-shadow: 0 2px 5px 0 rgba(60, 64, 67, .05); padding: 20px;">
-                        <div class="recource-box-image-container" style="background: linear-gradient(to right, #dec3e2, #cebdfe); border-radius: inherit; height: 50%;">
-                            <img src="https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg"; 
-                            style="width: 100%; height: 100%; object-fit: contain;
-                              -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-                              filter: grayscale(100%);">
-                        </div>
-                        <div class="reaource-box-head">Italy</div>
-                        <div class="resource-box-text"></div>
-                        <div class="resource-box-button"></div>
-                        
+                    I ran <a href="https://ubuntu.com/desktop/wsl" class="acknowledgement-link">Ubuntu</a> in <a href="https://learn.microsoft.com/en-us/windows/wsl/" class="acknowledgement-link">WSL</a> for development. Additionally, I also want to thank <a href="https://stackoverflow.com/" class="acknowledgement-link">Stack Overflow</a>, the visits to which got more and more frequent as the project expanded.
+                    On roadblocks, <a href="https://cs50.ai" class="acknowledgement-link">CS50 Duck Debugger</a> was really helpful because as <a href="https://youtu.be/3LPJfIKxwWc?t=4237" class="acknowledgement-link">David</a> said, "the goal here is not to simply take away tools that are clearly inevitable, in my view, and clearly helpful and productivity savers, but we'd like there to be some guardrails, intellectually, on just how helpful these chatbots are".
+                    This project also introduced me to <a href="https://git-scm.com/" class="acknowledgement-link">Git</a> and <a href="https://github.com/" class="acknowledgement-link">Github</a> and Fiore's repository can be found <a class="acknowledgement-link" href="https://github.com/tintedwindow/fiore">here</a>. 
+                    <div style="text-align: center; margin: 30px 0px 35px 0px;">
+                        Once again, I was standing on the shoulder of giants.
+                        <br> 
+                        From the bottom of my heart, <a href="/italy" class="yellow-highlight" style="background-color: #FFEFEF;"> thank you! </a>
                     </div>
-                    <div class="resource-box" style="width: 356px; height: 416px; background-color: #f7f9fd; 
-                    border-radius: 16px; box-shadow: 0 2px 5px 0 rgba(60, 64, 67, .05); padding: 20px;">
-                        <div class="recource-box-image-container" style="background: linear-gradient(to right, #dec3e2, #cebdfe); border-radius: inherit; height: 50%;">
-                            <img src="https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg"; 
-                            style="width: 100%; height: 100%; object-fit: contain;
-                              -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-                              filter: grayscale(100%);">
-                        </div>
-                        <div class="reaource-box-head">Music Playlist</div>
-                        <div class="resource-box-text"></div>
-                        <div class="resource-box-button"></div>
-                        
-                    </div>
-                    <!-- Each div can be a rectangle, which has title, then the description. With ha button for the link -->
-                    <!--
-                    Plan to put this on the resources tab alone and leave the paragraph acknowledgements here
-                        <div> Rectangle 1
-                            <div> Heading div </div>
-                            <div> Description</div>
-                            <div> Link button</div>
-
-                        </div>
-                        <div> Rectangle 2</div>
-                        <div> Rectangle 3</div>
-                        <div> Rectangle 4</div>
-
-                        !!! add about inspiratoon of Wizarding world behind apologies!
-                    -->
-                </div>        
+                </div>   
             </div>
         </div>
     </div>

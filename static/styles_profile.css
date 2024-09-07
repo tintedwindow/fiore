@@ -70,18 +70,20 @@
 }
 
 .entry-list-table::-webkit-scrollbar {
-    width: 10px; /* Width of the scrollbar */
+    width: 12px; /* Width of the scrollbar */
 }
 
 .entry-list-table::-webkit-scrollbar-track {
-    background: #ffffff; /* Background of the scrollbar track */
+    /* the long line on which scrollbar glides */
+    background: rgba(255, 213, 75, 0.2); 
     border-radius: 10px;
 }
 
 .entry-list-table::-webkit-scrollbar-thumb {
-    background-color:rgba(55, 53, 47, 0.45); /* Color of the scrollbar thumb */
-    border-radius: 15px; /* Rounded corners */
-    border: 2px solid #ffffff; /* Space around the thumb */
+    /* scrollbar bit */
+    background-color:rgba(252, 209, 80, 0.45);
+    border-radius: 15px;
+    border: 2px solid #ffffff;
 }
 
 .entry-list-head {

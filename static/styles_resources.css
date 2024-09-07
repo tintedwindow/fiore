@@ -45,11 +45,13 @@
 
 .resource-row-carousel::-webkit-scrollbar {
     width: 10px; /* scrollbar width */
+    height: 14px;
+
 }
 
 .resource-row-carousel::-webkit-scrollbar-track {
     /* the long line on which scrollbar glides */
-    background: rgba(255, 196, 0, 0.2); 
+    background: rgba(255, 213, 75, 0.2); 
     border-radius: 10px;
 }
 
@@ -57,7 +59,7 @@
     /* scrollbar bit */
     background-color:rgba(252, 209, 80, 0.45);
     border-radius: 15px;
-    border: 2px solid #ffffff;
+    border: 1px solid #ffffff;
 }
 
 .resource-box {

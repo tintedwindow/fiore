@@ -83,7 +83,7 @@
     /* scrollbar bit */
     background-color:rgba(252, 209, 80, 0.45);
     border-radius: 15px;
-    border: 2px solid #ffffff;
+    border: 1px solid #ffffff;
 }
 
 .entry-list-head {

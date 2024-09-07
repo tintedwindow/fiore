@@ -49,6 +49,11 @@ def uploaded_file(filename, thumbnail=None):
 
     return send_from_directory(os.getcwd(), image_path)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    # this expects an argument in any case
+    return apology("Are you really focusing your mind on where to apparate, Potter?", 404)
+
 @app.route('/entry-scroll', methods=["GET"])
 def entry_scroll():
     # retrieve the last or the next entry of the user
@@ -147,7 +152,7 @@ def resources():
 @app.route('/acknowledgements')
 def acknowledgements():
     return render_template("acknowledgements.html")
-    # return apology("You can thank me for hepling you in Hogwards, Potter!")
+    # return apology("You can thank me for hepling you in Hogwarts, Potter!")
 
 
 @app.route('/profile')

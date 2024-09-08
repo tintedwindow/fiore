@@ -139,12 +139,7 @@ body {
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
+{
     /* https://developer.mozilla.org/en-US/docs/Web/CSS/:autofill 
     When I was registering a test user, I noticed that when I autofilled a user details in my form field, the colors of the field changed.
     These webkit things are responsible for that.
@@ -155,5 +150,5 @@ select:-webkit-autofill:focus {
         color: -internal-light-dark(black, white) !important;
     but some properties like border, don't have it. So I changed that here :)
     */
-  border: inherit;
+    border: inherit;
 };

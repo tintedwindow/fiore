@@ -125,11 +125,8 @@
     <input id="file-month" name="month" type="hidden" value="{{month}}">
     <input id="file-year" type="hidden" value="{{year}}">
 
-    <!-- Image page hidden form attribute-->
-    <form id="image-page-info" style="display:none;" method="get" action="/day-info"> 
-    <input name="day" type="hidden">
-    <input name="month" type="hidden" value="{{month}}">
-    <input name="year" type="hidden" value="{{year}}">
-    </form>
+
+    <a id="image-page-link" style="display: none;" href="day-info?day=&month={{month}}&year={{year}}"></a>
+
 
 {% endblock %}

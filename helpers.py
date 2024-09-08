@@ -35,7 +35,7 @@ def street_link(return_all=False):
         ["Arezzo", "https://www.google.com/maps/embed?pb=!4v1717524881466!6m8!1m7!1s4m0s7Uae-8vVJzPJSj_HJg!2m2!1d43.46736676185345!2d11.88359854501204!3f308.6546291458899!4f5.540173243496838!5f0.4000000000000002", "zhttps://maps.app.goo.gl/RMgLiQBYXoMTSSkC9"],
         ["Liguria", "https://www.google.com/maps/embed?pb=!4v1717525460314!6m8!1m7!1s82T9AG1NMKvRgpd9nze1Yg!2m2!1d44.13640524169838!2d9.765037289350103!3f9.562905459513086!4f-9.76672118128117!5f0.7820865974627469", "https://maps.app.goo.gl/HvTC2TRixJTuWxc68"],
         ["Cortona", "https://www.google.com/maps/embed?pb=!4v1721327298805!6m8!1m7!1svJxShiP71Z82mHEmv3lxQA!2m2!1d43.27525568477115!2d11.98785088016457!3f177.77!4f-8.379999999999995!5f0.7820865974627469", "https://maps.app.goo.gl/WezBpFpTCsQs1uoc8"],
-        ["Tropea", "https://www.google.com/maps/embed?pb=!4v1721499716380!6m8!1m7!1sA6K8MBBKvhcOr-4G0O-NjQ!2m2!1d38.67740125296768!2d15.8913837582285!3f200.09535612161147!4f-4.784162648697659!5f0.4000000000000002", "https://maps.app.goo.gl/Zo77yEQUsRHBHFZp6"],
+        ["Tropea", "https://www.google.com/maps/embed?pb=!4v1725767244261!6m8!1m7!1sLM9A6ffg8Ukab6SnqfTyjQ!2m2!1d38.6773225530563!2d15.8914708638922!3f324.78510940964867!4f-2.9626865254650454!5f1.2088683118555819", "https://maps.app.goo.gl/avD3W1ZPnidsr6BRA"],
         ["Grezzana", "https://www.google.com/maps/embed?pb=!4v1721587015938!6m8!1m7!1sS9NmCHuLKoumag2p9_OL7Q!2m2!1d45.52162870229095!2d11.01623145542565!3f52.77!4f7.530000000000001!5f0.8108372072620882", "https://maps.app.goo.gl/gWA5MQYAnEgnpNZJ9"]
     ]
 

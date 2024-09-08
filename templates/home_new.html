@@ -18,9 +18,9 @@
                 <div class="calendar-info">
                     <div class="calendar-month">
                         <form action="/calendar-scroll" method="get">
-                            <input type="hidden" name="updater" value="-1">
-                            <input name="month" type="hidden" value="{{month}}">
-                            <input name="year" type="hidden" value="{{year}}">
+                            <input  name="updater" type="hidden"value="-1">
+                            <input name="m" type="hidden" value="{{month}}">
+                            <input name="y" type="hidden" value="{{year}}">
                             <button class="arrow" type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
@@ -33,9 +33,9 @@
                         </div>
 
                         <form action="/calendar-scroll" method="get">
-                            <input type="hidden" name="updater" value="1">
-                            <input name="month" type="hidden" value="{{month}}">
-                            <input name="year" type="hidden" value="{{year}}">
+                            <input name="updater" type="hidden" value="1">
+                            <input name="m" type="hidden" value="{{month}}">
+                            <input name="y" type="hidden" value="{{year}}">
                             <button class="arrow" type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
@@ -69,7 +69,7 @@
                                             {{day}}
                                         </div>
                                         {% if day in images_by_day %}
-                                            <a href="day-info?day={{day}}&month={{month}}&year={{year}}" style="height: 100%; width: 100%">
+                                            <a href="day-info?d={{day}}&m={{month}}&y={{year}}" style="height: 100%; width: 100%">
                                                 <img alt="{{ 'day-' ~ day }}" class="calendar-day-date-image" id="{{ 'day-' ~ day }}" src="{{ url_for('uploaded_file', filename=images_by_day[day]['filename'], thumbnail=1) }}" title="{{ images_by_day[day]['description'] if images_by_day[day]['description'] else '' }}">
                                             </a>
                                         {% else %}

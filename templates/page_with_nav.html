@@ -62,7 +62,7 @@
                         {% else %}
                             <li class="nav-list-item"><a href="/login">Log in</a></li>
                             <div class="nav-menu-divider"></div>
-                            <li class="nav-list-item pseudo-button" id="desktop-logout"><a href="/register">Enter Fiore</a></li>
+                            <li class="nav-list-item pseudo-button" id="desktop-logout"><a href="/register">Join Fiore</a></li>
                         {% endif %}
                         <li> 
                             <div class="nav-toggle" aria-label="toggle navigation">
@@ -78,6 +78,9 @@
     </header>
     {% block content %} {% endblock %}
 </body>
+
+{% block additional_js %} {% endblock %}
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Navigation toggle

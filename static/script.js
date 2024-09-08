@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 // building the outer anchor wrapper of the image element
                 let imgWrapperLink = document.createElement('a');
-                imgWrapperLink.href = "day-info?day=" + data.day + "&month=" + image_month + "&year=" + image_year;
+                imgWrapperLink.href = "day-info?d=" + data.day + "&m=" + image_month + "&y=" + image_year;
                 imgWrapperLink.style.width="100%";
                 imgWrapperLink.style.height="100%";
 

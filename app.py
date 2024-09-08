@@ -10,7 +10,7 @@ import logging
 from PIL import Image
 from werkzeug.utils import secure_filename
 
-from helpers import login_required, allowed_file_type, street_link, apology, valid_username, format_description, generate_filename
+from helpers import login_required, allowed_file_type, street_link, apology, valid_username, valid_password, format_description, generate_filename
 
 
 # Configuring the application
@@ -54,19 +54,49 @@ def page_not_found(e):
     # this expects an argument in any case
     return apology("Are you really focusing your mind on where to apparate, Potter?", 404)
 
+
+@app.route('/delete-account', methods=["POST"])
+@login_required
+def delete_account():
+    data = request.get_json()
+    password = data.get('password')
+    if not password:
+        return jsonify({"success": False, "error": "Password field is empty"})
+
+    # authenticate user
+    rows = db.execute("SELECT * FROM users WHERE id = ?", session["user_id"])
+    if not check_password_hash(rows[0]["hash"], password):
+        return jsonify({"success": False, "error": "Incorrect password"})
+    
+
+    # get and delete all locally stored images
+    filenames = db.execute("SELECT filename FROM images WHERE user_id = ?;", session["user_id"])
+
+    for file in filenames:
+        # delete from upload and thumbnail directories
+        filename = file["filename"]
+        os.remove(os.path.join('./uploads/thumbnails', 'thumb-' + filename))
+        os.remove(os.path.join('./uploads', filename))
+
+    # delete the user; user deletion cascades to entry deletion via constraint
+    db.execute("DELETE FROM users WHERE id = ?;", session["user_id"])
+
+    # Forget user_id and return fetch
+    session.clear()
+    return jsonify({"success": True})
+
+
 @app.route('/entry-scroll', methods=["GET"])
 def entry_scroll():
     # retrieve the last or the next entry of the user
     try:
         updater = int(request.args.get("updater"))
-        day = int(request.args.get("day"))
-        month = int(request.args.get("month"))
-        year = int(request.args.get("year"))
+        day = int(request.args.get("d"))
+        month = int(request.args.get("m"))
+        year = int(request.args.get("y"))
     except ValueError:
         return apology("Are you sure you are using the correct spells, Potter?", 403)
     
-    print(updater)
-    print("This was updater ^^")
     if updater == -1:
         date_info = db.execute("SELECT image_date FROM images WHERE user_id = ? AND DATE(image_date) < ? ORDER BY image_date DESC LIMIT 1;",
                             session["user_id"], f"{year}-{month:02}-{day:02}")
@@ -76,7 +106,7 @@ def entry_scroll():
     
     if date_info:
         date = datetime.strptime(date_info[0]["image_date"], '%Y-%m-%d %H:%M:%S')
-        return redirect(url_for('day_info', day=date.day, month=date.month, year=date.year))
+        return redirect(url_for('day_info', d=date.day, m=date.month, y=date.year))
     else:
         return redirect("/home")
 
@@ -84,8 +114,8 @@ def entry_scroll():
 def calendar_scroll():
     try:
         updater = int(request.args.get("updater"))
-        month = int(request.args.get("month"))
-        year = int(request.args.get("year"))
+        month = int(request.args.get("m"))
+        year = int(request.args.get("y"))
     except ValueError:
         return apology("Are you sure you are using the correct spells, Potter?", 403)
     
@@ -98,18 +128,18 @@ def calendar_scroll():
     else:
         month = month + updater
 
-    return redirect(url_for('home', month=month, year=year))
+    return redirect(url_for('home', m=month, y=year))
 
 @app.route("/delete", methods=["POST"])
 def delete():
 
-    if not (request.form.get("day") and request.form.get("month") and request.form.get("year")):
+    if not (request.form.get("d") and request.form.get("m") and request.form.get("y")):
         return apology("Are you sure you are casting the vanishing spell correctly, Potter?", 403)
     
     try:
-        day = int(request.form.get("day"))
-        month = int(request.form.get("month"))
-        year = int(request.form.get("year"))
+        day = int(request.form.get("d"))
+        month = int(request.form.get("m"))
+        year = int(request.form.get("y"))
     except ValueError:
         return apology("Are you sure you are using the correct spells, Potter?", 403)
 
@@ -128,7 +158,7 @@ def delete():
                             session["user_id"], f"{year}-{month:02}-{day:02}")
         
         flash('Deleted entry for ' + str(day) + " " + calendar.month_name[month] + " " + str(year))
-        return redirect(url_for('home', month=month, year=year))
+        return redirect(url_for('home', m=month, y=year))
 
     else:
         return apology("First you need something to practice vanishing on, Potter.", 403)      
@@ -176,16 +206,16 @@ def profile():
 @login_required
 def day_info():
     if request.method == "GET":
-        print(request.args.get("day"))
-        print(request.args.get("month"))
-        print(request.args.get("year"))
+        print(request.args.get("d"))
+        print(request.args.get("m"))
+        print(request.args.get("y"))
 
-        if not (request.args.get("day") and request.args.get("month") and request.args.get("year")):
+        if not (request.args.get("d") and request.args.get("m") and request.args.get("y")):
             return apology("Are you sure you have all the books, Potter?", 403)
         
-        day = int(request.args.get("day"))
-        month = int(request.args.get("month"))
-        year = int(request.args.get("year"))
+        day = int(request.args.get("d"))
+        month = int(request.args.get("m"))
+        year = int(request.args.get("y"))
         month_name = calendar.month_name[month]
 
     
@@ -277,15 +307,15 @@ def upload():
 @login_required
 def home():
     if request.method == "GET":
-        print(request.args.get("month"))
-        print(request.args.get("year"))
+        print(request.args.get("m"))
+        print(request.args.get("y"))
 
-        if(request.args.get("month") and request.args.get("year")):
+        if(request.args.get("m") and request.args.get("y")):
                                
             # do the calculation per value and display the form
             try:
-                month = int(request.args.get("month"))
-                year = int(request.args.get("year"))
+                month = int(request.args.get("m"))
+                year = int(request.args.get("y"))
             except ValueError:
                 return apology("Are you sure you are using the correct spells, Potter?", 403)
             

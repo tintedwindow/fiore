@@ -180,12 +180,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-
-        // Handles navigation to the day page via image click
-        var clickedImage = document.querySelectorAll('.calendar-day-date-image');
-        clickedImage.forEach(addClickListenerToImage);
-
-
         //handles if there is a redirect from delete i.e. a message
 
         var messageStatus= document.getElementById("message-status");
@@ -196,31 +190,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 });
 
-
-
-function addClickListenerToImage(image) {
-    image.addEventListener('click', function() {
-                var imageId = this.getAttribute('id');
-                var dayDateNumber = imageId.split('-')[1];
-                console.log(dayDateNumber)
-                
-                const imagePageLink = document.getElementById('image-page-link');
-                let url = imagePageLink.getAttribute('href');
-                const templateUrl = url;
-                url = url.replace('day=', 'day=' + dayDateNumber);
-                imagePageLink.href = url;
-
-                if (event.ctrlKey || event.metaKey) {
-                    imagePageLink.target = '_blank';
-                } else {
-                    imagePageLink.target = '_self';
-                }
-
-                imagePageLink.click();
-
-                imagePageLink.href = templateUrl;
-    });
-};
 
 
 

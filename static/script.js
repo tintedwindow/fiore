@@ -149,6 +149,7 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(data => {
                 console.log('Success:', data);
 
+                // building an image element to place in
                 let dayBox = document.getElementById('day-box-' + data.day);
                 let img = document.createElement('img');
                 img.src = data.filename;
@@ -157,14 +158,21 @@ document.addEventListener("DOMContentLoaded", function() {
                 img.className = "calendar-day-date-image";
                 img.id = 'day-' + data.day;
 
+                // building the outer anchor wrapper of the image element
+                let imgWrapperLink = document.createElement('a');
+                imgWrapperLink.href = "day-info?day=" + data.day + "&month=" + image_month + "&year=" + image_year;
+                imgWrapperLink.style.width="100%";
+                imgWrapperLink.style.height="100%";
+
+
                 let dayBoxDate = document.querySelector('#day-box-' + data.day + ' div');
                 dayBoxDate.classList.add("calendar-day-date-number-yes");
 
                 let svgElement = document.querySelector('#day-box-' + data.day + ' svg');
                 svgElement.parentNode.removeChild(svgElement);
 
-                dayBox.appendChild(img);
-                addClickListenerToImage(img);
+                dayBox.appendChild(imgWrapperLink);
+                imgWrapperLink.appendChild(img);
 
                 resetModal();
                 showNotification('File uploaded successfully!', true, 5000); // Show success message

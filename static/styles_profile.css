@@ -154,6 +154,10 @@
     align-items: center;    
 }
 
+.row-wrapper-link {
+    text-decoration: none;
+}
+
 .entry-list-entry {
     overflow: hidden;
     width: 100;
@@ -176,7 +180,6 @@
 
 .entry-list-entry:hover {
     background-color: rgba(0, 0, 0, 0.03);
-    cursor: pointer;
 }
 
 .entry-list-entry div {
@@ -195,4 +198,203 @@
 .entry-list-entry div:nth-child(2),
 .entry-list-entry div:nth-child(3) {
     border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#delete-account-trigger {
+     margin-top: 20px; 
+    padding: 5px 20px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+    background-color: rgba(0, 0, 0, 0.05); 
+    font-optical-sizing: auto; 
+    font-weight: 570; 
+    font-style: normal; 
+    font-variation-settings: 'slnt' 0;"
+}
+
+
+#preview-modal {
+    display: none;
+    position: fixed;
+    z-index: 20;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0); /* fallback color */
+    background-color: rgba(0, 0, 0, 0.3); /* black wwith alpha opacity */
+    align-items: center;
+    justify-content: center;
+}
+
+#modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%; /* Could be more or less, depending on screen size */
+    height: 350px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Optional: for styling */
+    animation-name: animatetop; /* Optional: for animation */
+    animation-duration: 0.4s; /* Animation duration */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+
+    /* text properties same as navbar items */
+    font-size: 0.9375rem;
+    color: #050505;
+
+    /* font settings */
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings:
+      "slnt" 0;
+}
+
+#modal-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#modal-title {
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    text-align: center; 
+
+    line-height: 28px;
+}
+
+#modal-confirmation-holder {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#modal-confirmation-text {
+    margin: 15px;
+    font-weight: 450;
+}
+
+#modal-buttons
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+
+}
+
+#modal-yes {
+    font-size: 1.15em;
+    padding: 5px;
+    border-radius: 4px;
+    text-decoration: underline 2px;
+    text-decoration-color: #fefefe;
+    text-underline-offset: 4px; 
+
+}
+
+#modal-yes:hover {
+    text-decoration-color: #D4E7C5;
+    cursor: pointer;
+}
+
+#modal-discard {
+    font-size: 1.15em;
+    padding: 5px;
+    border-radius: 4px;
+    text-decoration: underline 2px;
+    text-decoration-color: #fefefe;
+    text-underline-offset: 4px; 
+}
+
+#modal-discard:hover {
+    text-decoration-color: #FFD0D0;
+    cursor: pointer;
+}
+
+.confirmation-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-container {
+    margin-top: 4px;
+    margin-bottom: 5px;
+    width: 100%;
+    padding: 4px 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px inset;
+    display: flex;
+    height: 34px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input-container-focus {
+    outline: none;
+    box-shadow: inset 0 0 0 1px rgba(35, 131, 226, .57), 0 0 0 2px rgba(35, 131, 226, .35) !important;
+}
+
+.input-password {
+    padding: 0px;
+    font-size: 15px;
+    line-height: 26px;
+    border: none;
+    height: 100%;
+    width: 90%;
+}
+
+.password-eye {
+    font-size: 18px;
+    fill: rgba(15, 15, 15, 0.5);  
+}
+.password-eye:hover {
+    fill: rgba(15, 15, 15, 0.7); 
+}
+
+.input-password:focus {
+    outline: none;
+    box-shadow: none !important;
+}
+
+#error-message {
+    display: none;
+    font-size: 14px;    
+    color: #D37676;
+}
+
+
+#delete-account {
+    text-decoration: none;
+    border: none;
+    margin: 10px;
+    padding: 5px 20px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+
+    font-size: 15px;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 570;
+    font-style: normal;
+    font-variation-settings:
+      "slnt" 0;
+    
+}
+
+#delete-account:hover {
+background-color: rgba(255, 0, 0, 0.2);
 }

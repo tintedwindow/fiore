@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='styles_profile.css') }}">
 {% endblock %}
 
-<body>
-
 {% block content %}
     <div class="content-container">
         <div class="content">
@@ -59,55 +57,171 @@
                 </div>
                 <div class="entry-list-body">
                     {% for key, value in entries_by_day.items() %}
-                        <div class="entry-list-entry">
-                            <div class=""> {{ loop.index }}</div>
-                            <div class="entry-date">{{ key }}</div>
-                            <div class="">{{ value["upload_date"] }}</div>
-                            <div class="">{{ value["description"] if value["description"] }}</div>
-                        </div>
+                        <a class='row-wrapper-link'>
+                            <div class="entry-list-entry">
+                                <div class=""> {{ loop.index }}</div>
+                                <div class="entry-date">{{ key }}</div>
+                                <div class="">{{ value["upload_date"] }}</div>
+                                <div class="">{{ value["description"] if value["description"] }}</div>
+                            </div>
+                        </a>
                     {% endfor %}
                 </div>
             </div>
         </div>
+        <div id="delete-account-trigger" style="margin-top: 20px; padding: 5px 20px; cursor: pointer; border-radius: 5px; background-color: rgba(0, 0, 0, 0.05); font-optical-sizing: auto; font-weight: 570; font-style: normal; font-variation-settings: 'slnt' 0;">
+            Delete Account
+        </div>
     </div>
 
-    <!-- Image page hidden form attribute-->
-    <form id="image-page-info" style="display:none;" method="get" action="/day-info"> 
-        <input name="day" type="hidden">
-        <input name="month" type="hidden">
-        <input name="year" type="hidden">
-    </form>
+ 
+    <!-- Modal -->
+    <div id="preview-modal" class="modal">
+        <div id="modal-content">
+            <div id="modal-details">
+                <p id="modal-title">
+                    Are you sure you want to delete your account? 
+                    <br>
+                    This action cannot be undone.
+                </p>
+            </div>
+            <div id="modal-confirmation-holder">
+                <p id="modal-confirmation-text">Please re-enter your password to confirm account deletion.</p>
+                <form class="confirmation-form">
+                    <div class="input-container">
+                        <input class="input-field input-password" autocomplete="off" name="password" placeholder="Password" type="password">
+                        <svg class="password-eye" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                        </svg>
+                    </div>
+                    <p id="error-message">weeeeeee</p>
+                    <button type="submit" id="delete-account">Delete Account</button>
+                </form>
+            </div>
+            <div id="modal-buttons">
+                <span id="modal-yes">Yes</span>
+                <span id="modal-discard">Discard</span>
+            </div>
+        </div>
+    </div>
 
-<script>
-    let currentHour = new Date().getHours();
-    let greetingText = document.getElementById('greeting-text');
+{% endblock %}
 
-    if (currentHour < 12) {
-        greetingText.innerHTML = "Good morning";
-    }
-    else if (currentHour >= 12 && currentHour < 18) {
-        greetingText.innerHTML = "Good afternoon";
-    }
-    else {
-        greetingText.innerHTML = "Good evening";
-    }
+{% block additional_js %}
+    <script>
 
-    document.querySelectorAll(".entry-list-entry").forEach(function(entry) {
-        entry.addEventListener('click', function(){
+        // greets user
+        let currentHour = new Date().getHours();
+        let greetingText = document.getElementById('greeting-text');
+
+        if (currentHour < 12) {
+            greetingText.innerHTML = "Good morning";
+        }
+        else if (currentHour >= 12 && currentHour < 18) {
+            greetingText.innerHTML = "Good afternoon";
+        }
+        else {
+            greetingText.innerHTML = "Good evening";
+        }
+
+        // sets href of each <a> wrapping tag the row's date
+        document.querySelectorAll(".entry-list-entry").forEach(function(entry) {
+
             let entryDate = entry.querySelector('.entry-date').innerHTML;
             console.log(entryDate);
-
             let dateParts = entryDate.split("-");
-
-            document.querySelector('#image-page-info [name="day"]').value = dateParts[0];
-            document.querySelector('#image-page-info [name="month"]').value = dateParts[1];
-            document.querySelector('#image-page-info [name="year"]').value = dateParts[2];
-
-            document.getElementById('image-page-info').submit();
+            let aTag = entry.closest('a');
+            if (aTag) {
+                aTag.href = "day-info?d=" + dateParts[0] + "&m=" + dateParts[1] + "&y=" + dateParts[2];
+            }
 
         });
 
+
+        // for the account deletion process
+        document.getElementById("delete-account-trigger").addEventListener('click', function() {
+            document.getElementById('preview-modal').style.display = "flex";
+        });
+
+        function resetModal() {
+            document.getElementById('modal-confirmation-holder').style.display = "none";
+            document.getElementById('preview-modal').style.display = "none";
+            document.getElementById('modal-yes').style.display = "block";
+        }
+
+        var modalYes = document.getElementById('modal-yes');
+        var modalDiscard = document.getElementById('modal-discard');
+
+        // close modal simply if discard is clicked
+        modalDiscard.addEventListener('click', resetModal);
+        
+        modalYes.addEventListener("click", function(){
+            document.getElementById('modal-confirmation-holder').style.display = "flex";
+            document.getElementById('modal-yes').style.display = "none";
+        });
+
+        document.querySelectorAll('.input-field').forEach(function(inputField) {
+            inputField.addEventListener('focus', function() {
+                this.parentElement.classList.add('input-container-focus');
+            });
+            inputField.addEventListener('blur', function() {
+                this.parentElement.classList.remove('input-container-focus');
+            });
+        });
+
+        document.querySelector('.confirmation-form').addEventListener('submit', function(event){
+            event.preventDefault();
+
+            const password = document.querySelector('.input-password').value;
+            var errorMessageText = document.getElementById('error-message');
+
+            if (!password) {
+                errorMessageText.style.display = "block";  // Display the error message
+                errorMessageText.textContent = "Password cannot be blank.";
+                return; 
+            }
+
+            fetch('/delete-account', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({password: password })
+                })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = "/";
+                } else {
+                    console.log(data);
+                    errorMessageText.style.display = "block";
+                    errorMessageText.textContent = data.error;
+                }
+            });
+        });
+
+        // password eye
+        document.querySelectorAll('.password-eye').forEach(function(passwordEye) {
+        let passwordField = passwordEye.previousElementSibling;
+        passwordEye.addEventListener('click', function() {
+            if (passwordField.type === "password") {
+            passwordField.type = "text";
+            this.innerHTML = `
+                <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7 7 0 0 0-2.79.588l.77.771A6 6 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755q-.247.248-.517.486z"/>
+                <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829"/>
+                <path d="M3.35 5.47q-.27.24-.518.487A13 13 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7 7 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12z"/>
+            `;
+            } else {
+                passwordField.type = "password";
+                this.innerHTML =`
+                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                `;
+            }
+        });
     });
 
-</script>
+    </script>
+
 {% endblock %}

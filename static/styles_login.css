@@ -127,7 +127,8 @@ body {
     text-decoration-color: #3b3b3b;
 }
 
-.description {
+#description {
+    display: none;
     color: #86868b;
     text-align: center;
     overflow: auto;

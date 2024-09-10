@@ -366,35 +366,37 @@ def index():
 def login():
     """Log user in"""
 
-    # Forget any user_id
-    session.clear()
-
     # User reached route via POST (as by submitting login form)
-    if request.method == "POST":
-        # Ensure username was submitted
-        if not request.form.get("username"):
-            return render_template("login.html", message = "Must provide a username"), 400
-        # Ensure password was submitted
-        elif not request.form.get("password"):
-            return render_template("login.html", message = "Must provide a password"), 400
+    if request.method == "POST":            
+        # Forget any user_id
+        session.clear()
+        data = request.get_json()
+        username = data.get('username')
+        password = data.get('password')
+
+        #400 status code for blank inputs suggested by dbb, as it indicates bad request due to client error
+        if not username:
+            return jsonify({"error": "Username cannot be blank"}), 400 
+        if not password:
+            return jsonify({"error": "Password cannot be blank"}), 400
         
         # Query database for username
         rows = db.execute(
-            "SELECT * FROM users WHERE username = ?", request.form.get("username")
+            "SELECT * FROM users WHERE username = ?", username
         )
 
         # Ensure username exists and password is correct
         if len(rows) != 1:
-            return render_template("login.html", message = "Invalid username"), 403
-        elif not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            return render_template("login.html", message = "Incorrect password"), 403
+            return jsonify({"error": "Username not found"}), 401
+        elif not check_password_hash(rows[0]["hash"], password):
+            return jsonify({"error": "Incorrect password"}), 401
         
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
-        session["user_name"] = request.form.get("username") 
+        session["user_name"] = username
 
         # Redirect user to home page
-        return redirect("/home")
+        return jsonify({"message": "Login successful"}), 200
         
     # User reached route via a GET -> Simply clicking from home screen
     return render_template("login.html")
@@ -415,36 +417,40 @@ def register():
 
     #User reached route via POST (by submitting the registation form)
     if request.method == "POST":
-        username = request.form.get("username")
-        # Ensure username was submitted and isn't taken
-        print(username)
+        # Forget any user_id
+        session.clear()
+        data = request.get_json()
+        username = data.get('username')
+        password = data.get('password')
+        password_c = data.get('passwordConfirm')
+
+
         if not username:
-            return render_template("register.html", message = "Username not submitted"), 400
-        if len(db.execute("SELECT * FROM users WHERE username = ?", username)) != 0:
-            # 409 Conflict
-            return render_template("register.html", message= "Username already taken"), 409
-        
-        print(username + "1")
-        password = request.form.get("password")
-        password_c = request.form.get("confirmation")
-
-        # Ensure passwords were submitted and both fields match
+            return jsonify({"error": "Username cannot be blank"}), 400
         if not password or not password_c:
-            return render_template("register.html", message = "Password not submitted"), 400
+            return jsonify({"error": "Password cannot be blank"}), 400
         if password != password_c:
-            return render_template("register.html", message = "Passwords do not match"), 400
+            return jsonify({"error": "Passwords do not match"}), 400
         
+        # Check if username already exists
+        rows = db.execute(
+            "SELECT id FROM users WHERE username = ?", username
+        )
+        if len(rows) != 0:
+            return jsonify({"error": "Username already taken"}), 401
+           
         #validate the username and password 
-        if valid_username(username) != 200: 
-            return render_template("register.html", message = valid_username(username)), 400
+        if valid_username(username) != 200:
+            return jsonify({"error": valid_username(username)}), 400 
         if valid_password(password) != 200: 
-            return render_template("register.html", message = valid_password(password)), 400
-        
+            return jsonify({"error": valid_password(password)}), 400 
+            
+        # proceed with storing user
         current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
         db.execute("INSERT INTO users (username, hash, creation_date) VALUES (?, ?, ?)", username, generate_password_hash(password), current_date)
-        print(username)
-        return redirect("/login")
+        
+        return jsonify({"message": "Registration successful"}), 200
+    
     else:
         print("Helloo")
         db.execute("SELECT * FROM users")

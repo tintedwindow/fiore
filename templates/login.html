@@ -8,7 +8,7 @@
     <div class="content-container">
         <div class="content">
             <div class="login-container">
-                <form class="login-form" action="/login" method="post">
+                <form class="login-form">
                     <div class="description-hero">
                         Log in to your 
                             <a class="hero-home" href="/">Fiore</a> 
@@ -24,14 +24,64 @@
                             <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
                         </svg>
                     </div>
-                    {% if message %}
-                        <div class="description">
+                    <div id="description">
                             {{ message }}
-                        </div>
-                    {% endif %}
+                    </div>
                     <button type="submit">Log in</button>
                 </form>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block additional_js %}
+    <script>
+        // user login feedback via ajax
+        document.querySelector('.login-form').addEventListener('submit', function(event){
+            event.preventDefault();
+
+            const username = document.querySelector('.login-form-input-text').value;
+            const password = document.querySelector('.login-form-input-password').value;
+            console.log(username);
+            console.log(password);
+            var errorMessageText = document.getElementById('description');
+
+            if (!username) {
+                errorMessageText.style.display = "block";
+                errorMessageText.textContent = "Username cannot be blank.";
+                return;
+            }
+            if (!password) {
+                errorMessageText.style.display = "block";  // Display the error message
+                errorMessageText.textContent = "Password cannot be blank.";
+                return; 
+            }
+
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(error => { throw new Error(error.error);});
+                }
+                return response.json();
+            })
+            .then(data => {
+                window.location.href = "/home";
+            })
+            .catch(error => {
+                console.log(error);
+                errorMessageText.style.display = "block";
+                errorMessageText.textContent = error.message;
+            })
+        });
+
+    </script>
 {% endblock %}

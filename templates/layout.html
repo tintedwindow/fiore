@@ -16,6 +16,8 @@
     {% block main %}{% endblock %}
 </body>
 
+{% block additional_js %} {% endblock %}
+
 <script>
     document.querySelectorAll('.input-field').forEach(function(inputField) {
         inputField.addEventListener('focus', function() {
@@ -46,36 +48,5 @@
         });
     });
 
-    // user login feedback via ajax
-    document.querySelector('.confirmation-form').addEventListener('submit', function(event){
-        event.preventDefault();
-
-        const password = document.querySelector('.input-password').value;
-        var errorMessageText = document.getElementById('error-message');
-
-        if (!password) {
-            errorMessageText.style.display = "block";  // Display the error message
-            errorMessageText.textContent = "Password cannot be blank.";
-            return; 
-        }
-
-        fetch('/delete-account', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({password: password })
-            })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                window.location.href = "/";
-            } else {
-                console.log(data);
-                errorMessageText.style.display = "block";
-                errorMessageText.textContent = data.error;
-            }
-        });
-    });
 </script>
 </html>

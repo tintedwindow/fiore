@@ -50,7 +50,7 @@ For each month, you have a blank canvas in the form of a calendar. Each day can 
 ### Upload an image
 Chose from a variety of image file formats (even gifs). The support for a variety of file formats ensures that no matter what your media source is, Fiore just works.
 <div align="center">
-	<img src="static/date.jpg" alt="drawing" width="55%"/>
+	<img src="static/image.jpg" alt="drawing" width="55%"/>
 </div>
 
 ### Maybe add a description?

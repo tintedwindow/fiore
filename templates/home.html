@@ -6,13 +6,13 @@
 
 {% block main %}
 <p style="font-size: 26px;">
-    <span style="color: #be84b7;">{{name}}</span> is currently logged in &lt;3
+    <span style="color: #be84b7;">{{name}}</span> is currently logged in 
     <br>
     <br>
     <a href="/logout">logout?</a>
 </p>
 
-<div class="calander-container">
+<div class="calander-container" style="display: flex; align-items: center; justify-content: center; ">
     <table class="calander">
         <tr>
             <th>SUN</th>
@@ -27,12 +27,11 @@
         {% for week in calander %}
             <tr>
                 {% for day in week %}
-                    <td>
-                        <div class="content">
+                    <td style="width: auto;">
                             {% if day != 0 %}
                                 {{day}}
                             {% endif %}
-                        </div>
+
                     </td>
                 {% endfor %}
             </tr>

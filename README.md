@@ -68,7 +68,7 @@ Fiore! Watch the memory get framed in your calendar!
 </div>
 
 
-## Features
+## Additional Features
 
 Fiore is inspired by a touch of Italy. The islands, the landscapes and the beaches, they reflect the calmness that comes with intentional living and the calmness that Fiore brings to your journaling experience.
 
@@ -97,6 +97,24 @@ Errors, be it from the user or the server, can occcur, and the apology page hand
 	<img src="static/apology.jpg" alt="drawing" width="55%"/>
 </div>
 
+## Acknowledgements
+
+I have always been a [Notion](https://www.notion.so/) user and I've always admired it for its simplicity and organization. I remember the first time visiting [their website](https://www.notion.so/personal) and being so inspired by it that I dreamt of making one like it. This project was the opportunity that aligned perfectly. I also drew inspiration from cool features on other websites, like the apology page from [Wizarding World](https://www.wizardingworld.com/apology) with its playful broken link reference to a misspelled teleportation spell, and the [Google Labs](https://labs.google.com/search) page, showcasing Google's AI tools in a nice carousel. All of them came together to create the feeling of a calm Mediterranean Italian coast in a simple and organized journal app, Fiore.
+
+For the project’s development, I used [Google Fonts](https://fonts.google.com/) to incorporate the [Inter font](https://fonts.google.com/specimen/Inter) and its variations throughout the website. [Bootstrap's icon library](https://icons.getbootstrap.com/) was really handy for the icons. The project was built using [Visual Studio Code](https://code.visualstudio.com/) as my IDE. The backend language was [Python](https://www.python.org/), and the web framework used was [Flask](https://flask.palletsprojects.com/en/3.0.x/) with [SQLite](https://flask.palletsprojects.com/en/3.0.x/patterns/sqlite3/) to manage the database.
+
+Here are the Python libraries that helped me make this project possible:
+
+- [cs50](https://cs50.readthedocs.io/libraries/cs50/python/) (which also provided SQLite features)
+- [flask](https://flask.palletsprojects.com/en/3.0.x/installation/#python-version)
+- [flask_sessions](https://flask-session.readthedocs.io/en/latest/)
+- [werkzeug](https://werkzeug.palletsprojects.com/en/3.0.x/) (security and utils)
+- [The Python Standard Library](#) (calendar, datetime, functools, logging, os, re, uuid)
+
+I ran [Ubuntu](https://ubuntu.com/desktop/wsl) in [WSL](https://learn.microsoft.com/en-us/windows/wsl/) for development. Additionally, I want to thank [Stack Overflow](https://stackoverflow.com/), the visits to which got more and more frequent as the project expanded. On roadblocks, [dbb](https://cs50.ai) was really helpful. This project also introduced me to [Git](https://git-scm.com/) and [GitHub](https://github.com/), and Fiore's repository can be found [here](https://github.com/tintedwindow/fiore).
 
 
+This project made me realize that there's so much to learn for me, and it also made me realize that I did learn when I finally solved each challenge, whether it was flying the net, setting up local development, making Flask work, or going from a table tag to divisions that represent days in Fiore now. :)
+
+Once again, I was standing on the shoulder of giants. From the bottom of my heart, thank you.
 

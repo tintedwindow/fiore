@@ -105,9 +105,9 @@ For the project’s development, I used [Google Fonts](https://fonts.google.com/
 
 Here are the Python libraries that helped me make this project possible:
 
-- [cs50](https://cs50.readthedocs.io/libraries/cs50/python/) (which also provided SQLite features)
 - [flask](https://flask.palletsprojects.com/en/3.0.x/installation/#python-version)
 - [flask_sessions](https://flask-session.readthedocs.io/en/latest/)
+- [cs50](https://cs50.readthedocs.io/libraries/cs50/python/) (which also provided SQLite features)
 - [werkzeug](https://werkzeug.palletsprojects.com/en/3.0.x/) (security and utils)
 - [The Python Standard Library](#) (calendar, datetime, functools, logging, os, re, uuid)
 

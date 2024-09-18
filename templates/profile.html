@@ -12,7 +12,7 @@
         <div class="content">
             <div class="user-info">
                 <div class="user-name">
-                    <span id="greeting-text">Hi</span>, tinted!</div>
+                    <span id="greeting-text">Hi</span>, {{ session["user_name"] }}!</div>
                 <div class="user-stats">
                     <span>Account created: {{ creation_date}}</span> 
                     <span>Total Entries: {{ entry_count}}</span>

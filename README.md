@@ -103,7 +103,7 @@ I have always been a [Notion](https://www.notion.so/) user and I've always admir
 
 For the project’s development, I used [Google Fonts](https://fonts.google.com/) to incorporate the [Inter font](https://fonts.google.com/specimen/Inter) and its variations throughout the website. [Bootstrap's icon library](https://icons.getbootstrap.com/) was really handy for the icons. The project was built using [Visual Studio Code](https://code.visualstudio.com/) as my IDE. The backend language was [Python](https://www.python.org/), and the web framework used was [Flask](https://flask.palletsprojects.com/en/3.0.x/) with [SQLite](https://flask.palletsprojects.com/en/3.0.x/patterns/sqlite3/) to manage the database.
 
-Here are the Python libraries that helped me make this project possible:
+Here are the Python libraries that helped me make this project possible: 
 
 - [flask](https://flask.palletsprojects.com/en/3.0.x/installation/#python-version)
 - [flask_sessions](https://flask-session.readthedocs.io/en/latest/)

@@ -143,6 +143,23 @@
     font-size: 1.2em;
 }
 
+.day-page-description::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+.day-page-description::-webkit-scrollbar-track {
+    /* the long line on which scrollbar glides */
+    background: rgba(255, 213, 75, 0.2); 
+    border-radius: 10px;
+}
+
+.day-page-description::-webkit-scrollbar-thumb {
+    /* scrollbar bit */
+    background-color:rgba(252, 209, 80, 0.45);
+    border-radius: 15px;
+    border: 1px solid #ffffff;
+}
+
 .day-page-description {
     height: 25%;
     padding-top: 10px;

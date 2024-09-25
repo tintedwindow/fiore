@@ -24,7 +24,7 @@ pip install -r requirements.txt
 
 Run the script via this command to create the database:
 ``` bash
-sqlite3 schema.sql
+python3 schema.py
 ```
 Note: Running the Python script will set up the database for you, so you don't need to download SQLite separately.
 

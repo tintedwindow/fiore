@@ -65,6 +65,10 @@ def page_not_found(e):
     # this expects an argument in any case
     return apology("Are you really focusing your mind on where to apparate, Potter?", 404)
 
+@app.errorhandler(500)
+def internal_error(e):
+    return apology("Are you really trying to mix random potions, Potter?", 500)
+
 
 @app.route('/delete-account', methods=["POST"])
 @login_required

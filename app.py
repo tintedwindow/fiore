@@ -37,11 +37,17 @@ def after_request(response):
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     response.headers["Expires"] = 0
     response.headers["Pragma"] = "no-cache"
-    return response
+    return response 
 
 @app.route('/<path:filename>/')
 @app.route('/<path:filename>/<int:thumbnail>')
 def uploaded_file(filename, thumbnail=None):
+
+    #autheticate the image
+    images = db.execute("SELECT filename FROM images WHERE user_id = ?;", session["user_id"])
+    if not filename in [image['filename'] for image in images]:
+       return apology("Is that your book, Potter?", 404)
+    
     if thumbnail: 
         image_path = os.path.join('./uploads/thumbnails', 'thumb-' + filename)
     else:

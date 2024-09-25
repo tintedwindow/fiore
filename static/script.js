@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 // building an image element to place in
                 let dayBox = document.getElementById('day-box-' + data.day);
                 let img = document.createElement('img');
-                img.src = data.filename;
+                img.src = data.filename + "/1";
                 img.alt = "day-" + data.day;
                 img.title = data.description ? data.description : '';
                 img.className = "calendar-day-date-image";

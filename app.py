@@ -1,5 +1,5 @@
 import os
-
+import sys
 import calendar
 from datetime import datetime
 from cs50 import SQL
@@ -25,8 +25,13 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///fiore.db")
-
+try:
+    db = SQL("sqlite:///fiore.db")
+except RuntimeError:
+    print("Consider running the following command first:")
+    print("python3 schema.py")
+    sys.exit()
+    
 # Echoes what the sql query is executed in flask terminal
 # https://cs50.readthedocs.io/libraries/cs50/python/#how-can-i-disable-logging-of-sql-statements
 logging.getLogger("cs50").disabled = False
